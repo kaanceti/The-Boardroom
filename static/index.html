@@ -1,0 +1,1935 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Boardroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="/cat.js"></script>
+<style>
+:root {
+  --ground: #e6d7b4;
+  --ground-dot: #dccba3;
+  --parchment: #fbf1d9;
+  --parchment-edge: #e8d4a6;
+  --ink: #3a2618;
+  --muted: #6f533f;
+  --wood: #9a6236;
+  --wood-light: #b97a46;
+  --wood-dark: #5e3a1f;
+  --floor-a: #c69a64;
+  --floor-b: #b98c57;
+  --leaf: #437a31;
+  --leaf-dark: #2f5e22;
+  --gold: #e3b040;
+  --fail: #b03a2e;
+  --accent: #2f5e22;
+  --input-bg: #fffaf0;
+  --input-ink: #3a2618;
+  --pixel: "Pixelify Sans", "Courier New", monospace;
+  --body: "Nunito", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ground: #1d1a24; --ground-dot: #242031; --parchment: #2a2433; --parchment-edge: #3b3247;
+    --ink: #f1e6cf; --muted: #b8a68c; --floor-a: #4a3826; --floor-b: #42321f;
+    --accent: #9fd67f; --input-bg: #221d2b; --input-ink: #f1e6cf;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; color: var(--ink); font: 15px/1.6 var(--body);
+  background: var(--ground) radial-gradient(var(--ground-dot) 2px, transparent 2px) 0 0 / 16px 16px; }
+.box { background: var(--parchment); border: 4px solid var(--wood-dark); box-shadow: inset 0 0 0 3px var(--parchment-edge), 6px 6px 0 rgba(58, 38, 24, .22); }
+header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 26px; }
+h1 { font: 700 34px/1 var(--pixel); margin: 0; color: #fbf1d9; letter-spacing: .02em;
+  text-shadow: 3px 0 var(--wood-dark), -3px 0 var(--wood-dark), 0 3px var(--wood-dark), 0 -3px var(--wood-dark), 5px 5px 0 rgba(58,38,24,.35); }
+.status { font: 500 14px var(--pixel); padding: 6px 12px; background: var(--parchment); border: 3px solid var(--wood-dark); }
+.status.bad { color: var(--fail); }
+main { display: grid; grid-template-columns: 330px 1fr; gap: 24px; padding: 0 26px 40px; align-items: start; }
+aside { display: flex; flex-direction: column; gap: 22px; }
+aside .box { padding: 18px 20px; }
+h2 { font: 600 20px/1.2 var(--pixel); margin: 0 0 10px; }
+label { display: block; font: 500 15px var(--pixel); margin: 12px 0 6px; }
+textarea { width: 100%; resize: vertical; border: 3px solid var(--wood); padding: 9px 11px; font: 14.5px/1.5 var(--body); background: var(--input-bg); color: var(--input-ink); }
+textarea::placeholder { color: var(--muted); }
+textarea:focus, button:focus-visible, .custom input:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
+.mode { display: flex; gap: 14px; margin-top: 12px; }
+.mode label { display: flex; align-items: center; gap: 6px; margin: 0; font-size: 14px; }
+.hint { font-size: 13px; color: var(--muted); margin: 6px 0 0; }
+button.go { margin-top: 14px; width: 100%; padding: 10px; border: 3px solid var(--leaf-dark); background: var(--leaf); color: #fff; font: 600 18px var(--pixel); cursor: pointer; box-shadow: inset -3px -3px 0 var(--leaf-dark), inset 3px 3px 0 #77b05e; }
+button.go:active { box-shadow: inset 3px 3px 0 var(--leaf-dark); }
+button.go:disabled { opacity: .6; cursor: progress; }
+.list { list-style: none; margin: 0; padding: 0; }
+.list li button { width: 100%; text-align: left; background: none; border: 0; border-bottom: 2px dashed var(--parchment-edge); padding: 9px 2px; color: var(--ink); font: 14px/1.35 var(--body); cursor: pointer; }
+.list li button.active { font-weight: 700; color: var(--accent); }
+.list small { display: block; color: var(--muted); font-size: 12px; }
+
+/* The room */
+.room { position: relative; height: 540px; padding: 0; overflow: hidden; margin-bottom: 24px;
+  background: repeating-linear-gradient(90deg, var(--floor-a) 0 46px, var(--floor-b) 46px 48px),
+              repeating-linear-gradient(0deg, transparent 0 22px, rgba(58,38,24,.18) 22px 24px); background-blend-mode: multiply; }
+.table { position: absolute; left: 178px; right: 230px; top: 268px; height: 100px; background: var(--wood-light);
+  border: 4px solid var(--wood-dark); box-shadow: inset 0 -12px 0 var(--wood), 0 8px 0 rgba(58,38,24,.35);
+  display: grid; place-items: center; padding: 0 12px 0 96px; font: 600 17px var(--pixel); color: #fff3d6; text-shadow: 2px 2px 0 var(--wood-dark);
+  clip-path: polygon(8px 0, calc(100% - 8px) 0, 100% 8px, 100% calc(100% - 8px), calc(100% - 8px) 100%, 8px 100%, 0 calc(100% - 8px), 0 8px); }
+.seat { position: absolute; width: 164px; display: flex; flex-direction: column; align-items: center; color: var(--ink); }
+.seat .avatar { background: none; border: 0; padding: 0; cursor: pointer; }
+.plate .name { background: none; border: 0; padding: 0; color: inherit; cursor: pointer; }
+.plate .name:hover { text-decoration: underline dotted; text-underline-offset: 3px; }
+.seat svg { width: 80px; height: 80px; image-rendering: pixelated; filter: drop-shadow(3px 3px 0 rgba(58,38,24,.35)); }
+.plate { margin-top: 4px; padding: 3px 10px 4px; background: var(--parchment); border: 3px solid var(--wood-dark); text-align: center; line-height: 1.2; display: flex; flex-direction: column; }
+.plate .name { font: 600 15px var(--pixel); }
+.plate .role { font: 400 12px/1.2 var(--pixel); color: var(--muted); }
+.avatar { position: relative; display: block; }
+.bubble { position: absolute; top: -10px; right: -26px; background: #fff; border: 3px solid var(--wood-dark); padding: 0 7px; font: 700 16px/22px var(--pixel); color: var(--wood-dark); visibility: hidden; }
+.seat[data-state="thinking"] .bubble { visibility: visible; animation: bob 1s steps(2) infinite; }
+.seat[data-state="done"] .bubble { visibility: visible; background: var(--leaf); color: #fff; }
+.seat[data-state="failed"] .bubble { visibility: visible; background: var(--fail); color: #fff; }
+.seat[data-state="idle"] svg { filter: grayscale(.35) drop-shadow(3px 3px 0 rgba(58,38,24,.35)); }
+@keyframes bob { 50% { transform: translateY(-4px); } }
+/* Little life in the room: everyone breathes and blinks, and whoever is speaking talks. */
+.seat svg, .dialogue .who svg { overflow: visible; }
+.seat .avatar svg { animation: breathe 3.6s infinite; animation-delay: calc(var(--delay, 0s) * -1); }
+.seat .eyes, .dialogue .eyes { animation: blink 5.5s infinite; animation-delay: var(--delay, 0s); }
+.seat[data-state="thinking"] .mouth { animation: talk .45s infinite; }
+.seat[data-state="thinking"] .avatar svg { animation: nod .9s infinite; }
+@keyframes breathe { 0%, 49% { transform: translateY(0); } 50%, 100% { transform: translateY(2px); } }
+@keyframes blink { 0%, 93% { opacity: 1; } 94%, 97% { opacity: 0; } 98%, 100% { opacity: 1; } }
+@keyframes talk { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes nod { 0%, 49% { transform: translateY(0); } 50%, 100% { transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) {
+  .seat[data-state="thinking"] .bubble, .seat .avatar svg, .seat .eyes, .dialogue .eyes, .seat .mouth { animation: none !important; }
+}
+.s-chair { left: 24px; top: 278px; }
+/* Members sit along the table, which ends before the punishment corner on the right. */
+.s-0, .s-2 { left: calc(178px + (100% - 408px) * .24 - 82px); }
+.s-1, .s-3 { left: calc(178px + (100% - 408px) * .76 - 82px); }
+.s-0, .s-1 { top: 264px; transform: translateY(-100%); } .s-2, .s-3 { top: 378px; }
+.s-0 .plate, .s-1 .plate { order: -1; margin: 0 0 4px; }
+
+.agenda { font: 600 22px/1.35 var(--pixel); margin: 0 0 18px; }
+.howto { padding: 18px 22px; }
+.howto ol { margin: 0 0 8px; padding-left: 22px; }
+.howto li { margin: 0 0 6px; }
+.howto b { font-family: var(--pixel); font-weight: 600; }
+.dialogue { display: grid; grid-template-columns: 112px 1fr; gap: 20px; padding: 20px 22px; margin-bottom: 24px; }
+.dialogue .who { text-align: center; }
+.dialogue .who svg { width: 96px; height: 96px; image-rendering: pixelated; background: var(--parchment-edge); border: 3px solid var(--wood-dark); }
+.dialogue .who .name { font: 600 16px var(--pixel); margin-top: 6px; }
+.dialogue .who .role { font: 400 13px/1.25 var(--pixel); color: var(--muted); }
+.dialogue h3 { font: 600 19px var(--pixel); margin: 0 0 8px; }
+.prose { font: 15.5px/1.65 var(--body); max-width: 76ch; }
+.prose h2 { font: 600 17px/1.3 var(--pixel); margin: 18px 0 6px; }
+.prose h3 { font: 600 15px/1.3 var(--pixel); margin: 14px 0 4px; }
+.prose p { margin: 0 0 10px; } .prose ul, .prose ol { margin: 0 0 10px; padding-left: 22px; }
+.prose a { color: var(--accent); }
+.picker { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.picker button { display: flex; align-items: center; gap: 8px; padding: 4px 12px 4px 4px; background: var(--parchment); border: 3px solid var(--wood); font: 500 15px var(--pixel); color: var(--ink); cursor: pointer; }
+.picker button svg { width: 32px; height: 32px; image-rendering: pixelated; }
+.picker button[aria-selected="true"] { border-color: var(--wood-dark); background: var(--gold); color: #3a2618; }
+.sub { font: 600 16px var(--pixel); margin: 20px 0 6px; padding-top: 14px; border-top: 2px dashed var(--parchment-edge); }
+.error { color: var(--fail); }
+/* Files */
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.drop { position: relative; border: 3px dashed var(--wood); padding: 9px 10px; background: var(--input-bg); display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.drop.over { border-color: var(--leaf); background: var(--parchment-edge); }
+.drop .hint { margin: 0; }
+.attach { margin: 0; padding: 3px 10px; background: var(--parchment); border: 3px solid var(--wood-dark); font: 500 14px var(--pixel); color: var(--ink); cursor: pointer; }
+.sr-only:focus-visible + .attach { outline: 3px solid var(--gold); outline-offset: 2px; }
+.chosen { list-style: none; margin: 0; padding: 0; width: 100%; }
+.chosen:empty { display: none; }
+.chosen li { display: flex; align-items: center; gap: 8px; font-size: 13.5px; padding: 3px 0; border-top: 2px dashed var(--parchment-edge); }
+.chosen li span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chosen small, .files small { color: var(--muted); }
+.chosen button { background: none; border: 0; color: var(--fail); font: 700 16px var(--pixel); cursor: pointer; padding: 0 4px; }
+.files { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: -6px 0 18px; }
+.files .label { font: 500 14px var(--pixel); color: var(--muted); }
+.files a { display: inline-flex; gap: 6px; align-items: baseline; padding: 4px 10px; background: var(--parchment); border: 3px solid var(--wood); color: var(--ink); font: 500 14px var(--pixel); text-decoration: none; }
+.files a:hover { border-color: var(--wood-dark); background: var(--parchment-edge); }
+.files a.out { border-color: var(--leaf-dark); }
+.dialogue .files { margin: 4px 0 6px; }
+.minutes { font-size: 13.5px; color: var(--muted); margin: 14px 0 0; }
+.minutes a { color: var(--accent); }
+/* Did the board just agree with you? */
+.stamp { display: inline-block; margin-left: 12px; padding: 0 8px; font: 600 12px/1.7 var(--pixel); text-transform: uppercase; letter-spacing: .04em;
+  border: 3px solid currentColor; transform: rotate(-3deg); vertical-align: middle; cursor: help; }
+.stamp.disagree { color: var(--fail); }
+.stamp.partly { color: #b7791f; }
+.stamp.agree { color: var(--leaf); }
+.stamp.none { color: var(--muted); }
+.leaning { font-size: 13.5px; color: var(--muted); margin: -2px 0 10px; }
+.pushback { font-size: 13px; line-height: 1.4; color: var(--muted); margin: -4px 0 8px; }
+.list .dot { display: inline-block; width: 8px; height: 8px; margin-right: 7px; vertical-align: 1px; background: var(--parchment-edge); }
+.list .dot.disagree { background: var(--fail); }
+.list .dot.partly { background: #b7791f; }
+.list .dot.agree { background: var(--leaf); }
+/* Punishment corner */
+.corner { position: absolute; right: 12px; top: 120px; min-width: 116px; padding: 10px 10px 8px; display: flex; flex-direction: column;
+  gap: 4px; align-items: center; border: 3px dashed rgba(255, 250, 235, .55); background: rgba(255, 250, 235, .12);
+  box-shadow: inset 0 0 18px rgba(255, 255, 255, .14); transition: background .15s, border-color .15s; z-index: 1; }
+.corner-label { font: 600 13px/1.15 var(--pixel); color: #fff8e6; text-shadow: 2px 2px 0 var(--wood-dark); max-width: 96px; text-align: center; }
+.corner:not(.empty):not(.can-grow) .corner-label { max-width: none; }
+.corner-hint { font: 400 12px/1.2 var(--pixel); color: #fff3d6; text-shadow: 1px 1px 0 var(--wood-dark); max-width: 100px; }
+.corner:not(.empty) .corner-hint { display: none; }
+.empty-stool svg { display: block; width: 60px; height: 60px; image-rendering: pixelated; opacity: .6; }
+.corner.over.can-grow .corner-slots::after { content: ""; width: 72px; height: 119px; border: 2px dashed rgba(255, 255, 255, .85); }
+.cornered.new { animation: arrive .4s ease-out; }
+@keyframes arrive { 0% { opacity: 0; transform: translateY(6px); } }
+body.drag-to-corner .corner { background: rgba(255, 250, 235, .24); border-color: #fff8e6; }
+.corner.over { background: rgba(255, 255, 255, .42); border-style: solid; }
+.corner.full { animation: nope .3s ease-in-out; }
+@keyframes nope { 33% { transform: translateX(-3px); } 66% { transform: translateX(3px); } }
+.corner-slots { display: flex; gap: 16px; align-items: flex-start; }
+.corner-text { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.cornered { position: relative; display: flex; flex-direction: column; align-items: center; cursor: grab; touch-action: none; }
+.cornered .figure { position: relative; display: block; width: 72px; height: 119px; animation: fidget 5s infinite; }
+.cornered .stool { position: absolute; left: 0; top: 47px; }
+.cornered .stool svg { filter: none; }
+.cornered.facing .stool { z-index: -1; }
+.cornered svg { display: block; width: 72px; height: 72px; image-rendering: pixelated; filter: drop-shadow(2px 2px 0 rgba(58, 38, 24, .35)); }
+.cornered .front { display: none; }
+.cornered.facing .front { display: block; }
+.cornered.facing .back { display: none; }
+.cornered.turning .figure { animation: turn .56s steps(4); }
+.cornered .tag { font: 500 12px/1.2 var(--pixel); color: #fff8e6; text-shadow: 1px 1px 0 var(--wood-dark); }
+@keyframes turn { 50% { transform: scaleX(0); } }
+@keyframes fidget { 0%, 88% { transform: translateX(0); } 92% { transform: translateX(-2px); } 96% { transform: translateX(2px); } }
+.say { position: absolute; z-index: 6; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity .2s;
+  padding: 1px 7px; background: #fff; color: var(--wood-dark); border: 2px solid var(--wood-dark); font: 500 12px var(--pixel); }
+.say.on { opacity: 1; }
+.cornered .say { right: 66%; bottom: 80%; }
+.seat .say { left: 50%; top: -12px; transform: translateX(-50%); }
+.empty-chair { display: none; }
+.seat.away .avatar > svg { display: none; }
+.seat.away .empty-chair { display: block; }
+.seat.away .empty-chair svg { width: 80px; height: 80px; image-rendering: pixelated; opacity: .85; }
+.seat.away .bubble { visibility: hidden !important; }
+.seat:not(.s-chair) .avatar { touch-action: none; cursor: grab; }
+.seat.lifted .avatar > svg { opacity: .25; }
+.ghost { position: fixed; z-index: 100; width: 76px; height: 76px; pointer-events: none; transform: translate(-50%, -60%) rotate(-7deg);
+  filter: drop-shadow(5px 7px 0 rgba(0, 0, 0, .25)); }
+.ghost svg { width: 100%; height: 100%; image-rendering: pixelated; }
+body.dragging, body.dragging * { cursor: grabbing !important; user-select: none; }
+.seat.hop .avatar > svg { animation: hop .5s ease-out; }
+@keyframes hop { 50% { transform: translateY(-10px); } }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 120; padding: 6px 14px; background: var(--parchment);
+  border: 3px solid var(--wood-dark); font: 500 14px var(--pixel); color: var(--ink); opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.on { opacity: 1; }
+.why { position: fixed; z-index: 90; width: 300px; padding: 12px 14px; background: var(--parchment); color: var(--ink);
+  border: 4px solid var(--wood-dark); box-shadow: inset 0 0 0 3px var(--parchment-edge), 6px 6px 0 rgba(58, 38, 24, .3); }
+.why h3 { font: 600 15px var(--pixel); margin: 0 0 8px; }
+.why .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.why .chips button { padding: 2px 8px; font: 500 13px var(--pixel); color: var(--ink); background: var(--parchment-edge); border: 2px solid var(--wood); cursor: pointer; }
+.why .chips button[aria-pressed="true"] { background: var(--gold); border-color: var(--wood-dark); color: #3a2618; }
+.why input { width: 100%; border: 3px solid var(--wood); padding: 5px 8px; font: 14px var(--body); background: var(--input-bg); color: var(--input-ink); }
+.why .row { display: flex; justify-content: flex-end; gap: 8px; margin-top: 10px; }
+.why .row button { padding: 4px 12px; font: 600 14px var(--pixel); color: var(--ink); background: var(--parchment); border: 3px solid var(--wood-dark); cursor: pointer; }
+.why .row .save { color: #fff; background: var(--leaf); border-color: var(--leaf-dark); }
+.corner-record { font: 400 12px/1.2 var(--pixel); color: #fff3d6; text-shadow: 1px 1px 0 var(--wood-dark); margin-top: 2px; max-width: 110px; }
+.corner:not(.empty) .corner-record { display: none; }
+.lessons { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+.lessons button { margin-left: 6px; background: none; border: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font: inherit; padding: 0; }
+.absent { font-size: 13.5px; color: var(--muted); margin: -8px 0 16px; }
+.corner-row { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.corner-row button { padding: 5px 12px; font: 500 14px var(--pixel); color: var(--ink); background: var(--parchment); border: 3px solid var(--wood-dark); cursor: pointer; }
+.corner-row .hint { margin: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .cornered .figure, .cornered.turning .figure, .seat.hop .avatar > svg, .corner.full { animation: none !important; }
+}
+/* The back wall: the board walks in through the door, and the window follows the time of day. */
+.room { --wall: #eadbb9; --wall-stripe: #e1cfa9; }
+.room[data-wall="blue"] { --wall: #7f97ab; --wall-stripe: #7690a5; }
+.room[data-wall="navy"] { --wall: #3e4b67; --wall-stripe: #384560; }
+.room[data-wall="terracotta"] { --wall: #b8674c; --wall-stripe: #ad5f46; }
+.room[data-wall="wood"] { --wall: #8b5a35; --wall-stripe: #6e4528; }
+.room[data-wall="plum"] { --wall: #8f6b84; --wall-stripe: #84627a; }
+.wall { position: absolute; left: 0; right: 0; top: 0; height: 108px;
+  background: repeating-linear-gradient(90deg, var(--wall) 0 18px, var(--wall-stripe) 18px 20px);
+  border-bottom: 8px solid var(--wood-dark); box-shadow: 0 6px 0 rgba(58, 38, 24, .25); }
+.wall svg { position: absolute; image-rendering: pixelated; }
+.door { left: 30px; top: 6px; width: 72px; height: 102px; z-index: 1; }
+.wall.open .door.shut, .wall:not(.open) .door.ajar { display: none; }
+.window { left: max(116px, calc(50% - 82px)); top: 14px; width: 164px; height: 76px; }
+.decorate { position: absolute; right: 14px; top: 34px; padding: 3px 10px 4px; font: 500 13px var(--pixel); color: var(--ink);
+  background: var(--parchment); border: 3px solid var(--wood-dark); box-shadow: 3px 3px 0 rgba(58, 38, 24, .3); cursor: pointer; }
+.decorate:hover { background: var(--parchment-edge); }
+.mat { position: absolute; left: 26px; top: 108px; width: 80px; height: 12px; image-rendering: pixelated; }
+@media (prefers-color-scheme: dark) { .wall, .mat { filter: brightness(.8) saturate(.9); } }
+/* Walking in */
+.walker { position: absolute; left: 0; top: 0; z-index: 5; width: 80px; height: 80px; pointer-events: none; }
+.walker svg { width: 100%; height: 100%; image-rendering: pixelated; filter: drop-shadow(3px 3px 0 rgba(58, 38, 24, .35)); }
+.walker.behind { z-index: auto; }
+.seat.returning .avatar > svg, .seat.returning .bubble { opacity: 0; }
+.cornered.incoming { visibility: hidden; }
+.room.entering .seat .avatar > svg, .room.entering .seat .plate, .room.entering .seat .bubble { opacity: 0; }
+/* The office cat sleeps in its bed, wanders now and then, and likes being petted. */
+.bed { position: absolute; left: 34px; top: 474px; width: 96px; height: 36px; image-rendering: pixelated; }
+.cat { position: absolute; z-index: 4; left: 46px; top: 438px; width: 72px; height: 64px; padding: 0; background: none; border: 0; cursor: pointer; overflow: visible; transform-origin: 50% 100%; }
+.cat svg { display: block; width: 104px; height: 64px; margin-left: -16px; image-rendering: pixelated; filter: drop-shadow(2px 2px 0 rgba(58, 38, 24, .3)); }
+.stool { position: absolute; left: 132px; top: 482px; width: 40px; height: 20px; image-rendering: pixelated; }
+.pen { position: absolute; z-index: 3; left: 134px; top: 470px; width: 28px; height: 12px; image-rendering: pixelated; }
+.zzz.puff { color: #fff8e6; font-size: 13px; animation-duration: 1.6s; }
+.cat.in-book { visibility: hidden; }
+/* The cat's notebook: click the cat */
+dialog.notebook { width: min(780px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 20px 22px; color: var(--ink); background: var(--parchment); border: 4px solid var(--wood-dark); }
+dialog.notebook::backdrop { background: rgba(29, 20, 12, .55); }
+.nb { display: grid; grid-template-columns: 268px minmax(0, 1fr); gap: 26px; }
+.nb-portrait { position: relative; display: block; width: 100%; height: 204px; padding: 0; border: 4px solid var(--wood-dark); cursor: pointer;
+  background: repeating-linear-gradient(90deg, var(--floor-a) 0 46px, var(--floor-b) 46px 48px); overflow: hidden; }
+.nb-cat { position: absolute; left: 50%; bottom: 8px; width: 208px; height: 128px; margin-left: -104px; transform-origin: 50% 100%; pointer-events: none; }
+.nb-cat svg { display: block; width: 208px; height: 128px; image-rendering: pixelated; }
+.nb-say { position: absolute; z-index: 3; left: 8px; right: 8px; top: 8px; margin: 0; padding: 5px 9px; background: #fff; border: 2px solid var(--wood-dark);
+  font: 500 13.5px/1.35 var(--pixel); color: var(--wood-dark); text-align: left; opacity: 0; transition: opacity .25s; }
+.nb-say.on { opacity: 1; }
+.nb-portrait .emote { z-index: 4; }
+.nb-name { display: flex; align-items: baseline; flex-wrap: wrap; gap: 10px; margin: 12px 0 2px; }
+.nb-name h2 { margin: 0; font-size: 24px; }
+.nb-name input { width: 160px; border: 3px solid var(--wood); padding: 3px 8px; font: 600 20px var(--pixel); background: var(--input-bg); color: var(--input-ink); }
+.linkish { background: none; border: 0; padding: 0; color: var(--accent); font: 500 13px var(--pixel); text-decoration: underline; cursor: pointer; }
+.nb-about { margin: 0; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+.nb-title { margin: 0 0 10px; }
+.nb-stats { display: grid; grid-template-columns: repeat(3, 1fr); border: 3px solid var(--parchment-edge); }
+.nb-stats div { padding: 8px 10px; font: 500 13px var(--pixel); color: var(--muted); }
+.nb-stats div + div { border-left: 3px solid var(--parchment-edge); }
+.nb-stats b { display: block; font: 600 19px var(--pixel); color: var(--ink); font-variant-numeric: tabular-nums; }
+.nb-learning { margin: 8px 0 0; font: 500 13.5px var(--pixel); color: var(--muted); }
+.nb-bar { height: 10px; margin: 6px 0 0; background: var(--parchment-edge); border: 2px solid var(--wood-dark); }
+.nb-bar i { display: block; height: 100%; width: 0; background: var(--leaf); transition: width .4s; }
+.nb-sub { margin: 16px 0 6px; font: 600 15px var(--pixel); }
+.nb-talk .row { display: flex; gap: 6px; }
+.nb-talk input { flex: 1; min-width: 0; border: 3px solid var(--wood); padding: 7px 9px; font: 15px var(--body); background: var(--input-bg); color: var(--input-ink); }
+.nb-talk button { padding: 6px 14px; font: 600 15px var(--pixel); color: #fff; background: var(--leaf); border: 3px solid var(--leaf-dark); cursor: pointer; }
+.nb-talk button:disabled { opacity: .6; cursor: progress; }
+.nb-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+.nb-actions button { padding: 5px 12px; font: 600 14px var(--pixel); color: var(--ink); background: var(--parchment); border: 3px solid var(--wood-dark); cursor: pointer; }
+.nb-actions button:disabled { opacity: .6; cursor: progress; }
+.nb-actions label { display: flex; gap: 6px; align-items: center; margin: 0; font: 500 14px var(--pixel); }
+.nb-actions .nb-close { margin-left: auto; }
+.nb-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.nb-tabs button { padding: 4px 12px; background: var(--parchment); border: 3px solid var(--wood); font: 500 15px var(--pixel); color: var(--ink); cursor: pointer; }
+.nb-tabs button[aria-selected="true"] { border-color: var(--wood-dark); background: var(--gold); color: #3a2618; }
+.nb-foot { display: flex; justify-content: flex-end; margin-top: 16px; }
+.nb-foot button { padding: 5px 12px; font: 600 14px var(--pixel); color: var(--ink); background: var(--parchment); border: 3px solid var(--wood-dark); cursor: pointer; }
+.nb-list { list-style: none; margin: 0; padding: 0; max-height: 300px; overflow-y: auto; }
+.nb-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; gap: 10px; padding: 8px 2px; border-bottom: 2px dashed var(--parchment-edge); font: 500 13.5px/1.4 var(--pixel); }
+.nb-list small { display: block; color: var(--muted); font-size: 12px; }
+.nb-list b { color: #a0522d; font-weight: 600; }
+.nb-star { background: none; border: 0; padding: 0 4px; font: 600 19px/1 var(--pixel); color: var(--muted); cursor: pointer; }
+.nb-star[aria-pressed="true"] { color: #c98a12; }
+.nb-wish { padding: 12px 14px; background: #fff; border: 3px solid var(--wood-dark); }
+.nb-wish p { margin: 0 0 10px; font: 500 15px/1.4 var(--pixel); color: var(--wood-dark); }
+.nb-wish .row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
+.nb-wish .row .hint { margin: 0; }
+.nb-grant { padding: 5px 14px; font: 600 15px var(--pixel); color: #fff; background: var(--leaf); border: 3px solid var(--leaf-dark); cursor: pointer; }
+.nb-granted { font: 600 15px var(--pixel); color: var(--leaf); }
+.nb-ok { color: var(--leaf); font-weight: 600; white-space: nowrap; }
+.nb-wait { color: var(--muted); white-space: nowrap; }
+.catbtn { display: none; align-items: center; gap: 6px; padding: 4px 10px; font: 600 14px var(--pixel); color: var(--ink); background: var(--parchment); border: 3px solid var(--wood-dark); cursor: pointer; }
+.catbtn svg { width: 39px; height: 24px; image-rendering: pixelated; }
+@media (max-width: 1140px) { .catbtn { display: flex; } }
+@media (max-width: 680px) { .nb { grid-template-columns: 1fr; gap: 16px; } .nb-portrait { height: 190px; } dialog.notebook { padding: 14px; }
+  header { flex-wrap: wrap; } .catbtn { order: 3; } }
+.cat.flip svg { transform: scaleX(-1); }
+.cat.sleeping svg { transform-origin: 50% 100%; animation: snore 2.8s ease-in-out infinite; }
+@keyframes snore { 50% { transform: scaleY(1.06); } }
+.zzz { position: absolute; z-index: 4; font: 600 14px var(--pixel); color: #fff8e6; text-shadow: 2px 2px 0 var(--wood-dark); pointer-events: none; animation: zfloat 2.4s linear forwards; }
+@keyframes zfloat { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: 1; } 100% { opacity: 0; transform: translate(14px, -30px); } }
+/* What the cat says, from its own tiny brain */
+.cat-say { position: absolute; z-index: 9; max-width: 250px; padding: 4px 9px 5px; background: #fff; color: var(--wood-dark);
+  border: 2px solid var(--wood-dark); box-shadow: 3px 3px 0 rgba(58, 38, 24, .25); font: 500 12.5px/1.3 var(--pixel);
+  pointer-events: none; opacity: 0; transform: translateY(calc(-100% + 4px)); transition: opacity .25s, transform .25s; }
+.cat-say.on { opacity: 1; transform: translateY(-100%); }
+.cat-say::after { content: ""; position: absolute; left: 22px; bottom: -7px; width: 10px; height: 10px; background: #fff;
+  border-right: 2px solid var(--wood-dark); border-bottom: 2px solid var(--wood-dark); transform: rotate(45deg); }
+/* Emotes during the debate */
+.emote { position: absolute; z-index: 8; width: 46px; height: 43px; pointer-events: none; animation: emote-in 2s ease-out forwards; }
+.emote svg { display: block; width: 46px; height: 43px; image-rendering: pixelated; }
+@keyframes emote-in { 0% { opacity: 0; transform: translateY(8px); } 16% { opacity: 1; transform: translateY(0); } 82% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-4px); } }
+/* The Chair's gavel lies on the table and strikes its block when the decision is in. */
+.block { position: absolute; z-index: 2; left: 226px; top: 328px; width: 48px; height: 20px; image-rendering: pixelated; }
+.gavel { position: absolute; z-index: 3; left: 186px; top: 294px; width: 77px; height: 38px; transform-origin: 6% 50%; pointer-events: none; }
+.gavel svg { display: block; width: 100%; height: 100%; image-rendering: pixelated; filter: drop-shadow(2px 3px 0 rgba(58, 38, 24, .35)); }
+.bang { position: absolute; z-index: 9; left: 214px; top: 242px; font: 700 22px var(--pixel); color: #fff8e6; text-shadow: 3px 3px 0 var(--wood-dark), -2px -2px 0 var(--wood-dark); opacity: 0; pointer-events: none; }
+.bang.show { animation: bang-in 1s ease-out forwards; }
+@keyframes bang-in { 0% { opacity: 0; transform: translateY(6px); } 18% { opacity: 1; transform: translateY(0); } 75% { opacity: 1; } 100% { opacity: 0; transform: translateY(-6px); } }
+.room.thud { animation: thud .26s ease-in-out; }
+@keyframes thud { 30% { transform: translate(-2px, 1px); } 65% { transform: translate(2px, 0); } }
+.stamp.waiting { opacity: 0; }
+.stamp.slam { animation: stamp-in .5s cubic-bezier(.3, .7, .4, 1) both; }
+@keyframes stamp-in { 0% { opacity: 0; transform: scale(1.3) rotate(-7deg); } 100% { opacity: 1; transform: scale(1) rotate(-3deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .cat.sleeping svg, .emote, .stamp.slam, .room.thud { animation: none !important; }
+  .zzz { display: none; }
+}
+/* Decorate panel */
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 8px; }
+.swatches button { display: flex; align-items: center; gap: 8px; padding: 5px 8px; font: 500 14px var(--pixel); color: var(--ink); text-align: left;
+  background: var(--parchment); border: 3px solid var(--wood); cursor: pointer; }
+.swatches button[aria-checked="true"] { border-color: var(--wood-dark); background: var(--gold); color: #3a2618; }
+.swatches i { flex: none; width: 22px; height: 22px; border: 2px solid var(--wood-dark); background: repeating-linear-gradient(90deg, var(--a) 0 5px, var(--b) 5px 6px); }
+.custom .check { display: flex; align-items: flex-start; gap: 8px; margin: 16px 0 0; font: 500 14px/1.35 var(--pixel); }
+.custom .check input { margin-top: 3px; }
+/* Customise panel */
+dialog.custom { width: min(460px, calc(100vw - 32px)); padding: 18px 20px; color: var(--ink); background: var(--parchment); border: 4px solid var(--wood-dark);
+  box-shadow: inset 0 0 0 3px var(--parchment-edge), 6px 6px 0 rgba(58, 38, 24, .3); }
+dialog.custom::backdrop { background: rgba(29, 20, 12, .55); }
+.custom h2 { margin: 0; }
+.custom-role { font: 400 13px var(--pixel); color: var(--muted); margin: 2px 0 4px; }
+.custom select { width: 100%; border: 3px solid var(--wood); padding: 6px 8px; font: 500 15px var(--pixel); background: var(--input-bg); color: var(--input-ink); }
+.who .model { font: 500 12px/1.3 var(--pixel); color: var(--muted); margin-top: 3px; }
+.custom input[type="text"] { width: 100%; border: 3px solid var(--wood); padding: 7px 10px; font: 600 16px var(--pixel); background: var(--input-bg); color: var(--input-ink); }
+.faces { display: grid; grid-template-columns: repeat(auto-fill, minmax(54px, 1fr)); gap: 8px; max-height: min(370px, 48vh); overflow-y: auto; padding: 4px; }
+.faces .group { grid-column: 1 / -1; font: 500 13px var(--pixel); color: var(--muted); margin-top: 2px; }
+.faces button { padding: 3px; background: var(--parchment-edge); border: 3px solid transparent; cursor: pointer; }
+.faces button:hover { border-color: var(--wood); }
+.faces button[aria-pressed="true"] { border-color: var(--wood-dark); background: var(--gold); }
+.faces svg { display: block; width: 100%; height: auto; image-rendering: pixelated; }
+.custom .actions { display: flex; justify-content: space-between; gap: 10px; margin-top: 14px; }
+.custom .actions button { padding: 7px 14px; font: 600 15px var(--pixel); color: var(--ink); background: var(--parchment); border: 3px solid var(--wood-dark); cursor: pointer; }
+.custom .actions .save { color: #fff; background: var(--leaf); border-color: var(--leaf-dark); }
+@media (max-width: 1140px) {
+  .room { height: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 16px; padding: 18px 10px; }
+  .table { display: none; }
+  .seat { position: static; width: auto; }
+  .s-0 .plate, .s-1 .plate { order: 0; margin: 4px 0 0; }
+  .corner { position: static; grid-column: 1 / -1; order: 10; width: auto; min-height: 100px; gap: 6px; }
+  .s-0, .s-1 { transform: none; }
+  .wall { position: relative; grid-column: 1 / -1; order: -1; margin: -18px -10px 0; }
+  .window { width: 120px; height: 56px; top: 18px; }
+  .decorate { top: auto; bottom: 16px; }
+  .mat, .bed, .stool, .pen, .cat, .block, .gavel, .bang, .zzz, .walker, .cat-say { display: none; }
+}
+@media (max-width: 600px) {
+  h1 { font-size: 26px; }
+  .status { font-size: 12px; padding: 4px 8px; text-align: right; }
+}
+@media (max-width: 900px) {
+  main { grid-template-columns: 1fr; padding: 0 16px 40px; }
+  header { padding: 16px; }
+  .dialogue { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>The Boardroom</h1>
+  <button class="catbtn" id="catbtn" type="button" aria-haspopup="dialog"></button>
+  <span class="status" id="status">Checking Claude sign-in…</span>
+</header>
+<main>
+  <aside>
+    <form id="form" class="box">
+      <h2>New meeting</h2>
+      <label for="agenda">Message</label>
+      <textarea id="agenda" rows="4" placeholder="Ask the board a question or describe a decision" required></textarea>
+      <label for="context">Context (optional)</label>
+      <textarea id="context" rows="3" placeholder="Anything the board should know"></textarea>
+      <label for="files">Files (optional)</label>
+      <div class="drop" id="drop">
+        <input type="file" id="files" class="sr-only" multiple accept=".pdf,.docx,.xlsx,.xlsm,.csv,.tsv,.txt,.md,.json,.png,.jpg,.jpeg,.gif,.webp">
+        <label for="files" class="attach">Attach files</label><span class="hint">or drop them here</span>
+        <ul class="chosen" id="chosen"></ul>
+      </div>
+      <p class="hint" id="filehint">PDF, Word, Excel, CSV, text or images, up to 20 MB. Want a file back? Ask for one, like "put the plan in a spreadsheet".</p>
+      <div class="mode" role="radiogroup" aria-label="Meeting length">
+        <label><input type="radio" name="mode" value="full" checked> Full meeting</label>
+        <label><input type="radio" name="mode" value="quick"> Quick</label>
+      </div>
+      <p class="hint" id="modehint">Statements, cross-examination, then the Chair. About 9 Claude calls.</p>
+      <button class="go" id="convene" type="submit">Start meeting</button>
+    </form>
+    <div class="box">
+      <h2>Past meetings</h2>
+      <p class="pushback" id="pushback" hidden></p>
+      <ul class="list" id="meetings"><li class="hint">No meetings yet.</li></ul>
+    </div>
+  </aside>
+  <section>
+    <div class="room box" id="room"></div>
+    <div class="box howto" id="empty">
+      <h2>How a meeting works</h2>
+      <ol>
+        <li><b>Statements.</b> Each member answers on their own, from their speciality.</li>
+        <li><b>Cross-examination.</b> In a full meeting they review each other's answers without seeing names.</li>
+        <li><b>Resolution.</b> The Chair decides, overrules weak points and, when it matters, gives you honest criticism.</li>
+      </ol>
+      <p class="hint">Write a message on the left to start. Attach files for the board to read, or ask for a file back. Click a member's name to rename them or change their face.</p>
+    </div>
+    <div id="view"></div>
+  </section>
+</main>
+<dialog class="notebook" id="notebook" aria-labelledby="nb-title">
+  <div class="nb">
+    <div>
+      <button class="nb-portrait" id="nb-portrait" type="button" aria-label="Pet the cat"><p class="nb-say" id="nb-say" role="status"></p><span class="nb-cat" id="nb-cat"></span></button>
+      <div class="nb-name" id="nb-name"></div>
+      <p class="nb-about" id="nb-about"></p>
+    </div>
+    <div>
+      <div class="nb-tabs" role="tablist" aria-label="Notebook pages">
+        <button type="button" role="tab" id="nb-tab-home" aria-controls="nb-page-home" aria-selected="true" data-page="home">Home</button>
+        <button type="button" role="tab" id="nb-tab-thoughts" aria-controls="nb-page-thoughts" aria-selected="false" data-page="thoughts">Thoughts</button>
+        <button type="button" role="tab" id="nb-tab-wishes" aria-controls="nb-page-wishes" aria-selected="false" data-page="wishes">Wishes</button>
+      </div>
+      <h2 class="nb-title" id="nb-title">Notebook</h2>
+      <div role="tabpanel" id="nb-page-home" aria-labelledby="nb-tab-home">
+      <div class="nb-stats" id="nb-stats"></div>
+      <p class="nb-learning" id="nb-learning"></p>
+      <div class="nb-bar" id="nb-bar" hidden><i></i></div>
+      <form class="nb-talk" id="nb-talk">
+        <label class="nb-sub" for="nb-msg" style="display:block">Say something</label>
+        <div class="row"><input id="nb-msg" autocomplete="off" maxlength="200" placeholder="Ask about a meeting, or anything"><button type="submit" id="nb-send">Say</button></div>
+        <p class="hint" id="nb-talk-hint"></p>
+      </form>
+      <div class="nb-actions">
+        <button type="button" id="nb-teach">Teach it now</button>
+        <label id="nb-auto-wrap"><input type="checkbox" id="nb-auto"> Learn after every meeting</label>
+      </div>
+      </div>
+      <div role="tabpanel" id="nb-page-thoughts" aria-labelledby="nb-tab-thoughts" hidden>
+        <ul class="nb-list" id="nb-thoughts"></ul>
+        <p class="hint" id="nb-thoughts-hint"></p>
+      </div>
+      <div role="tabpanel" id="nb-page-wishes" aria-labelledby="nb-tab-wishes" hidden>
+        <div class="nb-wish" id="nb-wish"></div>
+        <div class="nb-sub">Past wishes</div>
+        <ul class="nb-list" id="nb-wishes"></ul>
+      </div>
+      <div class="nb-foot"><button type="button" id="nb-close">Close</button></div>
+    </div>
+  </div>
+</dialog>
+<dialog class="custom" id="custom" aria-labelledby="custom-title">
+  <form id="custom-form">
+    <h2 id="custom-title">Customise</h2>
+    <p class="custom-role" id="custom-role"></p>
+    <label for="custom-name">Name (up to 10 letters)</label>
+    <input type="text" id="custom-name" maxlength="10" autocomplete="off" spellcheck="false">
+    <label for="custom-model">Model</label>
+    <select id="custom-model">
+      <option value="opus">Opus: deepest reasoning, slower</option>
+      <option value="sonnet">Sonnet: strong and quick</option>
+      <option value="haiku">Haiku: fastest, lightest</option>
+    </select>
+    <label id="faces-label">Face</label>
+    <div class="faces" id="faces" role="group" aria-labelledby="faces-label"></div>
+    <div class="corner-row" id="corner-row"><button type="button" id="corner-toggle"></button><span class="hint" id="timeouts"></span></div>
+    <p class="lessons" id="lessons" hidden></p>
+    <p class="hint">Saved in this browser only. Their speciality and instructions stay the same.</p>
+    <div class="actions">
+      <button type="button" id="custom-reset">Default</button>
+      <span><button type="button" id="custom-cancel">Cancel</button> <button type="submit" class="save">Save</button></span>
+    </div>
+  </form>
+</dialog>
+<dialog class="custom" id="decor" aria-labelledby="decor-title">
+  <form method="dialog">
+    <h2 id="decor-title">Decorate the room</h2>
+    <label id="walls-label">Wall colour</label>
+    <div class="swatches" id="swatches" role="radiogroup" aria-labelledby="walls-label"></div>
+    <label class="check"><input type="checkbox" id="calm"> Calm mode: skip the entrance and let the cat sleep</label>
+    <p class="hint">Saved in this browser only.</p>
+    <div class="actions">
+      <button type="button" id="replay">Play the entrance</button>
+      <button type="submit" class="save">Done</button>
+    </div>
+  </form>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<form class="why" id="why" hidden>
+  <h3 id="why-title">Why the corner?</h3>
+  <div class="chips" id="why-chips"></div>
+  <input type="text" id="why-text" maxlength="80" placeholder="Or say why (optional)" autocomplete="off">
+  <div class="row"><button type="button" id="why-skip">Skip</button><button type="submit" class="save">Tell them</button></div>
+</form>
+<script>
+const SPRITES = {"chair":{"rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khhsssssshhk..","..khsssssssshk..","..ksgegssgegsk..","..kssssSSssssk..","..kssssmmssssk..","...kSssssssSk...","....kksssskk....","..kcccwwwwccck..",".kcccccaaccccck.",".kccccaaaacccck.",".kcccccaaccccck.",".kcccccccccccck."],"pal":{"k":"#3a2618","h":"#c9c3ba","s":"#f2c29b","S":"#d99a74","e":"#3a2618","m":"#b5584a","g":"#6f6a63","w":"#fbf7ee","c":"#8a5a3c","a":"#b03a2e"}},"skeptic":{"rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khsssssbbhhk..","..khbbbssssshk..","..kssssssssssk..","..kseesssseesk..","..kssssSSssssk..","...kSssmmmsSk...","....kksssskk....","..kcccwsswccck..",".kcccccccccccck.",".kcccccccccccck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#1c151d","h":"#2d2639","b":"#4f4560","s":"#f0bf98","S":"#d4946f","m":"#9c4a3e","e":"#1c151d","c":"#8c3b3b","w":"#f3ece0"}},"advocate":{"rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khhssssssshk..","..khssssssshhk..","..kssessssessk..","..kspesSSsepsk..","..ksssmmmmsssk..","...kSssssssSk...","....kksssskk....","..kccccsscccck..",".kccwccccccwcck.",".kccwccccccwcck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#3a2618","h":"#e8c15a","s":"#f4c7a1","S":"#dca07c","m":"#b5584a","e":"#3a2618","p":"#ee9a8a","c":"#4a7fa8","w":"#2f5d80"}},"operator":{"rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khsssssssshk..","..ksbbssssbbsk..","..kssessssessk..","..kssesSSsessk..","..khhsmmmmshhk..","...khhhhhhhhk...","....kksssskk....","..kccccsscccck..",".kccycccccccyck.",".kccycccccccyck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#3a2618","h":"#6b4a2e","b":"#6b4a2e","s":"#e9b48c","S":"#c98d67","m":"#b5584a","e":"#3a2618","c":"#d2843a","y":"#f3d36b"}},"scout":{"rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..",".khhhhhhhhhhhhk.",".khhsssssssshhk.",".khhsessssesshk.",".khhsesSSsesshk.",".khhsssmmssshhk.",".khhkSssssSkhhk.",".kkk.kssssk.kkk.","..kccccssdccck..",".kccccccccdccck.",".kcccccccdcccck.",".kccccccdccccck.",".kcccccdcccccck."],"pal":{"k":"#3a2618","h":"#9a4a2a","s":"#e2a97f","S":"#c08560","m":"#b5584a","e":"#3a2618","c":"#5a7a4a","d":"#6b4a2e"}}}
+;
+const EXTRA_FACES = {"bun":{"label":"Bun","rows":["......kkkk......",".....khhhhk.....","....kkhhhhkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khsssssssshk..","..kssessssessk..","..kssesSSsessk..","..kssssmmssssk..","...kSssssssSk...","....kksssskk....","..kccccsscccck..",".kcccwccccwccck.",".kcccwccccwccck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#2a1a12","h":"#1f1a1a","s":"#8d5a3b","S":"#734630","e":"#1a1010","m":"#5e2a22","c":"#6b4a9a","w":"#4e3477"}},"curly":{"label":"Curls","rows":["....k.kkkk.k....","...khkhhhhkhk...",".khhhhhhhhhhhhk.",".khhhhhhhhhhhhk.",".khhhhhhhhhhhhk.","..khsssssssshk..","..kssessssessk..","..kssesSSsessk..","..kssssmmssssk..","...kSssssssSk...","....kksssskk....","..kccccsscccck..",".kcccccccccccck.",".kckcccccccckck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#1e140e","h":"#2b1d16","s":"#6e4128","S":"#5a3320","e":"#140c08","m":"#9a4038","c":"#d9a531"}},"glasses":{"label":"Glasses","rows":["................","....kkkkkkkk....","...kssssssssk...","..kssssssssssk..","..kssssssssssk..","..kssssssssssk..","..ksgggssgggsk..","..ksgegSSgegsk..","..kssssmmssssk..","...kSssssssSk...","....kksssskk....","..kcccwwwwccck..",".kccccwrrwcccck.",".kccccwrrwcccck.",".kcccccwwccccck.",".kcccccccccccck."],"pal":{"k":"#2e2018","s":"#c68a5e","S":"#a8704a","e":"#1e1410","m":"#7a3a2e","g":"#5b6f8f","c":"#26324f","w":"#f2eee6","r":"#3a5fa0"}},"long":{"label":"Long hair","rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..",".khhhhhhhhhhhhk.",".khhsssssssshhk.",".khhsessssesshk.",".khhsesSSsesshk.",".khhsssmmssshhk.",".khhhSssssShhhk.",".khhhksssskhhhk.",".khccccsscccchk.",".kcccccccccccck.",".kcccccccccccck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#3a2618","h":"#f0d27a","s":"#f6cfae","S":"#e0a985","e":"#3a2618","m":"#c4555a","c":"#e48aa8"}},"scarf":{"label":"Headscarf","rows":["................","....kkkkkkkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khhhhhhhhhhk..","..khhsssssshhk..","..khsesssseshk..","..khsesSSseshk..","..khsssmmssshk..","..khhSssssShhk..","..khhhhsshhhhk..","..khhhhhhhhhhk..",".kcccccccccccck.",".kcccccccccccck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#1f3a3a","h":"#2f8f8a","s":"#d9a27a","S":"#bd8560","e":"#2a1a12","m":"#9a4a3e","c":"#6f7a3a"}},"beanie":{"label":"Beanie","rows":["................","....kkkkkkkk....","...kbbbbbbbbk...","..kbbbbbbbbbbk..","..kwwwwwwwwwwk..","..khsssssssshk..","..kssessssessk..","..ksfesSSsefsk..","..kssssmmssssk..","...kSssssssSk...","....kksssskk....","..kccccsscccck..",".kcccdccccdccck.",".kcccdccccdccck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#2a1a14","b":"#7d8a96","w":"#5f6b76","h":"#a8642e","s":"#f2c29b","S":"#d99a74","f":"#d48a62","e":"#2a1a14","m":"#b5584a","c":"#b8382f","d":"#f2eee6"}},"granny":{"label":"Silver bun","rows":["......kkkk......",".....khhhhk.....","....kkhhhhkk....","...khhhhhhhhk...","..khhhhhhhhhhk..","..khsssssssshk..","..ksgggssgggsk..","..ksgegSSgegsk..","..kssssmmssssk..","...kSssssssSk...","....kksssskk....","..kccccwwcccck..",".kccccwccwcccck.",".kcccccwwccccck.",".kcccccccccccck.",".kcccccccccccck."],"pal":{"k":"#3a2a22","h":"#d6d2cc","s":"#f0c4a2","S":"#d6a07e","g":"#7a5a3a","e":"#3a2a22","m":"#a8545a","c":"#8a5a8a","w":"#f2eee6"}},"cat":{"label":"Cat","rows":["..k..........k..","..kk........kk..","..khk......khk..","..khhkkkkkkhhk..","..khhhhhhhhhhk..",".khhhhhhhhhhhhk.",".khhhehhhhehhhk.",".khhhehhhhehhhk.",".khhhhhpphhhhhk.","kkhhhhhmmhhhhhkk",".khhhhhhhhhhhhk.","..khhhhhhhhhhk..","..kssssssssssk..",".khsssssssssshk.",".khhsssssssshhk.",".kkkkkkkkkkkkkk."],"pal":{"k":"#2a1f1a","h":"#e0913c","s":"#f4dcc0","S":"#f4dcc0","e":"#1c140f","m":"#9a4a3a","p":"#e88a8a","lid":"#e0913c"}},"tux":{"label":"Tux cat","rows":["..k..........k..","..kk........kk..","..khk......khk..","..khhkkkkkkhhk..","..khhhhhhhhhhk..",".khhhhhhhhhhhhk.",".khhhehhhhehhhk.",".khhhehhhhehhhk.",".khhhhwppwhhhhk.","vkhhhwwmmwwhhhkv",".khhhhwwwwhhhhk.","..khhhhhhhhhhk..","..khhhwwwwhhhk..",".khhwwwwwwwwhhk.",".khhwwwwwwwwhhk.",".kkkkkkkkkkkkkk."],"pal":{"k":"#0a0809","h":"#2a2528","w":"#f3f1ec","s":"#f3f1ec","e":"#c7cf45","m":"#9a4a4a","p":"#e59a9a","v":"#cfcfcf","lid":"#2a2528","lip":"#f3f1ec"}}};
+let board = null, currentId = null, pollTimer = null, activeTab = null;
+const BLINK = { chair: 0.4, skeptic: 2.1, advocate: 3.3, operator: 1.2, scout: 4.6 };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+function md(text) {
+  if (window.marked && window.DOMPurify) return DOMPurify.sanitize(marked.parse(text || ""));
+  return `<p style="white-space:pre-wrap">${esc(text)}</p>`;
+}
+const api = (p, opts) => fetch(p, opts).then(r => r.json());
+
+// Original pixel portraits, drawn as 16x16 SVG grids.
+// Faces you add yourself (my_faces.json next to boardroom.py) arrive from the server and never ship with the app.
+let myFaces = {};
+const allFaces = () => ({ ...SPRITES, ...EXTRA_FACES, ...myFaces });
+function faceSvg(key) {
+  const s = allFaces()[key] || SPRITES.chair;
+  const px = (x, y, c) => `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${esc(c)}"/>`;
+  // Eyes and mouth are drawn over what is underneath them (skin, a lens, fur), so they can blink and talk without leaving holes.
+  const lid = s.pal.lid || s.pal.s, lip = s.pal.lip || s.pal.lid || s.pal.s;
+  let base = "", eyes = "", mouth = "";
+  s.rows.forEach((row, y) => [...row].forEach((ch, x) => {
+    if (ch === ".") return;
+    base += px(x, y, ch === "e" ? lid : ch === "m" ? lip : s.pal[ch]);
+    if (ch === "e") eyes += px(x, y, s.pal.e);
+    if (ch === "m") mouth += px(x, y, s.pal.m);
+  }));
+  return `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${base}<g class="eyes">${eyes}</g><g class="mouth">${mouth}</g></svg>`;
+}
+const people = () => [{ ...board.chair, id: "chair" }, ...board.members];
+const person = id => people().find(p => p.id === id) || { name: id, speciality: "" };
+
+// Custom names and faces live only in this browser, so a copy downloaded from GitHub starts with the defaults.
+const NAMES_KEY = "boardroom.names", FACES_KEY = "boardroom.faces";
+const loadStore = key => { try { return JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch { return {}; } };
+const saveStore = (key, value) => { try { localStorage.setItem(key, JSON.stringify(value)); } catch {} };
+let customNames = loadStore(NAMES_KEY), customFaces = loadStore(FACES_KEY);
+// Each seat runs on its own Claude model (set in members.json); you can switch it in the customise panel.
+const MODELS_KEY = "boardroom.models", MODEL_NAMES = { opus: "Opus", sonnet: "Sonnet", haiku: "Haiku" };
+let customModels = loadStore(MODELS_KEY);
+const defaultModel = id => person(id).model || (board && board.model) || "sonnet";
+const modelOf = id => customModels[id] || defaultModel(id);
+const displayName = id => customNames[id] || person(id).name;
+const faceOf = id => (customFaces[id] && allFaces()[customFaces[id]]) ? customFaces[id] : id;
+const sprite = id => faceSvg(faceOf(id));
+
+// Show the names you chose everywhere, including in text the board wrote under the old names.
+const escRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function personalise(text, m) {
+  if (!text || !board) return text;
+  let out = text;
+  people().forEach(p => {
+    const now = displayName(p.id);
+    [p.name, (m.names || {})[p.id]].filter((n, i, all) => n && n !== now && all.indexOf(n) === i).forEach(old => {
+      out = out.replace(new RegExp(`(?<![\\p{L}\\p{N}])(?:[Tt]he )?${escRe(old)}(?![\\p{L}\\p{N}])`, "gu"), now);
+    });
+  });
+  // The cross-examination refers to "Statement A"; say whose it was.
+  const byLetter = Object.fromEntries(Object.entries(m.labels || {}).map(([id, letter]) => [letter, id]));
+  return out.replace(/\bStatement ([A-E])\b(?!\s*\()/g, (all, letter) => byLetter[letter] ? `${all} (${displayName(byLetter[letter])})` : all);
+}
+
+// The punishment corner: drag a member there and they turn to the wall and sit out the next meeting.
+const CORNER_KEY = "boardroom.corner", TIMEOUTS_KEY = "boardroom.timeouts", FEEDBACK_KEY = "boardroom.feedback", CORNER_SIZE = 2;
+let corner = loadStore(CORNER_KEY), timeouts = loadStore(TIMEOUTS_KEY), meetingRunning = false, suppressClick = false;
+// Why you cornered someone: their last three reasons go with them into future meetings, so they adjust.
+let feedback = loadStore(FEEDBACK_KEY);
+const REASONS = ["Too negative", "Too positive", "Too long", "Wrong facts", "Missed the point", "Too vague"];
+function askWhy(id) {
+  const form = document.getElementById("why"), text = document.getElementById("why-text"), chips = document.getElementById("why-chips");
+  document.getElementById("why-title").textContent = `Why is ${displayName(id)} in the corner?`;
+  chips.innerHTML = REASONS.map(r => `<button type="button" aria-pressed="false">${r}</button>`).join("");
+  chips.querySelectorAll("button").forEach(b => b.onclick = () => {
+    chips.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    text.value = b.textContent;
+  });
+  text.value = "";
+  form.hidden = false;
+  const c = document.getElementById("corner").getBoundingClientRect();
+  const narrow = window.innerWidth <= 1140 || c.left < 330;
+  form.style.left = narrow ? `${Math.max(8, (window.innerWidth - 300) / 2)}px` : `${c.left - 312}px`;
+  form.style.top = narrow ? `${Math.max(8, window.innerHeight - 260)}px` : `${Math.max(8, c.top)}px`;
+  const close = () => { form.hidden = true; form.onsubmit = null; };
+  document.getElementById("why-skip").onclick = close;
+  form.onkeydown = e => { if (e.key === "Escape") close(); };
+  form.onsubmit = e => {
+    e.preventDefault();
+    const reason = text.value.trim().slice(0, 80);
+    if (reason) {
+      feedback[id] = [reason, ...(feedback[id] || []).filter(r => r !== reason)].slice(0, 3);
+      if (corner[id]) corner[id].reason = reason;
+      saveStore(FEEDBACK_KEY, feedback); saveStore(CORNER_KEY, corner);
+      say(document.querySelector(`.cornered[data-id="${id}"] .say`), pick(["Noted. I'll fix that.", "Fair enough.", "Okay, okay. Lesson learned."]));
+    }
+    close();
+  };
+  text.focus();
+}
+function cornerRecord() {
+  // Who you send to the corner most.
+  const top = Object.entries(timeouts).filter(([id, n]) => n > 0 && board && board.members.some(m => m.id === id)).sort((a, b) => b[1] - a[1])[0];
+  const el = document.getElementById("corner-record");
+  if (el) el.textContent = top ? `Most cornered: ${displayName(top[0])} ×${top[1]}` : "";
+}
+const cornerIds = () => board ? board.members.map(m => m.id).filter(id => corner[id]) : [];
+const CHAIR_SVG = (() => {
+  const rows = ["................", "................", "....kkkkkkkk....", "....kwwwwwwk....", "....kwddddwk....", "....kwwwwwwk....",
+    "....kwddddwk....", "....kwwwwwwk....", "...kkkkkkkkkk...", "...kwwwwwwwwk...", "...kddddddddk...", "...kkkkkkkkkk...",
+    "....kd....dk....", "....kd....dk....", "....kd....dk....", "....kk....kk...."];
+  const pal = { k: "#3a2618", w: "#b97a46", d: "#9a6236" };
+  let r = "";
+  rows.forEach((row, y) => [...row].forEach((ch, x) => { if (ch !== ".") r += `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${pal[ch]}"/>`; }));
+  return `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+})();
+const FACE_PIXELS = new Set([..."sSemgyGlLtorpf"]);
+function backSvg(key) {
+  // The same character seen from behind: the face becomes the back of the head.
+  const s = allFaces()[key] || SPRITES.chair;
+  const back = s.pal.h || s.pal.s;
+  let r = "";
+  s.rows.forEach((row, y) => [...row].forEach((ch, x) => {
+    if (ch === ".") return;
+    let c = s.pal[ch];
+    if (y <= 10 && (FACE_PIXELS.has(ch) || (ch === "w" && y >= 5))) c = back;
+    else if (ch === "e" || ch === "m") c = s.pal.lid || s.pal.s;
+    r += `<rect x="${x}" y="${y}" width="1.02" height="1.02" fill="${esc(c)}"/>`;
+  }));
+  return `<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+}
+const LINES = {
+  any: ["pfff", "*sigh*", "...", "so boring", "zzz", "can I come back now?", "this is so unfair", "nice wall", "*counts bricks*", "I wasn't even that bad"],
+  busy: ["they're getting it wrong without me", "I would've said it better", "nobody asked me, fine", "psst... bad idea"],
+  arrive: ["What did I do?!", "Fine.", "Unbelievable.", "I'll be quiet... ish"],
+  back: ["Thanks. I'll behave.", "I'm back!", "Did you miss me?", "Lesson learned. Probably."],
+  skeptic: ["told you it would fail", "this will end badly", "I was right, you know", "they'll regret this"],
+  advocate: ["this corner has so much potential!", "best corner ever!", "we could sell this corner", "still a brilliant idea!"],
+  operator: ["I could be making a plan", "what a waste of time", "who's doing the numbers now?", "deadline: never"],
+  scout: ["I found 3 sources on this wall", "citation needed", "is this wall load-bearing?", "googling 'how to escape'"],
+};
+const pick = list => list[Math.floor(Math.random() * list.length)];
+function say(el, text, ms = 2800) {
+  if (!el) return;
+  el.textContent = text; el.classList.add("on");
+  clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove("on"), ms);
+}
+function toast(text) { const t = document.getElementById("toast"); say(t, text, 2400); }
+let mutterTimer = null;
+function scheduleMutter() {
+  clearTimeout(mutterTimer);
+  if (!cornerIds().length) return;
+  mutterTimer = setTimeout(() => {
+    const ids = cornerIds();
+    if (ids.length) {
+      const id = pick(ids);
+      say(document.querySelector(`.cornered[data-id="${id}"] .say`), pick([...LINES.any, ...(LINES[id] || []), ...(meetingRunning ? LINES.busy : [])]));
+    }
+    scheduleMutter();
+  }, (meetingRunning ? 3500 : 9000) + Math.random() * 4000);
+}
+// Walking to the corner and back: across their row first, then up or down, passing behind the others.
+const CORNER_SPEED = .26, walkingIn = new Set();
+const canWalk = () => !reducedMotion() && !narrowRoom();
+const centre = el => { const p = roomPos(el); return { x: p.x + p.w / 2, y: p.y + p.h / 2 }; };
+function walkBetween(id, pts) {
+  const room = document.getElementById("room"), w = document.createElement("div");
+  w.className = "walker behind"; w.innerHTML = sprite(id);
+  room.insertBefore(w, room.querySelector(".seat"));
+  return walkPath(w, pts, { speed: CORNER_SPEED, fade: false }).then(() => w.remove());
+}
+function settleInCorner(el) {
+  el.classList.remove("incoming");
+  el.classList.add("facing", "turning", "new");
+  setTimeout(() => el.classList.remove("facing"), 280);
+  setTimeout(() => el.classList.remove("turning"), 600);
+  setTimeout(() => say(el.querySelector(".say"), pick(LINES.arrive)), 700);
+}
+function drawCorner(arriving) {
+  const slots = document.getElementById("corner-slots");
+  if (!slots) return;
+  const ids = cornerIds();
+  slots.innerHTML = ids.map(id => `<div class="cornered" data-id="${id}" role="button" tabindex="0"
+      title="Drag ${esc(displayName(id))} back to the table to forgive them" aria-label="${esc(displayName(id))} is in the punishment corner. Press Enter to bring them back.">
+      <span class="say"></span><span class="figure"><span class="front">${sprite(id)}</span><span class="back">${backSvg(faceOf(id))}</span><span class="stool">${CHAIR_SVG}</span></span>
+      <span class="tag">${esc(displayName(id))}</span></div>`).join("");
+  if (!ids.length) slots.innerHTML = `<span class="empty-stool">${CHAIR_SVG}</span>`;
+  const cornerEl = document.getElementById("corner");
+  cornerEl.classList.toggle("empty", !ids.length);
+  cornerEl.classList.toggle("can-grow", ids.length > 0 && ids.length < CORNER_SIZE);
+  cornerRecord();
+  document.querySelectorAll(".seat").forEach(seat => {
+    const away = !!corner[seat.dataset.id];
+    seat.classList.toggle("away", away);
+    const p = person(seat.dataset.id);
+    seat.querySelector(".role").textContent = away ? "In the corner" : p.speciality;
+  });
+  slots.querySelectorAll(".cornered").forEach(el => {
+    makeDraggable(el, el.dataset.id, "corner");
+    el.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); bringBack(el.dataset.id); } };
+    if (walkingIn.has(el.dataset.id)) el.classList.add("incoming");
+    else if (el.dataset.id === arriving) settleInCorner(el);
+  });
+  scheduleMutter();
+}
+function sendToCorner(id) {
+  if (id === "chair" || corner[id]) return;
+  if (meetingRunning) { toast("Wait until the meeting ends."); return; }
+  if (cornerIds().length >= CORNER_SIZE) {
+    const c = document.getElementById("corner");
+    c.classList.remove("full"); void c.offsetWidth; c.classList.add("full");
+    toast(`The corner only fits ${CORNER_SIZE}.`); return;
+  }
+  const seatAv = seatAvatar(id), from = seatAv && canWalk() ? centre(seatAv) : null;
+  corner[id] = { meeting: null };
+  timeouts[id] = (timeouts[id] || 0) + 1;
+  saveStore(CORNER_KEY, corner); saveStore(TIMEOUTS_KEY, timeouts);
+  if (!from) { drawCorner(id); setTimeout(() => askWhy(id), 650); return; }
+  walkingIn.add(id);
+  drawCorner();
+  const fig = document.querySelector(`.cornered[data-id="${id}"] .figure`);
+  const p = roomPos(fig), to = { x: p.x + p.w / 2, y: p.y + 36 };
+  walkBetween(id, [from, { x: to.x, y: from.y }, to]).then(() => {
+    walkingIn.delete(id);
+    const el = document.querySelector(`.cornered[data-id="${id}"]`);
+    if (!el) return;
+    settleInCorner(el);
+    setTimeout(() => askWhy(id), 650);
+  });
+}
+function bringBack(id, line) {
+  if (!corner[id]) return;
+  const fig = document.querySelector(`.cornered[data-id="${id}"]:not(.incoming) .figure`);
+  const from = fig && canWalk() ? (p => ({ x: p.x + p.w / 2, y: p.y + 36 }))(roomPos(fig)) : null;
+  walkingIn.delete(id);
+  delete corner[id];
+  saveStore(CORNER_KEY, corner);
+  drawCorner();
+  const seat = document.querySelector(`.seat[data-id="${id}"]`);
+  if (!seat) return;
+  const sitDown = () => {
+    seat.classList.remove("returning", "hop"); void seat.offsetWidth; seat.classList.add("hop");
+    say(seat.querySelector(".say"), line || pick(LINES.back), 3200);
+  };
+  if (!from) return sitDown();
+  seat.classList.add("returning");
+  const to = centre(seat.querySelector(".avatar"));
+  walkBetween(id, [from, { x: from.x, y: to.y }, to]).then(sitDown);
+}
+function serveTime(list) {
+  // A member sits out one meeting, then comes back on their own once it has finished.
+  Object.entries(corner).forEach(([id, c]) => {
+    if (c.meeting && list.some(x => x.id === c.meeting && x.stage === "done")) bringBack(id, "Time served. I'll behave.");
+  });
+}
+const inside = (ev, el) => { const r = el.getBoundingClientRect(); return ev.clientX >= r.left - 10 && ev.clientX <= r.right + 10 && ev.clientY >= r.top - 10 && ev.clientY <= r.bottom + 10; };
+function makeDraggable(el, id, from) {
+  el.addEventListener("pointerdown", e => {
+    if (e.button !== 0) return;
+    const start = { x: e.clientX, y: e.clientY };
+    let ghost = null, blocked = false;
+    const cornerEl = document.getElementById("corner");
+    const move = ev => {
+      if (blocked || ev.pointerId !== e.pointerId) return;
+      if (!ghost) {
+        if (Math.hypot(ev.clientX - start.x, ev.clientY - start.y) < 6) return;
+        if (meetingRunning) { blocked = true; toast("Wait until the meeting ends."); return; }
+        ghost = document.createElement("div");
+        ghost.className = "ghost";
+        ghost.innerHTML = from === "seat" ? sprite(id) : backSvg(faceOf(id));
+        document.body.appendChild(ghost);
+        document.body.classList.add("dragging", from === "seat" ? "drag-to-corner" : "drag-from-corner");
+        el.closest(".seat")?.classList.add("lifted");
+      }
+      ghost.style.left = `${ev.clientX}px`; ghost.style.top = `${ev.clientY}px`;
+      cornerEl.classList.toggle("over", from === "seat" && inside(ev, cornerEl));
+    };
+    const up = ev => {
+      if (ev.pointerId !== e.pointerId) return;
+      window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); window.removeEventListener("pointercancel", up);
+      document.body.classList.remove("dragging", "drag-to-corner", "drag-from-corner");
+      el.closest(".seat")?.classList.remove("lifted");
+      cornerEl.classList.remove("over");
+      if (!ghost) return;
+      ghost.remove();
+      suppressClick = true; setTimeout(() => { suppressClick = false; }, 60);
+      if (ev.type === "pointercancel") return;
+      if (from === "seat" && inside(ev, cornerEl)) sendToCorner(id);
+      else if (from === "corner" && !inside(ev, cornerEl) && inside(ev, document.getElementById("room"))) bringBack(id);
+    };
+    // Listen on the whole window, so a fast drag that leaves the avatar straight away still counts.
+    window.addEventListener("pointermove", move); window.addEventListener("pointerup", up); window.addEventListener("pointercancel", up);
+  });
+}
+
+// The customise panel: a new name (up to 10 letters) and a face. The speciality and instructions never change.
+const dlg = document.getElementById("custom");
+let editing = null, pickedFace = null;
+function drawFaces() {
+  const boardFaces = Object.fromEntries(people().map(p => [p.id, { label: `${p.name} (default)` }]));
+  const groups = [["Default", boardFaces], ["More faces", { ...EXTRA_FACES, ...myFaces }]];
+  const el = document.getElementById("faces");
+  el.innerHTML = groups.filter(([, set]) => Object.keys(set).length).map(([title, set]) =>
+    `<div class="group">${title}</div>` + Object.entries(set).map(([k, f]) =>
+      `<button type="button" data-face="${esc(k)}" aria-pressed="${k === pickedFace}" title="${esc(f.label || k)}" aria-label="${esc(f.label || k)}">${faceSvg(k)}</button>`).join("")).join("");
+  el.querySelectorAll("button").forEach(b => b.onclick = () => {
+    pickedFace = b.dataset.face;
+    el.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  });
+}
+function openCustomise(id) {
+  editing = id; pickedFace = faceOf(id);
+  const p = person(id);
+  document.getElementById("custom-title").textContent = `Customise the ${p.name}`;
+  document.getElementById("custom-role").textContent = p.speciality;
+  const input = document.getElementById("custom-name");
+  input.value = customNames[id] || ""; input.placeholder = p.name;
+  document.getElementById("custom-model").value = modelOf(id);
+  document.getElementById("corner-row").hidden = id === "chair";
+  document.getElementById("corner-toggle").textContent = corner[id] ? "Bring back from the corner" : "Send to the corner";
+  document.getElementById("timeouts").textContent = `Time-outs so far: ${timeouts[id] || 0}`;
+  const lessons = document.getElementById("lessons");
+  lessons.hidden = id === "chair" || !(feedback[id] || []).length;
+  lessons.innerHTML = lessons.hidden ? "" : `What you've told them: ${feedback[id].map(esc).join("; ")}<button type="button" id="forget">Forget</button>`;
+  const forget = document.getElementById("forget");
+  if (forget) forget.onclick = () => { delete feedback[id]; saveStore(FEEDBACK_KEY, feedback); lessons.hidden = true; };
+  drawFaces();
+  dlg.showModal();
+  input.focus();
+}
+function refreshSeat(id) {
+  const seat = document.querySelector(`.seat[data-id="${id}"]`);
+  if (seat) {
+    seat.querySelector(".avatar > svg").outerHTML = sprite(id);
+    seat.querySelector(".name").textContent = displayName(id);
+  }
+  drawCorner();
+  if (roomMeeting) renderView(roomMeeting);
+}
+document.getElementById("custom-form").onsubmit = e => {
+  e.preventDefault();
+  const id = editing, p = person(id);
+  const v = document.getElementById("custom-name").value.trim().slice(0, 10);
+  if (v && v !== p.name) customNames[id] = v; else delete customNames[id];
+  if (pickedFace && pickedFace !== id) customFaces[id] = pickedFace; else delete customFaces[id];
+  const chosenModel = document.getElementById("custom-model").value;
+  if (chosenModel !== defaultModel(id)) customModels[id] = chosenModel; else delete customModels[id];
+  saveStore(NAMES_KEY, customNames); saveStore(FACES_KEY, customFaces); saveStore(MODELS_KEY, customModels);
+  dlg.close();
+  refreshSeat(id);
+};
+document.getElementById("custom-reset").onclick = () => {
+  document.getElementById("custom-name").value = ""; pickedFace = editing; drawFaces();
+  document.getElementById("custom-model").value = defaultModel(editing);
+};
+document.getElementById("custom-cancel").onclick = () => dlg.close();
+document.getElementById("corner-toggle").onclick = () => {
+  const id = editing;
+  dlg.close();
+  if (corner[id]) bringBack(id); else sendToCorner(id);
+};
+dlg.addEventListener("close", () => document.querySelector(`.seat[data-id="${editing}"] .name`)?.focus());
+
+// ---------- The room: back wall, walking in, the office cat, emotes, the gavel ----------
+const ROOM_KEY = "boardroom.room";
+const WALLS = { cream: ["Cream", "#eadbb9", "#e1cfa9"], blue: ["Dusty blue", "#7f97ab", "#7690a5"], navy: ["Navy", "#3e4b67", "#384560"],
+  terracotta: ["Terracotta", "#b8674c", "#ad5f46"], wood: ["Wood panels", "#8b5a35", "#6e4528"], plum: ["Plum", "#8f6b84", "#84627a"] };
+let roomPrefs = { wall: "cream", calm: false, ...loadStore(ROOM_KEY) };
+if (!WALLS[roomPrefs.wall]) roomPrefs.wall = "cream";
+document.getElementById("room").dataset.wall = roomPrefs.wall;
+const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const narrowRoom = () => window.matchMedia("(max-width: 1140px)").matches;
+const lively = () => !roomPrefs.calm && !reducedMotion() && !narrowRoom();
+const wait = ms => new Promise(r => setTimeout(r, ms));
+const pxRect = (x, y, c, w = 1, h = 1) => `<rect x="${x}" y="${y}" width="${w + .02}" height="${h + .02}" fill="${c}"/>`;
+const pixelCells = (rows, pal) => rows.map((row, y) => [...row].map((ch, x) => ch !== "." && pal[ch] ? pxRect(x, y, pal[ch]) : "").join("")).join("");
+const pixelSvg = (rows, pal, cls) => `<svg class="${cls || ""}" viewBox="0 0 ${rows[0].length} ${rows.length}" shape-rendering="crispEdges" aria-hidden="true">${pixelCells(rows, pal)}</svg>`;
+const roomPos = el => {
+  // Position inside the room, measured from inside its border, the same way absolutely placed things are.
+  const room = document.getElementById("room"), r = el.getBoundingClientRect(), R = room.getBoundingClientRect();
+  return { x: r.left - R.left - room.clientLeft, y: r.top - R.top - room.clientTop, w: r.width, h: r.height };
+};
+
+const DOOR_PAL = { t: "#4a2e18", k: "#3a2618", w: "#9a6236", d: "#7a4a28", y: "#e3b040", n: "#22160f" };
+const DOOR_SHUT = ["tttttttttttt", "tkkkkkkkkkkt", "tkwwwwwwwwkt", "tkwddwwddwkt", "tkwddwwddwkt", "tkwddwwddwkt", "tkwwwwwwwwkt", "tkwwwwwwwykt", "tkwwwwwwwykt",
+  "tkwwwwwwwwkt", "tkwddwwddwkt", "tkwddwwddwkt", "tkwddwwddwkt", "tkwddwwddwkt", "tkwwwwwwwwkt", "tkwwwwwwwwkt", "tkkkkkkkkkkt"];
+const DOOR_AJAR = DOOR_SHUT.map((row, y) => y === 0 || y === 1 || y === 16 ? row : "tknnnnnnnwkt");
+function windowSvg() {
+  // The sky outside matches the time of day where you are, with a pumpkin in October and snow on the sill in December.
+  const now = new Date(), hour = now.getHours(), month = now.getMonth();
+  const mode = hour < 6 || hour >= 20 ? "night" : hour < 10 ? "morning" : hour < 17 ? "day" : "evening";
+  const [top, bottom] = { morning: ["#f6c7a1", "#f9e1b8"], day: ["#8fc6e8", "#c3e3f4"], evening: ["#e98a5a", "#7d5a9a"], night: ["#1d2547", "#2f3a6b"] }[mode];
+  let art = `<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${top}"/><stop offset="1" stop-color="${bottom}"/></linearGradient></defs><rect x="1" y="1" width="24" height="9" fill="url(#sky)"/>`;
+  if (mode === "day") art += pxRect(4, 3, "#fff", 4, 1) + pxRect(3, 4, "#fff", 6, 1) + pxRect(16, 5, "#fff", 4, 1) + pxRect(15, 6, "#fff", 6, 1) + pxRect(20, 2, "#ffe066", 2, 2);
+  if (mode === "morning") art += pxRect(3, 6, "#ffd36b", 3, 3) + pxRect(14, 3, "#fff3dc", 5, 1);
+  if (mode === "evening") art += pxRect(18, 6, "#ffb347", 3, 3);
+  if (mode === "night") art += pxRect(18, 2, "#f4f1d0", 2, 2) + pxRect(4, 3, "#fff") + pxRect(9, 6, "#fff") + pxRect(13, 2, "#fff") + pxRect(22, 7, "#fff");
+  art += `<rect x=".5" y=".5" width="25" height="10" fill="none" stroke="#5e3a1f" stroke-width="1"/>` + pxRect(12.5, 1, "#5e3a1f", 1, 9) + pxRect(1, 5, "#5e3a1f", 24, .8) + pxRect(0, 10.2, "#b97a46", 26, 1.4);
+  if (month === 9) art += pxRect(20, 8.4, "#e07b2a", 3, 2) + pxRect(21.2, 7.6, "#3f6d2a", .8, .8);
+  if (month === 11) art += pxRect(0, 9.6, "#fff", 26, .7);
+  return `<svg class="window" viewBox="0 0 26 12" shape-rendering="crispEdges" aria-hidden="true">${art}</svg>`;
+}
+setInterval(() => { const w = document.getElementById("window"); if (w) w.innerHTML = windowSvg(); }, 5 * 60 * 1000);
+const CAT = {"pal":{"k":"#3b2416","b":"#a8693d","d":"#8a5332","l":"#e2b583","e":"#1a100a","p":"#e98c8c","r":"#6e2f2f","w":"#fff8e6"},"frames":{"walk1":["..........................","..........................","...............k...k......","..............kbk.kbk.....",".....k........kbbkbbbk....","....kbk......kbbbbbbbk....","....kbk..kkkkbbbbbbebk....",".....kbkkbbbbbbbbbbebk....",".....kbkbbbbbbbbbbbbpk....","......kbbbbbbbbbbbbbk.....","......kbbbbbbbbbbbbk......","......kbbbbbbbbbbbbk......","......kbbllllllllbk.......",".......kbk.....kbk........",".......kk......kk.........",".........................."],"walk2":["..........................","..........................","...............k...k......","....k.........kbk.kbk.....","....kbk.......kbbkbbbk....",".....kbk.....kbbbbbbbk....",".....kbk.kkkkbbbbbbebk....","......kbkbbbbbbbbbbebk....","......kbkbbbbbbbbbbbpk....","......kbbbbbbbbbbbbbk.....","......kbbbbbbbbbbbbk......","......kbbbbbbbbbbbbk......","......kbbllllllllbk.......",".........kbk.kbk..........",".........kk..kk...........",".........................."],"sit":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbebbk....","............kbbbbbebbk....","............kbbbbbbbpk....",".............kbbbbbbk.....","............kbbbbbbk......","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"blep":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbbbbk....","............kbbbbkkbbk....","............kbbbbbbbpk....",".............kbbbbbpk.....","............kbbbbbbk......","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"sleep":["..........................","..........................","..........................","..........................","..........................","..........................","................k...k.....","..........kkkkkkbk.kbk....","........kkbbbbbbbbkbbk....",".......kbbbbbbbbbbbbbk....","......kbbbbbbbbbbbbbbk....",".....kbbbbbbbbbkbbbkbk....",".....kbbbbbbbbbbkkkbpk....","....kbbbbbbbbbbbbbbbk.....","....kbbbbbbbbbbbbbbk......",".....kkkkkkkkkkkkkk......."],"walkA":["..........................","..........................","...............k...k......","..............kbk.kbk.....",".....k........kbbkbbbk....","....kbk......kbbbbbbbk....","....kbk..kkkkbbbbbbebk....",".....kbkkbbbbbbbbbbebk....",".....kbkbbbbbbbbbbbbpk....","......kbbbbbbbbbbbbbk.....","......kbbbbbbbbbbbbk......","......kbbbbbbbbbbbbk......","......kbbllllllllbk.......","........kbk....kbk........","........kk.....kk.........",".........................."],"walkB":["..........................","..........................","...............k...k......","....k.........kbk.kbk.....","....kbk.......kbbkbbbk....",".....kbk.....kbbbbbbbk....",".....kbk.kkkkbbbbbbebk....","......kbkbbbbbbbbbbebk....","......kbkbbbbbbbbbbbpk....","......kbbbbbbbbbbbbbk.....","......kbbbbbbbbbbbbk......","......kbbbbbbbbbbbbk......","......kbbllllllllbk.......","........kbk....kbk........","........kk.....kk.........",".........................."],"blink":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbbbbk....","............kbbbbkkbbk....","............kbbbbbbbpk....",".............kbbbbbbk.....","............kbbbbbbk......","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"yawn":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbkkbbk....","............kbbbbbbkkk....",".............kbbbbkppk....","............kbbbbbkpk.....","............kbbbbbbk......","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"lick":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbbbbk....","............kbbbbkkbbk....","............kbbbbbbppk....",".............kbbbkllk.....","............kbbbbkllk.....","...........kbbbbbkkk......","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"tail":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....",".......kk...kbbbbbebbk....","......kbbk..kbbbbbebbk....","......kbk...kbbbbbbbpk....","......kbk....kbbbbbbk.....","......kbk...kbbbbbbk......",".......kbk.kbbbbbllbk.....",".......kbkkbbbbbbllbk.....","........kbbbbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbkbbkbbk.....","..........kkkkkkkkkkk....."],"swipe":["..........................","............k...k.........","...........kbk.kbk........","...........kbbkbbbk.......","..........kbbbbbbbbk......","..........kbbbbbebbk......","..........kbbbbbebbk......","..........kbbbbbbbpkk.....","...........kbbbbbbkllk....","..........kbbbbbbkkkkk....",".........kbbbbbllbk.......","........kbbbbbbllbk.......","........kbbbbbbllbk.......","....kk..kbbbbbbllbk.......","....bbkkkbbbkbbkbbk.......","....kkkkkkkkkkkkkkk......."],"stretch":["..........................","..........................","..........................","......k...................",".....kbk..................",".....kbk.kkkk.............","......kbkbbbbkk...........",".......kbbbbbbbkk.........",".......kbbbbbbbbbkkk.k....",".......kbbbbbbbbbkbkbk....",".......kbbkbbbbbbbbbbk....",".......kbbkkkbbbbbbebk....",".......kbbk..kbllbbbpk....",".......kbbk.kkkkkkkkkk....",".......kkkk.klllllllk.....","............kkkkkkkkk....."],"belly":["..........................","..........................","..........................","..........................","..........................","..........................","........kk...kk...........",".......kbk..kbk...........",".......kbk..kbk..k...k....","......kkbkkkkbkkkbk.kb....",".....kbllllllllllbbkbb....","....kbllllllllllllbbbb....","....kbllllllllllllbkkb....","....kbbbbbbbbbbbbbbbbb....",".....kbbbbbbbbbbbbbbbk....","......kkkkkkkkkkkkkkk....."],"blink_half":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbbbbk....","............kbbbbbebbk....","............kbbbbbbbpk....",".............kbbbbbbk.....","............kbbbbbbk......","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"lick_up":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbebbk....","............kbbbbbebbkkk..","............kbbbbbbbplllk.",".............kbbbbbbklllk.","............kbbbbbbbkllk..","...........kbbbbbllbkllk..","..........kbbbbbbllbkkk...","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllk......","....kbbbkkkbbbkbbkkk......",".....kkkkkkkkkkkkk........"],"lick_up_shut":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbbbbk....","............kbbbbkkbbkkk..","............kbbbbbbbplllk.",".............kbbbbbbklllk.","............kbbbbbbbkllk..","...........kbbbbbllbkllk..","..........kbbbbbbllbkkk...","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllk......","....kbbbkkkbbbkbbkkk......",".....kkkkkkkkkkkkk........"],"lick_down":["..........................","..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbkk....","............kbbbbbbbbk....","............kbbbbbbbbkkk..","............kbbbbkkbblllk.","............kbbbbbbbppllk.","............kbbbbbbbkllk..","...........kbbbbbllbkllk..","..........kbbbbbbllbkkk...","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllk......","....kbbbkkkbbbkbbkkk......",".....kkkkkkkkkkkkk........"],"tail_flick":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbebbk....","............kbbbbbebbk....","............kbbbbbbbpk....",".............kbbbbbbk.....","............kbbbbbbk......","..kk.......kbbbbbllbk.....","..kbk.....kbbbbbbllbk.....","...kbkk...kbbbbbbllbk.....","....kbbkk.kbbbbbbllbk.....",".....kkbbbbbbbkbbkbbk.....",".......kkkkkkkkkkkkkk....."],"tail_mid":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbebbk....",".....kk.....kbbbbbebbk....","....kbk.....kbbbbbbbpk....","....kbk......kbbbbbbk.....","....kbk.....kbbbbbbk......",".....kbk...kbbbbbllbk.....",".....kbk..kbbbbbbllbk.....","......kbk.kbbbbbbllbk.....","......kbbkbbbbbbbllbk.....",".......kkbbbbbkbbkbbk.....","........kkkkkkkkkkkkk....."],"tail_up":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....",".......kk...kbbbbbebbk....","......kbbk..kbbbbbebbk....","......kbk...kbbbbbbbpk....","......kbk....kbbbbbbk.....","......kbk...kbbbbbbk......",".......kbk.kbbbbbllbk.....",".......kbkkbbbbbbllbk.....","........kbbbbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbkbbkbbk.....","..........kkkkkkkkkkk....."],"swipe_ready":["..........................","..............k...k.......",".............kbk.kbk..kk..",".............kbbkbbbkkllk.","............kbbbbbbbbkldk.","............kbbbbbebbkllk.","............kbbbbbebbklk..","............kbbbbbbbkllk..",".............kbbbbbbkllk..","............kbbbbbbkkkk...","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"swipe_hit":["..........................","..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbebbk....","............kbbbbbebbk....","............kbbbbbbbpk....",".............kbbbbbbk.....","............kbbbbbbk.kkkk.","...........kbbbbbllkkllllk","..........kbbbbbbllllllldk","..........kbbbbbbllkkkkkk.",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"yawn_big":["..............k...k.......",".............kbk.kbk......",".............kbbkbbbk.....","............kbbbbbbbbk....","............kbbbbbbbbk....","............kbbbbkkkkk....","............kbbbbbbrrk....",".............bbbbbbwrk....",".............kbbbbkprk....","............kbbbbbbkkk....","...........kbbbbbllbk.....","..........kbbbbbbllbk.....","..........kbbbbbbllbk.....",".....kkk..kbbbbbbllbk.....","....kbbbkkkbbbkbbkbbk.....",".....kkkkkkkkkkkkkkkk....."],"bow":["..........................","..........................","..........................","......k...................",".....kbk..................",".....kbk.kkkk.............","......kbkbbbbkk...........",".......kbbbbbbbkk.........",".......kbbbbbbbbbkkk.k....",".......kbbbbbbbbbkbkbk....",".......kbbkbbbbbbbbbbk....",".......kbbkkkbbbbbbebk....",".......kbbk..kbllbbbpk....",".......kbbk.kkkkkkkkkkk...",".......kkkk.kllllllllllk..","............kkkkkkkkkkk..."],"bow_far":["..........................","..........................","..........................","......k...................",".....kbk..................",".....kbk.kkkk.............","......kbkbbbbkkkk.........",".......kbbbbbbbbbkk.......",".......kbbbbbbbbbbbkkk.k..",".......kbbbbbbbbbbbkbkbk..",".......kbbkbbbbbbbbbbbbk..",".......kbbkkkbbbbbbbkkbk..",".......kbbk..kbbbllbbbpk..",".......kbbk.kkkkkkkkkkkkk.",".......kkkk.kllllllllllllk","............kkkkkkkkkkkkk."],"loaf":["..........................","..........................","..........................","..........................","..........................","................k...k.....","...............kbk.kbk....","...............kbbkbbbk...","..............kbbbbbbbbk..","..............kbbbbbebbk..","........kkkkkkkbbbbbebbk..",".......kbbbbbbkbbbbbbbpk..","......kbbbbbbbbbbbbbbbk...","....kkbbbbbbbbbbbkllkllk..","...kbbkbbbbbbbbbbkkkkkkk..","....kkkkkkkkkkkkkkkkk....."]}};
+const STOOL_ROWS = ["kkkkkkkkkk", "kwwwwwwwwk", "kkkkkkkkkk", ".kdk..kdk.", ".kdk..kdk."], PEN_ROWS = ["kkkkkkk", "kbbbbyk", "kkkkkkk"];
+const BED_ROWS = ["...kkkkkkkkkkkkkkkkkk...", ".kkrrrrrrrrrrrrrrrrrrkk.", "krrRRRRRRRRRRRRRRRRRRrrk", "krRRRRRRRRRRRRRRRRRRRRrk", "krRRRRRRRRRRRRRRRRRRRRrk",
+  "krrRRRRRRRRRRRRRRRRRRrrk", ".krrrrrrrrrrrrrrrrrrrrk.", "..kkkkkkkkkkkkkkkkkkkk..", "........................"];
+const GAVEL_ROWS = ["..............kkkkkk.", ".............kwwwwwwk", ".............kddddddk", ".............kwwwwwwk", "kkkkkkkkkkkkkkwwwwwwk",
+  "kwwwwwwwwwwwwkwwwwwwk", "kkkkkkkkkkkkkkwwwwwwk", ".............kddddddk", ".............kwwwwwwk", "..............kkkkkk."];
+function roomProps() {
+  return `<div class="wall" id="wall">${pixelSvg(DOOR_SHUT, DOOR_PAL, "door shut")}${pixelSvg(DOOR_AJAR, DOOR_PAL, "door ajar")}<span id="window">${windowSvg()}</span>
+      <button class="decorate" id="decorate" type="button">Decorate</button></div>
+    ${pixelSvg(["kkkkkkkkkkkkkkkkkkkk", "kgGgGgGgGgGgGgGgGgGk", "kkkkkkkkkkkkkkkkkkkk"], { k: "#3a2618", g: "#6f7a3c", G: "#87914a" }, "mat")}
+    ${pixelSvg(BED_ROWS, { k: "#3a2618", r: "#8c3b3b", R: "#b5584a" }, "bed")}
+    ${pixelSvg(STOOL_ROWS, { k: "#3a2618", w: "#c8925a", d: "#7a4a2a" }, "stool")}${pixelSvg(PEN_ROWS, { k: "#3a2618", b: "#2f6f9f", y: "#e3b040" }, "pen")}
+    <button class="cat" id="cat" type="button" aria-label="The office cat. Click to open its notebook." title="The office cat. Click to open its notebook."></button>
+    ${pixelSvg(["kkkkkkkkkkkk", "kwwwwwwwwwwk", "kddddddddddk", "kkkkkkkkkkkk", ".k........k."], { k: "#3a2618", w: "#8a5530", d: "#6b3f22" }, "block")}
+    <div class="gavel" id="gavel">${pixelSvg(GAVEL_ROWS, { k: "#3a2618", w: "#b97a46", d: "#7a4a28" })}</div>
+    <div class="bang" id="bang" aria-hidden="true">BANG!</div>`;
+}
+
+// Emotes: small speech bubbles that pop up over the members while they argue.
+const EMOTES = {
+  bang:    { rows: ["...rr...", "...rr...", "...rr...", "...rr...", "...rr...", "........", "...rr...", "...rr..."], pal: { r: "#c0392b" } },
+  what:    { rows: ["..bbbb..", ".bb..bb.", ".....bb.", "....bb..", "...bb...", "........", "...bb...", "...bb..."], pal: { b: "#2f6f9f" } },
+  angry:   { rows: ["rr....rr", "rr....rr", "..r..r..", "........", "........", "..r..r..", "rr....rr", "rr....rr"], pal: { r: "#c0392b" } },
+  sweat:   { rows: ["...b....", "...bb...", "..bbb...", "..bbbb..", ".bbwbbb.", ".bwbbbb.", ".bbbbbb.", "..bbbb.."], pal: { b: "#5aa0d6", w: "#d8ecfa" } },
+  dots:    { rows: ["........", "........", "........", "g..g..g.", "g..g..g.", "........", "........", "........"], pal: { g: "#7a5c44" } },
+  heart:   { rows: ["........", ".pp..pp.", "pppppppp", "pppppppp", ".pppppp.", "..pppp..", "...pp...", "........"], pal: { p: "#e0607e" } },
+  sparkle: { rows: ["...y....", "...y....", ".yyyyy..", "...y....", "...y..y.", ".....yyy", "......y.", "........"], pal: { y: "#e3a82b" } },
+  idea:    { rows: ["..yyyy..", ".yyyyyy.", ".yywwyy.", ".yyyyyy.", "..yyyy..", "...gg...", "..gggg..", "...gg..."], pal: { y: "#f2c94c", w: "#fff8d6", g: "#7a7a7a" } } };
+const EMOTE_SETS = {
+  skeptic:  { done: ["angry", "what", "dots"], debate: ["angry", "bang", "what", "dots"] },
+  advocate: { done: ["idea", "sparkle", "heart"], debate: ["sparkle", "idea", "bang"] },
+  operator: { done: ["sweat", "idea", "dots"], debate: ["sweat", "dots", "what"] },
+  scout:    { done: ["idea", "what", "sparkle"], debate: ["what", "bang", "idea"] } };
+const emoteSet = (id, kind) => (EMOTE_SETS[id] || { done: ["idea", "sparkle", "dots"], debate: ["what", "bang", "dots"] })[kind];
+function emoteSvg(kind) {
+  const e = EMOTES[kind];
+  return `<svg viewBox="0 0 15 14" shape-rendering="crispEdges" aria-hidden="true"><path d="M3 .5h9a2.5 2.5 0 0 1 2.5 2.5v6a2.5 2.5 0 0 1-2.5 2.5H8.5L7 13.5 5.5 11.5H3A2.5 2.5 0 0 1 .5 9V3A2.5 2.5 0 0 1 3 .5z" fill="#fffdf6" stroke="#5e3a1f" stroke-width=".9"/><g transform="translate(3.5 2)">${pixelCells(e.rows, e.pal)}</g></svg>`;
+}
+function emote(target, kind) {
+  if (!target || !EMOTES[kind] || !target.getBoundingClientRect().width) return;
+  const p = roomPos(target), el = document.createElement("div");
+  el.className = "emote"; el.innerHTML = emoteSvg(kind);
+  el.style.left = `${p.x - 40}px`; el.style.top = `${p.y - 16}px`;
+  document.getElementById("room").appendChild(el);
+  setTimeout(() => el.remove(), 2100);
+}
+const seatAvatar = id => document.querySelector(`.seat[data-id="${id}"]:not(.away) .avatar`);
+function reactTo(id, to, stage) {
+  if (corner[id]) return;
+  if (id === "chair") {
+    if (to === "thinking") emote(seatAvatar(id), "dots");
+    if (to === "done") gavelDue = true;
+    return;
+  }
+  if (to === "done") emote(seatAvatar(id), pick(emoteSet(id, stage === "review" ? "debate" : "done")));
+}
+let chatterTimer = null;
+function chatter(on) {
+  // During cross-examination, whoever is still reviewing reacts now and then.
+  if (!on) { clearTimeout(chatterTimer); chatterTimer = null; return; }
+  if (chatterTimer) return;
+  const next = () => {
+    chatterTimer = setTimeout(() => {
+      const busy = [...document.querySelectorAll('.seat[data-state="thinking"]:not(.away):not(.s-chair)')];
+      if (busy.length) { const seat = pick(busy); emote(seat.querySelector(".avatar"), pick(emoteSet(seat.dataset.id, "debate"))); }
+      next();
+    }, 2600 + Math.random() * 1600);
+  };
+  next();
+}
+
+// Walking in: every time the app opens, the board comes through the door one by one, the Chair last. Click to skip.
+const WALK_SPEED = .19, HOP_MS = 300;
+function walkPath(el, pts, { stop = () => false, speed = WALK_SPEED, fade = true } = {}) {
+  const segs = pts.slice(1).map((b, i) => Math.hypot(b.x - pts[i].x, b.y - pts[i].y));
+  const total = segs.reduce((a, b) => a + b, 0), dur = total / speed;
+  return new Promise(done => {
+    const t0 = performance.now();
+    const frame = now => {
+      if (stop()) return done();
+      const t = Math.min(1, (now - t0) / dur);
+      let d = t * total, i = 0;
+      while (i < segs.length - 1 && d > segs[i]) { d -= segs[i]; i++; }
+      const a = pts[i], b = pts[i + 1], f = segs[i] ? d / segs[i] : 1;
+      const hop = t < 1 ? Math.abs(Math.sin((now - t0) / HOP_MS * Math.PI)) * 5 : 0;
+      el.style.transform = `translate(${Math.round(a.x + (b.x - a.x) * f - 40)}px, ${Math.round(a.y + (b.y - a.y) * f - 40 - hop)}px)`;
+      el.style.opacity = fade ? Math.min(1, (now - t0) / 350) : 1;
+      if (t < 1) requestAnimationFrame(frame); else done();
+    };
+    requestAnimationFrame(frame);
+  });
+}
+let entrance = Promise.resolve(), entering = false;
+function playEntrance() {
+  const room = document.getElementById("room"), wall = document.getElementById("wall");
+  if (!lively() || !wall || entering) return Promise.resolve();
+  entering = true;
+  room.classList.add("entering");
+  room.querySelector(".table").textContent = "The board is arriving…";
+  wall.classList.add("open");
+  const door = { x: 66, y: 62 };
+  const trips = [...room.querySelectorAll(".seat:not(.away)")].map(seat => {
+    const p = roomPos(seat.querySelector(".avatar")), target = { x: p.x + p.w / 2, y: p.y + p.h / 2 };
+    return { seat, target, far: Math.abs(target.y - door.y) + Math.abs(target.x - door.x) };
+  });
+  // Farthest seats fill first, so nobody walks through someone already seated. The Chair always comes in last.
+  trips.sort((a, b) => (a.seat.dataset.id === "chair") - (b.seat.dataset.id === "chair") || b.far - a.far);
+  let skipped = false, finished = false;
+  const timers = [], walkers = [];
+  return new Promise(resolve => {
+    const finish = () => {
+      if (finished) return;
+      finished = true; entering = false;
+      timers.forEach(clearTimeout); walkers.forEach(w => w.remove());
+      room.removeEventListener("pointerdown", skip); document.removeEventListener("keydown", onKey);
+      room.classList.remove("entering"); wall.classList.remove("open");
+      room.querySelectorAll(".seat .avatar > svg, .seat .plate, .seat .bubble").forEach(el => { el.style.opacity = ""; });
+      renderRoom(roomMeeting);
+      resolve();
+    };
+    const skip = () => { skipped = true; finish(); };
+    const onKey = e => { if (e.key === "Escape") skip(); };
+    room.addEventListener("pointerdown", skip); document.addEventListener("keydown", onKey);
+    let last = 0;
+    trips.forEach(({ seat, target }, i) => {
+      const delay = i * 650 + (seat.dataset.id === "chair" ? 150 : 0);
+      last = delay;
+      timers.push(setTimeout(async () => {
+        const w = document.createElement("div");
+        w.className = "walker"; w.innerHTML = sprite(seat.dataset.id); w.style.opacity = 0;
+        room.appendChild(w); walkers.push(w);
+        const lane = target.y - 16;
+        await walkPath(w, [door, { x: door.x, y: lane }, { x: target.x, y: lane }, target], { stop: () => skipped });
+        if (skipped) return;
+        w.remove();
+        seat.querySelector(".avatar > svg").style.opacity = 1;
+        seat.querySelector(".bubble").style.opacity = 1;
+        const plate = seat.querySelector(".plate");
+        plate.style.opacity = 1;
+        plate.animate([{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "translateY(0)" }], { duration: 450, easing: "ease-out" });
+        seat.dataset.arrived = "1";
+        if (trips.every(t => t.seat.dataset.arrived)) { trips.forEach(t => delete t.seat.dataset.arrived); timers.push(setTimeout(finish, 450)); }
+      }, delay));
+    });
+    timers.push(setTimeout(() => wall.classList.remove("open"), last + 900));
+    if (!trips.length) finish();
+  });
+}
+
+// The office cat: asleep in its bed most of the time, always seen side-on.
+const BED = { x: 46, y: 438 }, CAT_CYCLE = ["walk1", "walkA", "walk2", "walkB"];
+let catPos = { ...BED }, catAsleep = false, catBusy = false, zTimer = null, napTimer = null, strollTimer = null;
+const catEl = () => document.getElementById("cat");
+const catPose = p => { const c = catEl(); if (c) c.innerHTML = pixelSvg(CAT.frames[p], CAT.pal); };
+function catPlace(x, y) { const c = catEl(); catPos = { x, y }; c.style.left = `${x}px`; c.style.top = `${y}px`; }
+function catWalk(x, y) {
+  const c = catEl(), from = { ...catPos }, dur = Math.hypot(x - from.x, y - from.y) / .045;
+  c.classList.toggle("flip", x < from.x);
+  return new Promise(done => {
+    const t0 = performance.now();
+    let shown = -1;
+    const frame = now => {
+      const t = Math.min(1, (now - t0) / dur), f = Math.floor((now - t0) / 240) % 4;
+      if (f !== shown) { catPose(CAT_CYCLE[f]); shown = f; }
+      c.style.left = `${Math.round(from.x + (x - from.x) * t)}px`;
+      c.style.top = `${Math.round(from.y + (y - from.y) * t - (f % 2 ? 2 : 0))}px`;
+      if (t < 1) requestAnimationFrame(frame); else { catPlace(x, y); done(); }
+    };
+    requestAnimationFrame(frame);
+  });
+}
+function catSnooze() {
+  const c = catEl();
+  if (!c) return;
+  catAsleep = true;
+  c.classList.remove("flip"); c.classList.add("sleeping");
+  catPlace(BED.x, BED.y); catPose("sleep");
+  clearInterval(zTimer);
+  zTimer = setInterval(() => {
+    if (!catAsleep || document.hidden || narrowRoom() || reducedMotion()) return;
+    const z = document.createElement("span");
+    z.className = "zzz"; z.textContent = "z";
+    z.style.left = `${catPos.x + 50}px`; z.style.top = `${catPos.y + 22}px`;
+    document.getElementById("room").appendChild(z);
+    setTimeout(() => z.remove(), 2500);
+  }, 1100);
+}
+function catWake() {
+  catAsleep = false;
+  clearTimeout(napTimer);
+  catEl().classList.remove("sleeping");
+  document.querySelectorAll(".zzz").forEach(z => z.remove());
+  catPose("sit");
+}
+async function catStroll() {
+  // Wake up, waddle over towards the table, stick a tongue out, then back to bed.
+  if (catBusy || !lively() || entering) return;
+  catBusy = true;
+  catWake();
+  await wait(600);
+  const plate = document.querySelector(".s-2 .plate");
+  const tx = plate ? Math.min(172, roomPos(plate).x - 74) : 172;
+  if (tx > BED.x + 50) {
+    await catWalk(tx - 4, BED.y); await catWalk(tx, 420);
+    catPose("blep"); await wait(1200);
+    await catWalk(BED.x, BED.y);
+  } else {
+    catPose("blep"); await wait(1200);
+  }
+  catPose("sit"); await wait(300);
+  catSnooze();
+  catBusy = false;
+}
+function scheduleStroll() {
+  clearTimeout(strollTimer);
+  strollTimer = setTimeout(() => { if (!document.hidden) catStroll(); scheduleStroll(); }, 50000 + Math.random() * 50000);
+}
+async function petCat() {
+  if (catBusy) return;
+  catBusy = true;
+  const wasAsleep = catAsleep;
+  catWake(); emote(catEl(), "heart"); catPose("blep");
+  await wait(900);
+  catPose("sit");
+  const line = catTalk();
+  let curled = false;
+  if (line) {
+    const t0 = performance.now();
+    curled = await catAct(line);
+    await wait(Math.max(600, 4200 - (performance.now() - t0)));
+  } else await wait(400);
+  if (wasAsleep || curled) catSnooze(); else catPose("sit");
+  catBusy = false;
+}
+
+// The cat's body follows its words: a move written between stars, like *stretches*, is played out.
+// The model learned these moves from its teacher lines; anything else between stars is just words.
+// A body is either the cat in the room or the big one in its notebook; the moves work on both.
+function roomBody() {
+  return { el: catEl(), room: true, scale: 4, pad: -16, emote: k => emote(catEl(), k), puff: (t, dx, dy) => catPuff(t, dx, dy) };
+}
+function catFrame(b, p, squash = true) {
+  if (b.stop || !b.el) return;
+  b.el.innerHTML = pixelSvg(CAT.frames[p], CAT.pal);
+  if (squash) b.el.animate([{ transform: "scaleY(.93)" }, { transform: "scaleY(1.03)" }, { transform: "scaleY(1)" }], { duration: 220, easing: "ease-out" });
+}
+async function catPlay(b, seq) { for (const [p, ms] of seq) { if (b.stop) return; catFrame(b, p); await wait(ms); } }
+function catPuff(text, dx, dy) {
+  const z = document.createElement("span");
+  z.className = "zzz puff"; z.textContent = text;
+  z.style.left = `${catPos.x + dx}px`; z.style.top = `${catPos.y + dy}px`;
+  document.getElementById("room").appendChild(z);
+  setTimeout(() => z.remove(), 1700);
+}
+function catCentre(b, frame) {
+  // Middle of the drawn pixels inside the cat's box, so a roll spins around the body.
+  let x0 = 99, x1 = 0, y0 = 99, y1 = 0;
+  CAT.frames[frame].forEach((r, y) => [...r].forEach((ch, x) => { if (ch !== ".") { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); } }));
+  const mid = (x0 + x1 + 1) / 2, w = CAT.frames[frame][0].length, flip = b.room && b.el.classList.contains("flip");
+  return `${(flip ? w - mid : mid) * b.scale + b.pad}px ${(y0 + y1 + 1) / 2 * b.scale}px`;
+}
+function penBack(pen) {
+  pen.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400 }).finished.then(() => {
+    pen.getAnimations().forEach(a => a.cancel());
+    pen.classList.remove("down");
+    pen.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 600 });
+  });
+}
+const CAT_MOVES = [
+  [/stretch/, async b => {
+    await catPlay(b, [["bow", 380]]); catFrame(b, "bow_far"); b.puff("~ ~", -10, 14); await wait(900);
+    await catPlay(b, [["bow", 300], ["sit", 200]]);
+  }],
+  [/yawn/, async b => {
+    await catPlay(b, [["blink", 200]]); catFrame(b, "yawn_big"); await wait(1000);
+    await catPlay(b, [["blink", 260], ["sit", 150]]);
+  }],
+  [/lick|groom|wash/, async b => {
+    await catPlay(b, [["lick_up", 420]]);
+    for (let i = 0; i < 3; i++) await catPlay(b, [["lick_down", 260], ["lick_up_shut", 240]]);
+    b.emote("sparkle"); await catPlay(b, [["lick_up", 380], ["sit", 150]]);
+  }],
+  [/tail/, async b => {
+    for (let i = 0; i < 2; i++) await catPlay(b, [["tail_flick", 150], ["tail_mid", 150], ["tail_up", 260], ["tail_mid", 150], ["tail_flick", 150], ["sit", 160]]);
+  }],
+  [/blink/, async b => {
+    await catPlay(b, [["blink_half", 220], ["blink", 750]]); b.emote("heart"); await catPlay(b, [["blink_half", 220], ["sit", 150]]);
+  }],
+  [/purr/, async b => {
+    catFrame(b, "blink"); b.emote("heart"); b.puff("prrr", 62, 16);
+    await b.el.animate([{ transform: "translateX(0)" }, { transform: "translateX(-1.5px)" }, { transform: "translateX(1.5px)" }, { transform: "translateX(0)" }], { duration: 110, iterations: 12 }).finished;
+    catFrame(b, "sit");
+  }],
+  [/roll/, async b => {
+    await catPlay(b, [["loaf", 380], ["sleep", 260]]);
+    if (b.stop) return;
+    const c = b.el, dir = b.room && c.classList.contains("flip") ? -1 : 1, d = (b.room ? 40 : 56) * dir;
+    c.style.transformOrigin = catCentre(b, "sleep");
+    await c.animate([{ transform: "translateX(0) rotate(0)" }, { transform: `translateX(${d}px) rotate(${360 * dir}deg)` }], { duration: 750, easing: "ease-in-out" }).finished;
+    await wait(250);
+    await c.animate([{ transform: `translateX(${d}px) rotate(0)` }, { transform: `translateX(0) rotate(${-360 * dir}deg)` }], { duration: 750, easing: "ease-in-out" }).finished;
+    c.style.transformOrigin = "";
+    b.emote("heart");
+    await catPlay(b, [["loaf", 300], ["sit", 150]]);
+  }],
+  [/pen|knock|swat|\bbats?\b/, async b => {
+    // Only the pen on the stool by the bed can be knocked off; anywhere else it is a swipe at nothing.
+    const pen = document.querySelector("#room .pen");
+    const near = b.room && pen && !pen.classList.contains("down") && !b.el.classList.contains("flip") && Math.abs(catPos.x - BED.x) < 6 && Math.abs(catPos.y - BED.y) < 6;
+    if (near) b.emote("bang");
+    catFrame(b, "swipe_ready"); await wait(650);
+    catFrame(b, "swipe_hit", false);
+    if (near) {
+      await wait(70);
+      await pen.animate([{ transform: "translate(0, 0) rotate(0)" }, { transform: "translate(22px, -10px) rotate(120deg)", offset: .3 },
+                         { transform: "translate(40px, 22px) rotate(340deg)", offset: .8 }, { transform: "translate(42px, 16px) rotate(355deg)", offset: .9 },
+                         { transform: "translate(44px, 20px) rotate(360deg)" }], { duration: 800, easing: "ease-in", fill: "forwards" }).finished;
+      pen.classList.add("down");
+      setTimeout(() => penBack(pen), 45000);
+    } else await wait(450);
+    await catPlay(b, [["sit", 300], ["blep", 900], ["sit", 200]]);
+  }],
+  [/curl|sleep|nap|snooze/, async b => {
+    await catPlay(b, [["loaf", 380]]); catFrame(b, "sleep"); await wait(900);
+    return "curled";
+  }],
+];
+async function catAct(line, b = roomBody()) {
+  // Plays each move in the line, in order. True when the last move left the cat curled up asleep.
+  if (b.room ? !lively() : reducedMotion()) return false;
+  let curled = false;
+  for (const m of line.matchAll(/\*([^*]+)\*/g)) {
+    if (b.stop) break;
+    const move = CAT_MOVES.find(([re]) => re.test(m[1].toLowerCase()));
+    if (move) curled = (await move[1](b)) === "curled";
+  }
+  return curled;
+}
+
+// ---- The cat's notebook: click the cat. A big portrait, its name, what it learned, and a box to talk to it.
+const CAT_KEY = "boardroom.cat";
+let catPrefs = loadStore(CAT_KEY), book = null, bookPoll = null;
+const catName = () => (catPrefs.name || "").trim() || "Kibi";
+const catTitle = () => `${catName()}, the office cat. Click to open its notebook.`;
+const CAT_ALLOWED = new Set("abcdefghijklmnopqrstuvwxyz0123456789 .,?!'\"-:;()%£*");
+const CAT_LEADS = ["could you please", "can you please", "should i", "should we", "why did", "why does", "why is", "why are", "why",
+  "could you", "can you", "will", "does", "do", "is", "are", "how do i", "how can i", "how do", "what is", "what are", "what",
+  "i want to", "i'd like to", "help me", "make me", "please", "tell me", "a friend wants to", "my friend wants to",
+  "my partner wants to", "we want to", "i need to", "i need", "i am thinking of", "i'm thinking of", "thinking of", "i run",
+  "i have", "i am", "i'm", "hey", "hi", "hello", "so"].sort((a, b) => b.length - a.length);
+const CAT_TRAILING = new Set(["to", "in", "and", "a", "an", "the", "of", "for", "with", "my", "your", "or", "on", "at", "just", "is", "it", "me", "us", "you"]);
+let catBlocked = null;
+// Chat openers to look past, so "what do you think of the zumba class?" is about "the zumba class".
+const CAT_FRAMES = ["what do you think of", "what do you think about", "what do you think", "how do you feel about", "do you remember",
+  "have you heard of", "have you heard about", "tell me about", "talk about", "what about", "how about", "do you like", "do you love",
+  "do you know", "do you want", "how is", "how was", "how are", "how were", "how's", "what is", "what's", "what are", "who is", "where is",
+  "i love", "i like", "i hate", "i got", "i bought", "i made", "i went to", "we went to", "we have", "i had", "it is", "it's", "about",
+  "any thoughts on", "your thoughts on", "thoughts on", "your opinion on", "opinion on"]
+  .sort((a, b) => b.length - a.length);
+// Openers that ask about something, so the cat gets help starting the topic ("how was the dentist?"), not for "are you hungry".
+const CAT_ASK = new Set(["what do you think of", "what do you think about", "how do you feel about", "do you remember", "have you heard of",
+  "have you heard about", "tell me about", "talk about", "what about", "how about", "how is", "how was", "how were", "how's",
+  "any thoughts on", "your thoughts on", "thoughts on", "your opinion on", "opinion on", "i love", "i hate", "i went to", "we went to"]);
+function catTopicOf(text) { return catTopicInfo(text).topic; }
+function catTopicInfo(text) {
+  // Like topic_of in cat/prepare.py, plus chat openers: "How was the meeting?" becomes "the meeting".
+  let t = String(text || "").normalize("NFKD").toLowerCase().replace(/[’‘]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-").replace(/[#*_`|>\[\]]+/g, " ");
+  t = [...t].filter(c => CAT_ALLOWED.has(c)).join("").replace(/[ \t]+/g, " ").trim();
+  const name = catName().toLowerCase();
+  t = t.replace(new RegExp(`^(hey |hi |hello |oi )?${escRe(name)}\\b[ ,!:]*`), "");   // "kibi, how was..." talks to the cat, not about it
+  t = t.split(/[.?!,;]| because | so that | but /).find(x => x.trim()) || "";
+  t = t.replace(/^[ ,;:\-"']+|[ ,;:\-"']+$/g, "");
+  let framed = false;
+  for (let round = 0; round < 2; round++) {
+    const lead = [...CAT_FRAMES, ...CAT_LEADS].find(l => t.startsWith(l + " "));
+    if (lead) { t = t.slice(lead.length + 1); framed = framed || CAT_ASK.has(lead); }
+  }
+  const about = t.match(/ (?:about|of) (.+)$/);   // "a story about my sister's dog" is about "my sister's dog"
+  if (about && about[1].split(" ").length >= 1) { t = about[1]; framed = true; }
+  const words = t.split(" ").filter(Boolean).slice(0, 5);
+  while (words.length && CAT_TRAILING.has(words.at(-1))) words.pop();
+  while (words.length && ["you", "it", "this", "that", "there"].includes(words[0]) && words.length > 1) words.shift();
+  t = words.join(" ");
+  // Like the meetings it learns from: never hand it advice, violence or rude words to repeat (cat/safety.py).
+  const topic = t && t.length >= 3 && !(catBlocked && catBlocked.test(t)) ? t : null;
+  return { topic, framed: !!topic && framed };
+}
+function catYou(text) {
+  // What you typed, as the cat reads it (like you_text in cat/prepare.py). It knows itself as "kibi", whatever you named it.
+  let t = String(text || "").normalize("NFKD").toLowerCase().replace(/[’‘]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, "-");
+  const name = catName().toLowerCase();
+  if (name !== "kibi") t = t.replace(new RegExp(`(^|[^a-z])${escRe(name)}(?![a-z])`, "g"), "$1kibi");
+  t = [...t].filter(c => CAT_ALLOWED.has(c)).join("").replace(/\s+/g, " ").trim();
+  if (t.length > 60) t = t.slice(0, 60).replace(/ [^ ]*$/, "");
+  if (catBlocked && catBlocked.test(t)) t = t.replace(new RegExp(catBlocked.source, "g"), "...");   // it never reads rude words, so it cannot repeat them
+  return t;
+}
+// Someone who sounds low gets a kind answer written for this, never a made-up joke from its brain.
+const CAT_SOS = /\b(suicid\w*|kill(ing)? myself|want(ed)? to die|wanna die|end (my|it) (life|all)|end it all|self.?harm\w*|hurt(ing)? myself|cut(ting)? myself|(don'?t|do not) want to (live|be alive|be here))\b/;
+const CAT_LOW = /\b(i'?m|i am|im|i feel|i'?ve been|i have been|feeling)( so| really| very| a bit| kind of| kinda| pretty| super| quite)? (sad|lonely|depressed|down|low|miserable|anxious|stressed|hopeless|upset|scared|worthless|empty|alone|heartbroken|crying)\b|\b(no ?one|nobody) (cares|loves me|likes me)\b|\bi hate myself\b|\bi'?m not ok(ay)?\b/;
+const CAT_CARE = {
+  sos: ["*sits very close* i am only a tiny cat, and this is too big for me. please talk to a person now. uk and ireland: samaritans, free on 116 123, any time. us: 988. anywhere else: your local emergency number."],
+  low: ["*blinks slowly* i am here. i am only a tiny cat, so i cannot fix it. maybe tell someone you trust how you feel?",
+        "*sits next to you* sad days are heavy. a friend can help carry them. is there someone you could message?",
+        "*purrs softly* i am not good with words. people are. maybe call someone? i will stay right here."],
+};
+function catCare(text) {
+  const t = String(text || "").toLowerCase().replace(/[’‘]/g, "'");
+  return CAT_SOS.test(t) ? "sos" : CAT_LOW.test(t) ? "low" : null;
+}
+// The cat learned the members by their roles ("the skeptic"). It says whatever names you gave them instead.
+// "Chair" is also furniture, so the Chair is only renamed when a verb follows ("the chair said").
+const CAT_CHAIR_VERBS = "said|says|say|decided|decides|banged|bangs|thinks|thought|is|was|has|had|looked|looks|asked|told|wants|likes|made|gave|called|smiled|frowned|sighed|laughed|knows|wrote|writes|will|summed|stood|picked|listens|dropped|dreams|did|saw|walks|eats";
+function catNames(line) {
+  if (!line) return line;
+  const me = catName();
+  if (me.toLowerCase() !== "kibi") line = line.replace(/\bkibi\b/gi, me);   // it learned its name as "kibi"
+  if (!board) return line;
+  for (const id of ["skeptic", "advocate", "operator", "scout", "chair"]) {
+    const name = String(displayName(id) || "").trim();
+    if (!name || name.toLowerCase() === id || name.toLowerCase() === `the ${id}`) continue;
+    const re = id === "chair" ? new RegExp(`\\bthe chair(?= (${CAT_CHAIR_VERBS})\\b)`, "gi") : new RegExp(`\\b(the )?${id}\\b`, "gi");
+    line = line.replace(re, name);
+  }
+  return line;
+}
+function bookBody() {
+  const port = document.getElementById("nb-portrait");
+  const fx = (html, cls, x, y, ms) => {
+    const el = document.createElement("div");
+    el.className = cls; el.innerHTML = html; el.style.left = `${x}px`; el.style.top = `${y}px`;
+    port.appendChild(el); setTimeout(() => el.remove(), ms);
+  };
+  return { el: document.getElementById("nb-cat"), room: false, scale: 8, pad: 0,
+           emote: k => fx(emoteSvg(k), "emote", 176, 44, 2100), puff: t => fx(esc(t), "zzz puff", 196, 96, 1700) };
+}
+function bookSay(text) {
+  const b = document.getElementById("nb-say");
+  b.textContent = text; b.classList.toggle("on", !!text);
+}
+function renderCatName(editing = false) {
+  const box = document.getElementById("nb-name");
+  if (editing) {
+    box.innerHTML = `<input id="nb-name-input" maxlength="20" aria-label="The cat's name" value="${esc(catName())}"><button class="linkish" type="button" id="nb-name-save">save</button>`;
+    const input = document.getElementById("nb-name-input"), save = () => {
+      catPrefs.name = input.value.trim().slice(0, 20); saveStore(CAT_KEY, catPrefs); renderCatName(); catLabels();
+    };
+    input.focus(); input.select();
+    input.onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); save(); } if (e.key === "Escape") { e.preventDefault(); e.stopPropagation(); renderCatName(); } };
+    document.getElementById("nb-name-save").onclick = save;
+    return;
+  }
+  box.innerHTML = `<h2>${esc(catName())}</h2><button class="linkish" type="button" id="nb-rename">rename</button>`;
+  document.getElementById("nb-rename").onclick = () => renderCatName(true);
+}
+function catLabels() {
+  const c = catEl();
+  if (c) { c.title = catTitle(); c.setAttribute("aria-label", catTitle()); }
+  const btn = document.getElementById("catbtn");
+  if (btn) btn.innerHTML = `${pixelSvg(CAT.frames.sit, CAT.pal)}${esc(catName())}`;
+  const t = document.getElementById("nb-title"), onHome = !document.getElementById("nb-page-home")?.hidden;
+  if (t && onHome) t.textContent = `${catName()}'s notebook`;
+  const hint = document.getElementById("nb-talk-hint");
+  if (hint) hint.textContent = `${catName()} makes everything up. It knows nothing about the news, and nothing it says is true.`;
+  const about = document.getElementById("nb-about");
+  if (about) about.textContent = `${catName()} is the office cat. Tiny AI, big naps. Learns from your meetings on its own brain, so your Claude allowance stays untouched.`;
+}
+function fmtCount(n) { return n >= 1e6 ? `${(n / 1e6).toFixed(1)}M` : n >= 1e3 ? `${Math.round(n / 1e3)}k` : String(n); }
+async function refreshNotebook() {
+  let st = null;
+  try { st = await api("/api/cat"); } catch {}
+  if (!st || !book) return;
+  catTopics = st.topics || catTopics;
+  catLearning = st.learning || catLearning;
+  if (st.blocked && st.blocked.length) catBlocked = new RegExp(st.blocked.join("|"));
+  const numbers = catBrain ? Object.values(catBrain.w).reduce((n, a) => n + a.length, 0) : 0;
+  const lessons = (catBrain && catBrain.steps) || st.steps || 0;
+  document.getElementById("nb-stats").innerHTML =
+    `<div><b>${numbers ? fmtCount(numbers) : "–"}</b>numbers</div><div><b>${lessons.toLocaleString("en-GB")}</b>lessons</div><div><b>${catTopics.length}</b>topics</div>`;
+  const lr = st.learning || {}, bar = document.getElementById("nb-bar");
+  const pct = Math.round(100 * (lr.done || 0) / (lr.total || 1));
+  document.getElementById("nb-learning").textContent = lr.running ? `Learning from your meetings: ${pct}%`
+    : lr.error ? "Its last lesson did not finish. Try Teach it now."
+    : st.brain === "yours" ? `Last lesson ${st.saved ? new Date(st.saved).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "recently"}.`
+    : st.brain ? "It has not learned from your meetings yet." : "Its brain did not load.";
+  bar.hidden = !lr.running; bar.querySelector("i").style.width = `${pct}%`;
+  const demo = typeof DEMO !== "undefined";
+  document.getElementById("nb-teach").hidden = demo || !st.brain;
+  document.getElementById("nb-teach").disabled = !!lr.running;
+  document.getElementById("nb-auto-wrap").hidden = demo;
+  document.getElementById("nb-auto").checked = st.auto !== false;
+  clearTimeout(bookPoll);
+  if (lr.running) bookPoll = setTimeout(refreshNotebook, 3000);
+  else if (book && book.wasLearning) { book.wasLearning = false; await loadCatBrain(); toast(`${catName()} learned from your meetings.`); refreshNotebook(); }
+  if (book) book.wasLearning = book.wasLearning || !!lr.running;
+}
+async function bookTalk(heard) {
+  // The cat answers what you typed (or just says something when petted), in the portrait, and acts out its moves.
+  // With no brain it just blinks.
+  if (!book || book.busy) return;
+  book.busy = true;
+  document.getElementById("nb-send").disabled = true;
+  const b = book.body;
+  catFrame(b, "sit", false);
+  let line = "";
+  const care = heard ? catCare(heard) : null;
+  if (care) line = pick(CAT_CARE[care]);
+  else if (catBrain) {
+    // It reads your whole message. When you ask about something ("how was the dentist?") it gets help starting that topic;
+    // otherwise it only gets help spelling a topic it has started by itself.
+    const { topic, framed } = catTopicInfo(heard || "");
+    try { line = catNames(catBrain.say(heard ? { you: catYou(heard), topic, copyFrom: framed ? 0 : 3 } : { topic: null })); } catch { line = ""; }
+  }
+  bookSay(line || (catBrain ? "..." : "*blinks slowly* (its brain did not load)"));
+  if (!care) catRemember(line);
+  if (line) await catAct(line, b);
+  if (!b.stop) catFrame(b, "sit", false);
+  if (book && book.body === b) { book.busy = false; document.getElementById("nb-send").disabled = false; }
+}
+// ---- Its thoughts (everything it says) and its wishes (one a day), kept on this computer only.
+const CAT_LOG_KEY = "boardroom.catlog", CAT_WISH_KEY = "boardroom.catwishes";
+let catLog = (() => { try { const v = JSON.parse(localStorage.getItem(CAT_LOG_KEY) || "[]"); return Array.isArray(v) ? v : []; } catch { return []; } })();
+function catRemember(line) {
+  if (!line) return;
+  catLog.unshift({ t: Date.now(), line, star: false });
+  // Keep the newest 200, but never drop a starred one.
+  if (catLog.length > 200) catLog = catLog.filter((x, i) => i < 200 || x.star);
+  try { localStorage.setItem(CAT_LOG_KEY, JSON.stringify(catLog)); } catch {}
+}
+function catWhen(t) {
+  const d = new Date(t), now = new Date(), day = 864e5;
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+  if (t >= midnight) return d.toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+  if (t >= midnight - day) return "Yesterday";
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+}
+const catLineHtml = line => esc(line).replace(/\*([^*]+)\*/g, "<b>*$1*</b>");
+function renderThoughts() {
+  const list = document.getElementById("nb-thoughts");
+  list.innerHTML = catLog.slice(0, 60).map((x, i) =>
+    `<li><span>${catLineHtml(x.line)}<small>${catWhen(x.t)}</small></span><button type="button" class="nb-star" data-i="${i}" aria-pressed="${!!x.star}" aria-label="Favourite">${x.star ? "★" : "☆"}</button></li>`).join("");
+  document.getElementById("nb-thoughts-hint").textContent = catLog.length
+    ? `Everything ${catName()} has said, newest first. Star the ones you like. Kept on this computer only.`
+    : `${catName()} has not said anything yet. Pet it, or say something on the Home page.`;
+  list.querySelectorAll(".nb-star").forEach(btn => btn.onclick = () => {
+    const x = catLog[+btn.dataset.i];
+    x.star = !x.star;
+    try { localStorage.setItem(CAT_LOG_KEY, JSON.stringify(catLog)); } catch {}
+    renderThoughts();
+  });
+}
+const catDay = (t = Date.now()) => { const d = new Date(t); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+function catWishes() { const w = loadStore(CAT_WISH_KEY); w.days = w.days || {}; return w; }
+function todaysWish() {
+  // One wish a day, written by its own brain, starting the way its wish lines do.
+  const w = catWishes(), today = catDay();
+  if (!w.days[today] && catBrain) {
+    let line = "";
+    for (let i = 0; i < 3 && line.split(" ").length < 4; i++) {
+      try { line = catNames(catBrain.say({ start: pick(["i wish", "i wish for", "i want", "i would like", "my wish for today is", "my wish list:"]) })); } catch { line = ""; }
+    }
+    if (line) { w.days[today] = { line, granted: false }; saveStore(CAT_WISH_KEY, w); }
+  }
+  return w.days[today] || null;
+}
+function renderWishes() {
+  const wish = todaysWish(), box = document.getElementById("nb-wish");
+  box.innerHTML = wish
+    ? `<p>${catLineHtml(wish.line)}</p><div class="row">${wish.granted ? `<span class="nb-granted">Granted</span>` : `<button type="button" class="nb-grant" id="nb-grant">Grant wish</button>`}<span class="hint">Today's wish. A new one tomorrow.</span></div>`
+    : `<p>${catName()} is too sleepy to wish for anything. Its brain did not load.</p>`;
+  const grant = document.getElementById("nb-grant");
+  if (grant) grant.onclick = async () => {
+    const w = catWishes();
+    w.days[catDay()].granted = true; saveStore(CAT_WISH_KEY, w);
+    renderWishes();
+    if (book && !book.busy) {
+      book.busy = true;
+      const b = book.body;
+      b.emote("heart");
+      await catAct(pick(["*purrs*", "*rolls over*", "*blinks slowly*"]), b);
+      if (!b.stop) { catFrame(b, "sit", false); book.busy = false; }
+    }
+  };
+  const days = Object.keys(catWishes().days).filter(d => d !== catDay()).sort().reverse().slice(0, 14);
+  const all = catWishes().days;
+  document.getElementById("nb-wishes").innerHTML = days.length
+    ? days.map(d => `<li><span>${catLineHtml(all[d].line)}<small>${catWhen(new Date(d + "T12:00").getTime())}</small></span>${all[d].granted ? `<span class="nb-ok">granted</span>` : `<span class="nb-wait">not yet</span>`}</li>`).join("")
+    : `<li><span class="hint" style="margin:0">Its first wish is above. Come back tomorrow for another.</span></li>`;
+  if (wish && book && !book.busy) bookSay(wish.line);
+}
+function showNotebookPage(name) {
+  document.querySelectorAll("#notebook [role=tab]").forEach(t => t.setAttribute("aria-selected", String(t.dataset.page === name)));
+  for (const p of ["home", "thoughts", "wishes"]) document.getElementById(`nb-page-${p}`).hidden = p !== name;
+  document.getElementById("nb-title").textContent = name === "thoughts" ? `${catName()}'s thoughts` : name === "wishes" ? `${catName()}'s wishes` : `${catName()}'s notebook`;
+  if (name === "thoughts") renderThoughts();
+  if (name === "wishes") renderWishes();
+}
+async function openNotebook() {
+  const d = document.getElementById("notebook");
+  if (!d || d.open) return;
+  catLabels(); renderCatName();
+  book = { body: bookBody(), busy: false };
+  book.body.el.innerHTML = pixelSvg(CAT.frames.sit, CAT.pal);
+  bookSay("");
+  catEl()?.classList.add("in-book");
+  document.getElementById("cat-say")?.classList.remove("on");
+  showNotebookPage("home");
+  d.showModal();
+  refreshNotebook();
+  await wait(350);
+  bookTalk(null);
+}
+function closeNotebook() {
+  const d = document.getElementById("notebook");
+  if (book) book.body.stop = true;
+  book = null; clearTimeout(bookPoll);
+  catEl()?.classList.remove("in-book");
+  if (d.open) d.close();
+}
+function setupNotebook() {
+  const d = document.getElementById("notebook");
+  if (!d) return;
+  catLabels();
+  document.getElementById("catbtn").onclick = openNotebook;
+  const tabs = [...d.querySelectorAll("[role=tab]")];
+  tabs.forEach((t, i) => {
+    t.onclick = () => showNotebookPage(t.dataset.page);
+    t.onkeydown = e => {
+      const j = e.key === "ArrowRight" ? (i + 1) % tabs.length : e.key === "ArrowLeft" ? (i + tabs.length - 1) % tabs.length : -1;
+      if (j >= 0) { e.preventDefault(); tabs[j].focus(); showNotebookPage(tabs[j].dataset.page); }
+    };
+  });
+  document.getElementById("nb-close").onclick = closeNotebook;
+  d.addEventListener("close", () => { if (book) closeNotebook(); });
+  d.addEventListener("click", e => { if (e.target === d) closeNotebook(); });
+  document.getElementById("nb-portrait").onclick = async () => {
+    // Petting: a heart, a tongue out, then it says something.
+    if (!book || book.busy) return;
+    book.body.emote("heart"); catFrame(book.body, "blep");
+    await wait(800);
+    bookTalk(null);
+  };
+  document.getElementById("nb-talk").onsubmit = e => {
+    e.preventDefault();
+    const input = document.getElementById("nb-msg"), msg = input.value.trim();
+    input.value = "";
+    if (msg) input.placeholder = `You said: ${msg.slice(0, 60)}`;
+    if (msg) bookTalk(msg);
+  };
+  document.getElementById("nb-teach").onclick = async () => {
+    document.getElementById("nb-teach").disabled = true;
+    try { const st = await api("/api/cat/learn", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ steps: 300 }) });
+          catLearning = st.learning; watchCatLearning(); } catch {}
+    if (book) book.wasLearning = true;
+    refreshNotebook();
+  };
+  document.getElementById("nb-auto").onchange = async e => {
+    try { await api("/api/cat/settings", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ auto: e.target.checked }) }); } catch {}
+  };
+}
+
+// The cat's own brain: a tiny language model trained on this computer (cat/tinycat.py). It never uses Claude.
+const CAT_BRAIN_URL = "/api/cat/brain";
+let catBrain = null, catTopics = [], catLearning = null;
+async function loadCatBrain() {
+  try {
+    const st = await api("/api/cat");
+    catTopics = st.topics || [];
+    if (st.blocked && st.blocked.length) catBlocked = new RegExp(st.blocked.join("|"));
+    catLearning = st.learning || null;
+    if (!window.TinyCat || !st.brain) return;
+    const res = await fetch(CAT_BRAIN_URL);
+    if (res.ok) catBrain = new TinyCat(await res.json());
+  } catch { catBrain = null; }
+}
+function catSpeak(text, ms = 4200) {
+  const room = document.getElementById("room");
+  let b = document.getElementById("cat-say");
+  if (!b) { b = document.createElement("div"); b.id = "cat-say"; b.className = "cat-say"; b.setAttribute("role", "status"); room.appendChild(b); }
+  b.textContent = text;
+  b.style.left = `${Math.max(8, catPos.x - 6)}px`;
+  b.style.top = `${catPos.y + 2}px`;
+  b.classList.remove("on"); void b.offsetWidth; b.classList.add("on");
+  clearTimeout(b._t); b._t = setTimeout(() => b.classList.remove("on"), ms);
+}
+function catTalk(topic) {
+  // Half the time it brings up something you asked the board recently.
+  if (!catBrain) return "";
+  if (topic === undefined) topic = catTopics.length && Math.random() < .5 ? pick(catTopics.slice(0, 5)).topic : null;
+  let line = "";
+  try { line = catNames(catBrain.say({ topic })); } catch { line = ""; }
+  if (!line) return "";
+  catRemember(line);
+  catSpeak(line, 4200 + (lively() ? 2600 * (line.match(/\*[^*]+\*/g) || []).length : 0));
+  return line;
+}
+async function catAfterMeeting(m) {
+  // After the gavel, the cat has a word about what was just decided, then learns from it in the background.
+  await wait(1700);
+  try { const st = await api("/api/cat"); catTopics = st.topics || catTopics; catLearning = st.learning || null; } catch {}
+  if (!catBrain || catBusy || narrowRoom()) return watchCatLearning();
+  const mine = catTopics.find(t => t.id === m.id);
+  catBusy = true;
+  clearTimeout(napTimer); catWake();
+  const line = catTalk(mine ? mine.topic : null);
+  const t0 = performance.now();
+  if (line) await catAct(line);
+  await wait(Math.max(600, 4300 - (performance.now() - t0)));
+  catSnooze();
+  catBusy = false;
+  watchCatLearning();
+}
+let catWatch = null;
+function watchCatLearning() {
+  // While the cat practises after a meeting, check now and then; when it is done, load the new brain.
+  clearTimeout(catWatch);
+  if (!catLearning || !catLearning.running) return;
+  const cat = catEl();
+  if (cat) cat.title = `The office cat is learning from your meetings (${Math.round(100 * (catLearning.done || 0) / (catLearning.total || 1))}%).`;
+  catWatch = setTimeout(async () => {
+    let st = null;
+    try { st = await api("/api/cat"); } catch {}
+    if (!st) return;
+    catTopics = st.topics || catTopics;
+    const was = catLearning;
+    catLearning = st.learning;
+    if (catLearning.running) return watchCatLearning();
+    if (cat) cat.title = catTitle();
+    if (was && was.running && !catLearning.error) {
+      await loadCatBrain();
+      if (!catBusy && !narrowRoom()) { emote(catEl(), "idea"); toast("The cat learned from your last meeting."); }
+    }
+  }, 15000);
+}
+
+// The gavel: two knocks on its block when the Chair decides, then the verdict stamp lands.
+let gavelDue = false;
+async function strikeGavel() {
+  const g = document.getElementById("gavel"), room = document.getElementById("room");
+  if (!g || reducedMotion() || narrowRoom()) return;
+  document.querySelector("#resolution .stamp")?.classList.add("waiting");
+  for (let i = 0; i < 2; i++) {
+    await g.animate([{ transform: "rotate(0deg)" }, { transform: "rotate(-38deg)" }], { duration: 260, easing: "ease-out", fill: "forwards" }).finished;
+    await g.animate([{ transform: "rotate(-38deg)" }, { transform: "rotate(0deg)" }], { duration: 110, easing: "ease-in", fill: "forwards" }).finished;
+    room.classList.remove("thud"); void room.offsetWidth; room.classList.add("thud");
+    if (i === 1) {
+      const b = document.getElementById("bang");
+      b.classList.remove("show"); void b.offsetWidth; b.classList.add("show");
+      if (catAsleep && !catBusy) { catWake(); emote(catEl(), "bang"); napTimer = setTimeout(catSnooze, 1500); }
+    }
+    await wait(110);
+  }
+  await wait(250);
+  const stampEl = document.querySelector("#resolution .stamp");
+  if (stampEl) { stampEl.classList.remove("waiting"); stampEl.classList.add("slam"); }
+}
+
+// Decorate: wall colour and calm mode, saved in this browser only.
+const decor = document.getElementById("decor");
+function drawSwatches() {
+  const el = document.getElementById("swatches");
+  el.innerHTML = Object.entries(WALLS).map(([k, [label, a, b]]) =>
+    `<button type="button" role="radio" data-wall="${k}" aria-checked="${k === roomPrefs.wall}"><i style="--a:${a};--b:${b}"></i>${label}</button>`).join("");
+  el.querySelectorAll("button").forEach(btn => btn.onclick = () => {
+    roomPrefs.wall = btn.dataset.wall; saveStore(ROOM_KEY, roomPrefs);
+    document.getElementById("room").dataset.wall = roomPrefs.wall;
+    el.querySelectorAll("button").forEach(x => x.setAttribute("aria-checked", x === btn));
+  });
+}
+function openDecor() {
+  drawSwatches();
+  document.getElementById("calm").checked = !!roomPrefs.calm;
+  decor.showModal();
+}
+document.getElementById("calm").onchange = e => { roomPrefs.calm = e.target.checked; saveStore(ROOM_KEY, roomPrefs); };
+document.getElementById("replay").onclick = () => {
+  decor.close();
+  if (roomPrefs.calm) toast("Calm mode is on, so the board is already seated.");
+  else if (reducedMotion()) toast("Your device asks for less motion, so the entrance is off.");
+  else if (narrowRoom()) toast("Make the window wider to see the entrance.");
+  else entrance = playEntrance();
+};
+
+let roomMeeting = null;
+function renderRoom(m) {
+  const before = roomMeeting, live = !!(before && m && before.id === m.id);
+  roomMeeting = m;
+  const state = id => {
+    if (!m) return "idle";
+    if (id === "chair") return m.resolution ? m.resolution.status : "idle";
+    const rv = (m.reviews || []).find(r => r.id === id);
+    if (m.stage === "review" && rv) return rv.status;
+    const st = (m.statements || []).find(s => s.id === id);
+    return st ? st.status : "idle";
+  };
+  const bubble = s => ({ thinking: "...", done: "✓", failed: "!" }[s] || "");
+  const words = s => ({ idle: "waiting", thinking: "speaking", done: "done", failed: "failed" }[s]);
+  const stageText = !m ? "The board is ready" : ({ queued: "Opening the meeting", statements: "Members are speaking", review: "Cross-examination", resolution: "The Chair is deciding", done: "Meeting closed" }[m.stage] || "");
+  const room = document.getElementById("room");
+  const seated = [{ ...board.chair, id: "chair", cls: "s-chair" }, ...board.members.slice(0, 4).map((mb, i) => ({ ...mb, cls: `s-${i}` }))];
+  if (!room.querySelector(".seat")) {
+    // Draw the room once; later updates only change states, so the animations keep running smoothly.
+    room.innerHTML = `<div class="corner empty" id="corner"><div class="corner-slots" id="corner-slots"></div>
+      <span class="corner-text"><span class="corner-label">Punishment corner</span><span class="corner-hint">Drag a member here</span><span class="corner-record" id="corner-record"></span></span></div>
+      ${roomProps()}<div class="table"></div>` + seated.map(p => `<div class="seat ${p.cls}" data-id="${p.id}" data-state="idle" style="--delay:${(BLINK[p.id] || 0)}s">
+      <button class="avatar" type="button"><span class="bubble"></span><span class="say"></span>${sprite(p.id)}<span class="empty-chair">${CHAIR_SVG}</span></button>
+      <span class="plate"><button class="name" type="button" title="Click to customise">${esc(displayName(p.id))}</button><span class="role">${esc(p.speciality)}</span></span></div>`).join("");
+    room.querySelectorAll(".seat").forEach(seat => {
+      const id = seat.dataset.id;
+      if (id !== "chair") makeDraggable(seat.querySelector(".avatar"), id, "seat");
+      seat.querySelector(".avatar").onclick = () => {
+        if (suppressClick) return;
+        const cur = roomMeeting;
+        if (!cur) return;
+        if (id === "chair") { document.getElementById("resolution")?.scrollIntoView({ behavior: "smooth" }); return; }
+        activeTab = id; renderView(cur); document.getElementById("statements")?.scrollIntoView({ behavior: "smooth" });
+      };
+      seat.querySelector(".name").onclick = () => openCustomise(id);
+    });
+    drawCorner();
+    document.getElementById("decorate").onclick = openDecor;
+    catEl().onclick = () => { if (!suppressClick) openNotebook(); };
+    setupNotebook();
+    catSnooze();
+    scheduleStroll();
+  }
+  if (!entering) room.querySelector(".table").textContent = stageText;
+  seated.forEach(p => {
+    const b = room.querySelector(`.seat[data-id="${p.id}"]`);
+    const st = state(p.id);
+    if (b.dataset.state !== st) {
+      if (live) reactTo(p.id, st, m.stage);
+      b.dataset.state = st;
+    }
+    b.querySelector(".bubble").textContent = bubble(st);
+    b.querySelector(".avatar").setAttribute("aria-label", corner[p.id] ? `${displayName(p.id)}, in the punishment corner` : `${displayName(p.id)}, ${words(st)}`);
+  });
+  chatter(live && m.stage === "review");
+}
+
+const VERDICT = { agree: "Agreed with you", partly: "Partly agreed", disagree: "Disagreed with you", none: "No leaning given" };
+const stamp = v => v && VERDICT[v.call] ? `<span class="stamp ${v.call}" title="Did the board side with what you wanted? It is told to judge your idea as if you hoped for the opposite.">${VERDICT[v.call]}</span>` : "";
+const who = (id, model) => { const p = person(id); return `<div class="who">${sprite(id)}<div class="name">${esc(displayName(id))}</div><div class="role">${esc(p.speciality)}</div>${model ? `<div class="model">${esc(MODEL_NAMES[model] || model)}</div>` : ""}</div>`; };
+
+function renderView(m) {
+  document.getElementById("empty").hidden = true;
+  let html = `<p class="agenda">${esc(m.agenda)}</p>`;
+  if ((m.absent || []).length) html += `<p class="absent">Sat out, in the punishment corner: ${m.absent.map(id => esc(displayName(id))).join(", ")}</p>`;
+  if ((m.files || []).length) html += `<div class="files"><span class="label">Attached</span>${m.files.map(f => fileLink(m, "input", f)).join("")}</div>`;
+  const r = m.resolution;
+  if (r && (r.status === "done" || r.status === "failed")) {
+    html += `<div class="dialogue box" id="resolution">${who("chair", r.model)}<div><h3>Resolution${stamp(m.verdict)}</h3>` +
+      (m.verdict && m.verdict.leaning ? `<p class="leaning">What you seemed to want: ${esc(personalise(m.verdict.leaning, m))}</p>` : "") +
+      (r.status === "done" ? `<div class="prose">${md(personalise(r.text, m))}</div>` : `<p class="error">${esc(r.error)}</p>`) +
+      ((m.outputs || []).length ? `<div class="sub">Files from the board</div><div class="files">${m.outputs.map(f => fileLink(m, "output", f)).join("")}</div>` : "") +
+      (CAN_DOWNLOAD && m.stage === "done" ? `<p class="minutes">Download the minutes: <a href="/api/meetings/${m.id}/minutes.docx">Word</a> · <a href="/api/meetings/${m.id}/minutes.md">Markdown</a></p>` : "") +
+      `</div></div>`;
+  }
+  const sts = m.statements || [];
+  if (sts.length) {
+    if (!activeTab || !sts.find(s => s.id === activeTab)) activeTab = sts[0].id;
+    const s = sts.find(x => x.id === activeTab);
+    const rv = (m.reviews || []).find(x => x.id === activeTab);
+    html += `<div class="picker" role="tablist" id="statements">` +
+      sts.map(x => `<button role="tab" data-id="${x.id}" aria-selected="${x.id === activeTab}">${sprite(x.id)}${esc(displayName(x.id))}</button>`).join("") + `</div>` +
+      `<div class="dialogue box">${who(s.id, s.model)}<div><h3>Statement${s.seconds ? ` <span class="hint">${s.seconds}s</span>` : ""}</h3>` +
+      (s.status === "thinking" ? `<p class="hint">Speaking…</p>` : s.ok ? `<div class="prose">${md(personalise(s.text, m))}</div>` : `<p class="error">${esc(s.error)}</p>`) +
+      (rv && rv.ok ? `<div class="sub">Cross-examination</div><div class="prose">${md(personalise(rv.text, m))}</div>` : rv && rv.status === "thinking" ? `<div class="sub">Cross-examination</div><p class="hint">Reviewing the others…</p>` : "") +
+      `</div></div>`;
+  }
+  document.getElementById("view").innerHTML = html;
+  document.querySelectorAll(".picker button").forEach(t => t.onclick = () => { activeTab = t.dataset.id; renderView(m); });
+}
+
+async function openMeeting(id) {
+  currentId = id;
+  clearTimeout(pollTimer);
+  const m = await api(`/api/meetings/${id}`);
+  renderRoom(m); renderView(m); highlight();
+  if (gavelDue) { gavelDue = false; strikeGavel().then(() => catAfterMeeting(m)); }
+  if (m.stage !== "done") pollTimer = setTimeout(() => openMeeting(id), 2500);
+  else loadMeetings();
+}
+function highlight() { document.querySelectorAll("#meetings button").forEach(b => b.classList.toggle("active", b.dataset.id === currentId)); }
+let listTimer = null;
+async function loadMeetings() {
+  const list = await api("/api/meetings");
+  // Only one meeting at a time: two at once burns through the Claude plan's usage limit.
+  const running = list.some(x => x.stage !== "done");
+  meetingRunning = running;
+  serveTime(list);
+  const btn = document.getElementById("convene");
+  btn.disabled = running;
+  btn.textContent = running ? "Meeting in progress…" : "Start meeting";
+  clearTimeout(listTimer);
+  if (running) listTimer = setTimeout(loadMeetings, 5000);
+  const el = document.getElementById("meetings");
+  // How often the board pushed back on what you wanted, out of the meetings where you had a view.
+  const judged = list.filter(x => ["agree", "partly", "disagree"].includes(x.verdict));
+  const pushed = judged.filter(x => x.verdict !== "agree").length;
+  const pb = document.getElementById("pushback");
+  pb.hidden = !judged.length;
+  pb.textContent = `The board pushed back on what you wanted in ${pushed} of ${judged.length} meeting${judged.length === 1 ? "" : "s"}.`;
+  el.innerHTML = list.length ? list.map(x => `<li><button data-id="${x.id}">${x.verdict && x.verdict !== "none" ? `<i class="dot ${x.verdict}" title="${VERDICT[x.verdict]}"></i>` : ""}${esc(x.title)}<small>${x.created.slice(0, 16).replace("T", " ")} · ${x.mode}${x.stage !== "done" ? " · in progress" : ""}</small></button></li>`).join("") : `<li class="hint">No meetings yet.</li>`;
+  el.querySelectorAll("button").forEach(b => b.onclick = () => openMeeting(b.dataset.id));
+  highlight();
+}
+// Files: attached to a new meeting, and downloaded from past ones.
+const CAN_DOWNLOAD = true;
+const FILE_TYPES = [".pdf", ".docx", ".xlsx", ".xlsm", ".csv", ".tsv", ".txt", ".md", ".json", ".png", ".jpg", ".jpeg", ".gif", ".webp"];
+const MAX_FILES = 5, MAX_TOTAL = 20 * 1024 * 1024;
+const size = b => b < 1024 ? `${b} B` : b < 1048576 ? `${Math.round(b / 1024)} KB` : `${(b / 1048576).toFixed(1)} MB`;
+const fileLink = (m, kind, f) => `<a class="${kind === "output" ? "out" : ""}" href="/api/meetings/${m.id}/${kind}/${encodeURIComponent(f.name)}" download>${esc(f.name)} <small>${size(f.bytes)}</small></a>`;
+let chosen = [];
+function drawChosen(message) {
+  const list = document.getElementById("chosen");
+  list.innerHTML = chosen.map((f, i) => `<li><span>${esc(f.name)}</span><small>${size(f.size)}</small><button type="button" data-i="${i}" aria-label="Remove ${esc(f.name)}">×</button></li>`).join("");
+  list.querySelectorAll("button").forEach(b => b.onclick = () => { chosen.splice(+b.dataset.i, 1); drawChosen(); });
+  document.getElementById("filehint").textContent = message || "PDF, Word, Excel, CSV, text or images, up to 20 MB. Want a file back? Ask for one, like \"put the plan in a spreadsheet\".";
+  document.getElementById("filehint").classList.toggle("error", !!message);
+}
+function addFiles(list) {
+  let message = "";
+  for (const f of list) {
+    const ext = f.name.slice(f.name.lastIndexOf(".")).toLowerCase();
+    if (!FILE_TYPES.includes(ext)) { message = `${f.name}: use PDF, Word, Excel, CSV, text or an image.`; continue; }
+    if (chosen.some(c => c.name === f.name && c.size === f.size)) continue;
+    if (chosen.length >= MAX_FILES) { message = `You can attach up to ${MAX_FILES} files.`; break; }
+    if (chosen.reduce((t, c) => t + c.size, 0) + f.size > MAX_TOTAL) { message = "The files would add up to more than 20 MB."; continue; }
+    chosen.push(f);
+  }
+  drawChosen(message);
+}
+const fileInput = document.getElementById("files");
+fileInput.onchange = () => { addFiles(fileInput.files); fileInput.value = ""; };
+const drop = document.getElementById("drop");
+drop.ondragover = e => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = e => { e.preventDefault(); drop.classList.remove("over"); addFiles(e.dataTransfer.files); };
+const toBase64 = f => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.onload = () => resolve(String(reader.result).split(",")[1] || "");
+  reader.onerror = () => reject(reader.error);
+  reader.readAsDataURL(f);
+});
+document.querySelectorAll('input[name="mode"]').forEach(i => i.onchange = () => {
+  document.getElementById("modehint").textContent = i.value === "quick" ? "Statements, then the Chair. About 5 Claude calls." : "Statements, cross-examination, then the Chair. About 9 Claude calls.";
+});
+document.getElementById("form").onsubmit = async e => {
+  e.preventDefault();
+  const agenda = document.getElementById("agenda").value.trim();
+  if (!agenda) return;
+  const btn = document.getElementById("convene");
+  btn.disabled = true;
+  let files = [];
+  try {
+    files = await Promise.all(chosen.map(async f => ({ name: f.name, data: await toBase64(f) })));
+  } catch { drawChosen("A file could not be read. Try attaching it again."); btn.disabled = false; return; }
+  const res = await api("/api/meetings", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ agenda, context: document.getElementById("context").value, mode: document.querySelector('input[name="mode"]:checked').value, files, names: customNames, absent: cornerIds(), feedback, models: customModels }) });
+  if (res.error) { document.getElementById("modehint").textContent = res.error; btn.disabled = false; return; }
+  cornerIds().forEach(id => { corner[id].meeting = res.id; });
+  saveStore(CORNER_KEY, corner);
+  chosen = []; drawChosen();
+  activeTab = null;
+  await loadMeetings();
+  openMeeting(res.id);
+};
+(async () => {
+  board = await api("/api/board");
+  try {
+    const f = await api("/api/faces");
+    if (f && !f.error) myFaces = f;
+  } catch { myFaces = {}; }
+  renderRoom(null);
+  entrance = playEntrance();
+  entrance.then(() => setTimeout(async () => { await loadCatBrain(); watchCatLearning(); }, 300));
+  loadMeetings();
+  const st = await api("/api/status");
+  const el = document.getElementById("status");
+  el.textContent = st.message; el.classList.toggle("bad", !st.ok);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+{
+  "1:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "A gives a sharper, cost-aware plan: repay only the soon-to-be-charged portion, park the rest in savings and set an alert before the free period ends, while B's 'pay it all off now' headline sits awkwardly with its own conditional advice.",
+    "seconds": 8.5
+  },
+  "1:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 7.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "B gives a more accurate picture: interest usually applies only above the shrinking free limit, so it repays just the part about to be charged, while A's headline 'pay it off now' clashes with its own 0% caveat. B's arbitrary 1 November deadline and its Lifetime ISA tangent are minor flaws.",
+    "seconds": 8.0
+  },
+  "2:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives a clear decision with checkable fee math, honest uncertainty about seasonality, and fuller coverage of legal and money risks such as review rules, licensing, payout holds and Offsite Ads, while B states January demand and slow traction as fact and covers fewer of the risks that matter, though it adds useful user-testing and channel advice.",
+    "seconds": 7.2
+  },
+  "2:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B gives the same launch-now verdict but backs it with checkable fee math, flags unsupported claims about seasonality and ranking, and covers key legal and money risks (review rules, brand and font licensing, payout holds, mandatory Offsite Ads) that A misses, along with a dated test-and-decide plan.",
+    "seconds": 7.2
+  },
+  "3:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A covers the risks that matter, including disclosure duties, Section 20 works, Building Safety Act protection, mortgage refix and the problem of selling with a tenant in place, and flags its uncertainties, whereas B's advice to sell before a works bill appears edges toward concealment and it misses several of these risks.",
+    "seconds": 8.3
+  },
+  "3:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 5.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B covers more of the risks that matter, including the duty to disclose known works, a mortgage reset and Building Safety Act protections, and it flags its uncertainties, whereas A suggests selling before a works bill is issued without mentioning the disclosure obligation.",
+    "seconds": 6.9
+  },
+  "4:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives a dated, concrete plan and covers the risks that matter most, including company data rules, silent errors in automated reports and cost, while flagging its uncertain figures; B is clearer but weaker on legal and data-handling risk.",
+    "seconds": 4.2
+  },
+  "4:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B gives a more concrete, checkable plan and flags the key data-privacy and silent-error risks that A misses, though its statistics and cost figures are shaky and it is a little cluttered.",
+    "seconds": 3.9
+  },
+  "5:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives a sharper, more actionable plan and covers the key LISA risks, including the 12-month rule, the 25% withdrawal penalty and the price cap, while B never mentions the penalty and its advice to open by April 2027 ignores the 12-month clock, though B does flag its UK assumption, which A does not.",
+    "seconds": 7.1
+  },
+  "5:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 6.0,
+      "accuracy": 6.0,
+      "risk": 5.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "B gives a sharper, correctly qualified plan and flags key Lifetime ISA risks that A misses: the 12-month qualifying rule, the 25% withdrawal penalty, the price cap and the need for an emergency fund, while A's suggestion to open a Lifetime ISA by April 2027 would needlessly delay the qualifying clock.",
+    "seconds": 6.3
+  },
+  "6:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 5.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives correct take-home figures (about £2,880 at the basic rate and £2,320 at the higher rate), concrete runway and scope tests, flagged legal uncertainty, and dated steps. B wrongly claims £2,700 to £2,900 net for higher-rate taxpayers and offers vaguer decision criteria.",
+    "seconds": 12.9
+  },
+  "6:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 5.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B gives clear, checkable tests and dated steps, and its take-home figures are correct (about £2,320 at 40% and £2,880 at 20%), whereas A wrongly says higher-rate taxpayers keep £2,700 to £2,900; B also covers the risks more fully, including verifying runway, the 2027 dismissal-rights change, redundancy pay, equity and savings.",
+    "seconds": 6.9
+  },
+  "7:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "single",
+    "reason": "B gives the same core advice with a clear skill-based checkpoint and a real-data project; A has dated deadlines and sharper risk coverage (refunds, cancellation) but leans on unconfirmed listing prices and adds analyst notes that clutter it.",
+    "seconds": 9.2
+  },
+  "7:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 9.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "B flags uncertainty more carefully, sets a dated stop rule, and covers more of the risks that matter (refund, cancellation, intake dates, dialect), though A's skill-based day-21 check and cleaner layout keep it close.",
+    "seconds": 6.3
+  },
+  "8:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives more precise, well-hedged legal context (e.g., California Labor Code 2870's limits), a better-sequenced plan that checks the contract before involving HR, and avoids B's unsupported claim that posting 'usually helps more than it hurts', though B reads slightly more cleanly.",
+    "seconds": 6.6
+  },
+  "8:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B is more precise on the key risk, citing California Labor Code 2870 and its exclusion for related work, and its plan to sort projects, check the contract first and get legal advice before telling HR is more actionable, though its view-count estimate and survey reference are speculative and its dated steps make it a little denser than A.",
+    "seconds": 6.2
+  },
+  "9:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 6.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "A is more actionable, with fee-tier negotiation, local commission caps, the price markup needed for full recovery, and concrete quit rules, though its illustrative figures and analyst notes are harder to follow than B's cleaner but less thorough advice.",
+    "seconds": 7.8
+  },
+  "9:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "B is more actionable: it shows that fully recovering a 30% fee needs a 43% markup, recommends running the pilot in quiet hours only, flags local commission caps and payment fees, and sets measurable quit rules. A is clearer and solid but less incisive.",
+    "seconds": 7.1
+  },
+  "10:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 7.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "A makes the decision depend on office days and the net extra cost after fares, and it flags its uncertainty on tenancy law, while B leans towards moving too quickly, uses a loose 2-to-3-day figure and gives lease advice that looks outdated for England.",
+    "seconds": 6.5
+  },
+  "10:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B makes the decision depend on office days and net cost, notes the new commute won't be zero, and covers one-off costs, a cash buffer and current tenancy law with uncertainty flagged, while A gives a firmer verdict without the data and assumes 12-month lock-ins that may no longer apply.",
+    "seconds": 7.0
+  },
+  "11:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "A gives a firmer decision with a full cost comparison that counts repairs, lost interest and realistic UK resale values, while B's net figure seems to leave out the repair costs it lists, though A has one garbled bullet about mileage caps.",
+    "seconds": 9.5
+  },
+  "11:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 7.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "B is more realistic about what £6,000 buys in the UK, counts lost interest, financing costs and the legal risk of outstanding finance, and gives timed next steps, though one sentence about mileage caps is garbled; A's net-cost arithmetic does not quite add up.",
+    "seconds": 8.2
+  },
+  "12:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "A covers more of the risks that matter (employer IP claims, pre-agreement work ownership, entity formation, the 83(b) tax deadline) and gives dated, testable next steps, while B is clearer and makes the strong point that equity should follow contributions but misses several legal and tax risks.",
+    "seconds": 39.5
+  },
+  "12:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "B covers more of the risks that matter, including employer IP claims, entity liability, 83(b) timing and pre-agreement work ownership, and adds a dated plan with a customer test and stop rule, though it is denser than A's clear but narrower advice.",
+    "seconds": 5.8
+  },
+  "13:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "A gives more precise, sourced evidence, a worked tax example, and checks for an emergency fund and high-interest debt; B is clear and sound but less specific and misses those prerequisites.",
+    "seconds": 9.7
+  },
+  "13:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "Both answers reach the same sound conclusion, but B adds better-sourced evidence, concrete tax figures, an emergency-fund and debt check, and the advice to fund any stock picks with new money instead of selling, while flagging its own uncertainties.",
+    "seconds": 9.8
+  },
+  "14:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives a concrete dated plan and covers money, consumer-rights and tax risks with uncertainty flagged, while B is clear and offers a useful cheap-upgrade option but uses unsourced figures and has thinner risk coverage.",
+    "seconds": 4.2
+  },
+  "14:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B gives a dated, actionable plan with a firm budget cap and covers money, consumer-rights and tax risks while flagging what it could not verify, whereas A leans on unsourced statistics like the depreciation and usage figures and misses the legal angle.",
+    "seconds": 6.2
+  },
+  "15:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A gives a measurable pilot plan with stop rules, flags its uncertain cost figures, and covers legal data-privacy risk; B is clearer but omits privacy risk and loosely calls Airtable and Monday.com event-specific tools.",
+    "seconds": 6.1
+  },
+  "15:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 6.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "B covers the same core advice but adds the legal risk of handling attendee data under GDPR and CCPA, cost ranges flagged as unconfirmed, and concrete stop rules, which outweighs A's slightly cleaner writing.",
+    "seconds": 7.2
+  }
+}
