@@ -89,7 +89,16 @@ html = rep(html, 'el.querySelectorAll("button").forEach(b => b.onclick = () => o
 # once the board has walked in, open the first meeting so visitors see it at work
 html = rep(html, '  loadMeetings();\n  const st = await api("/api/status");',
                  '  await loadMeetings();\n  await entrance;\n  if (DEMO.meetings.length) openMeeting(DEMO.meetings[0].id);\n  const st = await api("/api/status");')
-html = rep(html, '<title>The Boardroom</title>', '<title>The Boardroom (demo)</title>')
+SITE = "https://kaanceti.github.io/The-Boardroom/"
+ABOUT = "An AI advisory board that argues with you, on your own Claude plan, and an office cat with its own tiny AI. This demo replays three real meetings."
+html = rep(html, '<title>The Boardroom</title>', '<title>The Boardroom (demo)</title>\n'
+           f'<meta name="description" content="{ABOUT}">\n'
+           '<meta property="og:title" content="The Boardroom: an AI board that argues with you">\n'
+           f'<meta property="og:description" content="{ABOUT}">\n'
+           f'<meta property="og:image" content="{SITE}social-preview.png">\n'
+           f'<meta property="og:url" content="{SITE}">\n'
+           '<meta property="og:type" content="website">\n'
+           '<meta name="twitter:card" content="summary_large_image">')
 html = rep(html, 'const CAN_DOWNLOAD = true;', 'const CAN_DOWNLOAD = false;')
 html = rep(html, '<textarea id="agenda" rows="4" placeholder="Ask the board a question or describe a decision" required></textarea>',
                  '<textarea id="agenda" rows="4" placeholder="This demo replays saved meetings. Pick one under Past meetings." required></textarea>')
