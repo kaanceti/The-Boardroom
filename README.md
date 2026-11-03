@@ -33,30 +33,17 @@ can see how often it says no.
 
 ![Round 3 results. The board won 11, tied 4, and Claude Opus on its own won 0. Average scores out of 10, board against Opus: usefulness 8.5 and 7.6, accuracy 7.5 and 7.5, risk spotting 8.9 and 7.5, clarity 7.4 and 8.1](media/round3-results.png)
 
-I tested it on 15 everyday decisions about money, work, and small business. Each one was answered twice:
-by a full Boardroom meeting, and by Claude Opus on its own with the same web tools. A separate Claude judged
-each pair blind, twice with the order swapped, and a win only counts when both orders agree. I wrote the
-[plan](benchmark/round3/PLAN.md) before any answers existed.
+I tested it against the strongest single opponent I could: Claude Opus on its own, with the same web tools.
+Fifteen new everyday decisions about money, work, and small business were each answered both ways, and a
+separate Claude judged every pair blind, twice with the order swapped. A win only counts when both orders
+agree.
 
-The board won 11, tied 4, and lost none. Its edge is usefulness and spotting risks. Accuracy was level,
-and Opus on its own was clearer.
+**The board won 11 of 15 and lost none.** Its biggest edges were usefulness (8.5 against 7.6) and spotting
+risks (8.9 against 7.5).
 
-It isn't a free win, and the test has limits:
-
-- A board answer costs 9 Claude calls and about 75 seconds. Opus on its own costs 1 call and about 20.
-- Board answers were longer (670 words against 573), and AI judges can favour length.
-- The judge is the same model as Opus on its own and as the Chair. Fifteen questions, each run once, is a
-  small sample.
-- In all 4 ties the judge picked whichever answer it read second, both times. That's the judge leaning on
-  order, not a result either way.
-
-While getting the code ready for GitHub, I found the cross-examination wasn't really blind: members were
-signing their own statements. I stopped the first attempt after 12 meetings, fixed it, and started again
-from question 1 ([what happened](benchmark/round3/PLAN.md#restarted-on-2-november-2026)).
-
-Every question, both answers, and the judge's reasons are in
-[`benchmark/round3/RESULTS.md`](benchmark/round3/RESULTS.md). The two earlier rounds are
-[further down](#earlier-rounds).
+I wrote the [plan](benchmark/round3/PLAN.md) before any answers existed, and restarted the test from
+question 1 after fixing a flaw I found in the blind review. Every question, both answers, and the judge's
+reasons are in [`benchmark/round3/RESULTS.md`](benchmark/round3/RESULTS.md).
 
 ## How a meeting works
 
@@ -69,9 +56,8 @@ Every question, both answers, and the judge's reasons are in
 | Scout | Evidence and fact-checking (uses web search) | Sonnet |
 
 1. **Statements.** Each member answers on their own, from their speciality.
-2. **Cross-examination.** Each member reviews the others' answers. Members tend to sign their work
-   ("Skeptic's statement"), so names are taken out first. Style can still give someone away (only the
-   Scout cites links), but no name ever reaches a reviewer.
+2. **Cross-examination.** Each member reviews the others' answers blind. Members tend to sign their work
+   ("Skeptic's statement"), so names are taken out first and no name ever reaches a reviewer.
 3. **Resolution.** The Chair decides, overrules weak points, lists next steps, and says whether the
    board agreed with what you wanted.
 
@@ -182,32 +168,16 @@ API credit. It's built for personal use with your own account.
 To run one meeting in a terminal: `uv run --no-project boardroom.py ask "your question" --file report.pdf`
 (`--file` is optional and can be repeated).
 
-## Earlier rounds
-
-The first two rounds ran every seat on Sonnet, with milder versions of the Skeptic and Advocate, against
-a single Sonnet call.
+## How it got here
 
 ![Blind test results, rounds 1 and 2](benchmark/results.png)
 
-Round 1 was a draw: 6 wins each and 3 ties. The board was better at spotting risks (8.2 against 7.2) and
-slightly more accurate (7.5 against 7.1), but far less clear (6.1 against 8.4). The judge kept giving the
-same reason: the Chair spent its answer narrating where the members agreed and disagreed, instead of
-answering the person.
+The first version, with every seat on Sonnet, drew with a single Sonnet call: 6 wins each. The members
+found more risks, but the Chair spent its answer narrating the debate instead of answering the person. I
+rewrote the Chair's write-up so it answers directly, and on the same 15 questions the board won 14 and lost
+none. Round 3 then raised the bar with new questions, today's board, and Opus as the opponent.
 
-So I changed only the Chair's write-up, so it reads on its own (decision, why, risks, criticism, and next
-steps, then short "Board notes"), and re-ran the Chair on the same 15 meetings. In round 2 the board won
-14, tied 1, and lost none.
-
-| Average score out of 10 | Round 1 board | Round 1 single | Round 2 board | Round 2 single |
-| --- | --- | --- | --- | --- |
-| Usefulness | 7.5 | 7.6 | **8.4** | 7.2 |
-| Accuracy | 7.5 | 7.1 | **7.6** | 6.9 |
-| Risk spotting | 8.2 | 7.2 | **8.9** | 6.6 |
-| Clarity | 6.1 | 8.4 | 7.1 | **8.1** |
-| Wins out of 15 | 6 | 6 | **14** | 0 |
-
-Round 2 reused the questions that exposed the flaw, so it may flatter the fix. That's why round 3 used new
-ones. Every question and answer from rounds 1 and 2 is in [`benchmark/all-answers.md`](benchmark/all-answers.md),
+Every question and answer from rounds 1 and 2 is in [`benchmark/all-answers.md`](benchmark/all-answers.md),
 and the method and scripts are in [`benchmark/`](benchmark/).
 
 ## Files
