@@ -17,7 +17,7 @@ The [plan](PLAN.md) was written before any answer existed. Fifteen new questions
 - **Where the board lost points.** Clarity, and in questions 2 and 8 (both ties) the judge marked it down for survey figures it could not verify. Both came from the Scout's web research and the Chair kept them.
 - **The app did not change during the test.** Every answer carries the same fingerprint: boardroom.py `d653179507aa`, members.json `c168a9c6083c`.
 - **Blind reviews.** No reviewer was shown a name. One of the 60 reviews guessed a member from their style ("Operator-style caution"). In the first attempt, before the fix, 22 of the first 32 reviews named who wrote what.
-- **Incomplete meetings.** Ten meetings stopped when the Claude plan hit its session limit and were run again later. Only complete meetings count; the stopped ones are in [incomplete/](incomplete/).
+- **Complete meetings only.** Meetings stopped by the Claude plan's session limit were run again later, so every answer here comes from a full meeting.
 
 Limits stated before the test: the judge is the same model as Opus alone and as the Chair, fifteen questions is a small sample, and each question was run once.
 

@@ -29,8 +29,8 @@ The first attempt began with boardroom.py `00ab813fbfd2`. While checking the cod
 cross-examination was not really blind: members signed their own statements ("Skeptic's statement: ..."), and in
 the 12 meetings run so far 22 of the first 32 reviews named who wrote what. I stopped the run, fixed it (names are
 now taken out of the statements before review, and members are asked not to sign), and started again from
-question 1. The answers from the first attempt were set aside without being judged or read, and are kept in
-[`first-attempt/`](first-attempt/). The questions, the judge and members.json did not change.
+question 1. The answers from the first attempt were set aside without being judged or read. The questions,
+the judge and members.json did not change.
 
 ## How it is judged
 

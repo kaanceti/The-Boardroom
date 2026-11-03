@@ -18,8 +18,9 @@ Inspired by Andrej Karpathy's [llm-council](https://github.com/karpathy/llm-coun
 ## Why I built it
 
 AI tends to tell people what they want to hear. A Stanford study published in *Science* in March 2026
-found that AI chatbots affirmed people's actions 49% more often than other humans did, even when the
-person was in the wrong. I wanted the opposite: a board that argues with me.
+found that AI chatbots affirmed people's actions 49% more often than other humans did, including when
+those actions involved deception or harm ([AP report](https://wtop.com/lifestyle/2026/03/ai-is-giving-bad-advice-to-flatter-its-users-says-new-study-on-dangers-of-overly-agreeable-chatbots/)).
+I wanted the opposite: a board that argues with me.
 
 So two of the four members are extreme on purpose. The Skeptic argues the most cautious case, including
 doing nothing, and the Advocate argues the boldest, so the board can't settle on the safe average answer.
