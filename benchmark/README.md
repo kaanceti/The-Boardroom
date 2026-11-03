@@ -34,7 +34,8 @@ every meeting, and the first attempt that was set aside when the blind-review fl
 
 - [`all-answers.md`](all-answers.md): every question with both answers, the scores and the judge's reasons.
 - [`meetings/`](meetings/): the full board meetings (statements and cross-examination), as Markdown minutes and JSON.
-- `questions.json`: the 15 questions.
+- `questions.json`: the 15 questions. Four were about my own life, so their details and answers are withheld
+  for privacy; their scores still count.
 - `answers.json`: round 1 answers (single and board). `answers_v2.json`: round 2 board answers.
 - `judgments.json`, `judgments_answers_v2.json`: every judgement, both orders.
 - `run.py`, `judge.py`, `rechair.py`: the test itself. `write_report.py` rebuilds `all-answers.md`.

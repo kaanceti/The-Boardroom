@@ -34,7 +34,9 @@ out = ["# Blind test: every question and answer", "",
        "with the reworked write-up; the members' statements and the single answers are identical in both rounds.",
        "- Scores are out of 10, averaged over two judgements with the order swapped. A win only counts when both orders agree.",
        "- Member names were replaced with neutral labels (\"Analyst 1\" and so on) before judging; the answers below "
-       "are shown as the board wrote them. Full meeting minutes are in [meetings/](meetings/).", "",
+       "are shown as the board wrote them. Full meeting minutes are in [meetings/](meetings/).",
+       "- Four questions were about my own life, so their details and answers are withheld for privacy. Their scores "
+       "still count in every total.", "",
        "## Which is which", "",
        "| Label | What it means |",
        "| --- | --- |",
@@ -68,8 +70,11 @@ for k, q in A.items():
             "| --- | --- | --- | --- | --- |"]
     for c in C:
         out.append(f"| {NAMES[c]} | {b1[c]:.1f} | {s1[c]:.1f} | {b2[c]:.1f} | {s2[c]:.1f} |")
-    out += [f"| **Winner** | {WIN[w1]} | | {WIN[w2]} | |", "",
-            f"Judge, round 2 (A = Board, B = Single): \"{reason_r2}\"", "",
+    out += [f"| **Winner** | {WIN[w1]} | | {WIN[w2]} | |", ""]
+    if q.get("withheld"):
+        out += ["The answers and the judge's reasons for this question are withheld for privacy.", ""]
+        continue
+    out += [f"Judge, round 2 (A = Board, B = Single): \"{reason_r2}\"", "",
             f"Judge, round 1 (A = Board, B = Single): \"{reason_r1}\"", "",
             details("Board answer, round 2 (reworked Chair)", V2[k]["text"]),
             details("Single Claude answer", q["single"]["text"]),

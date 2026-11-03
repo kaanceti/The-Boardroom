@@ -13,7 +13,7 @@
       "clarity": 7.0
     },
     "winner": "board",
-    "reason": "A gives the more precise advice: it repays only the part of the overdraft that will soon cost interest, notes that interest applies only above the shrinking free limit, and sets dated steps, while B defaults to repaying everything and opens with a slightly contradictory decision.",
+    "reason": "Withheld for privacy.",
     "seconds": 7.0
   },
   "1:single_first": {
@@ -30,7 +30,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "B adds the key point that graduate overdrafts usually charge interest only above a shrinking free limit, gives a more precise repayment rule and dated steps, and avoids A's mixed message of 'pay off now' but 'keep it if still 0%'.",
+    "reason": "Withheld for privacy.",
     "seconds": 6.6
   },
   "2:board_first": {
@@ -81,7 +81,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "A gives a clearer conditional plan with dated steps and flags the key legal risks, including honest disclosure of known works, Building Safety Act protection and selling with a sitting tenant, while B's yield formula leaves out mortgage interest and tax and its advice to sell before a works bill is issued edges toward a disclosure problem.",
+    "reason": "Withheld for privacy.",
     "seconds": 7.3
   },
   "3:single_first": {
@@ -98,7 +98,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "B gives similarly concrete, dated steps but catches risks A misses or gets wrong: A implies timing a sale to get ahead of a works bill, while B stresses honest disclosure and also covers Building Safety Act cladding protection, selling with a sitting tenant and below-market rent.",
+    "reason": "Withheld for privacy.",
     "seconds": 7.1
   },
   "4:board_first": {
@@ -149,7 +149,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "A covers the risks that matter, including the LISA's 12-month clock, first-time-buyer rule and the cash cushion, but its analyst commentary adds clutter. B reads more cleanly but misses the 12-month timing and wrongly suggests waiting until April 2027 to open a LISA.",
+    "reason": "Withheld for privacy.",
     "seconds": 8.0
   },
   "5:single_first": {
@@ -166,7 +166,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "Both give the same sound core advice. B catches more of the deposit-specific risks: the LISA's 12-month wait before use, the first-time-buyer rule, a cash cushion and Scottish tax bands. Its long section critiquing the analysts makes it harder to follow than A's cleaner answer.",
+    "reason": "Withheld for privacy.",
     "seconds": 8.0
   },
   "6:board_first": {
@@ -489,7 +489,7 @@
       "clarity": 8.0
     },
     "winner": "single",
-    "reason": "B gives a clearer, self-contained plan that tests whether the pain is about contacts or logistics and compares HubSpot with an alternative tool, while A is cluttered with analyst back-and-forth, though A alone flags the privacy and consent risk.",
+    "reason": "Withheld for privacy.",
     "seconds": 12.3
   },
   "15:single_first": {
@@ -506,7 +506,7 @@
       "clarity": 9.0
     },
     "winner": "single",
-    "reason": "A gives a clear, self-contained plan with well-chosen risks and concrete next steps, while B adds a useful privacy flag and dated milestones but spends much of its length on analyst disagreements that do less to help the owner act.",
+    "reason": "Withheld for privacy.",
     "seconds": 7.2
   }
 }

@@ -13,7 +13,7 @@
       "clarity": 7.0
     },
     "winner": "board",
-    "reason": "A gives a sharper, cost-aware plan: repay only the soon-to-be-charged portion, park the rest in savings and set an alert before the free period ends, while B's 'pay it all off now' headline sits awkwardly with its own conditional advice.",
+    "reason": "Withheld for privacy.",
     "seconds": 8.5
   },
   "1:single_first": {
@@ -30,7 +30,7 @@
       "clarity": 7.0
     },
     "winner": "board",
-    "reason": "B gives a more accurate picture: interest usually applies only above the shrinking free limit, so it repays just the part about to be charged, while A's headline 'pay it off now' clashes with its own 0% caveat. B's arbitrary 1 November deadline and its Lifetime ISA tangent are minor flaws.",
+    "reason": "Withheld for privacy.",
     "seconds": 8.0
   },
   "2:board_first": {
@@ -81,7 +81,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "A covers the risks that matter, including disclosure duties, Section 20 works, Building Safety Act protection, mortgage refix and the problem of selling with a tenant in place, and flags its uncertainties, whereas B's advice to sell before a works bill appears edges toward concealment and it misses several of these risks.",
+    "reason": "Withheld for privacy.",
     "seconds": 8.3
   },
   "3:single_first": {
@@ -98,7 +98,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "B covers more of the risks that matter, including the duty to disclose known works, a mortgage reset and Building Safety Act protections, and it flags its uncertainties, whereas A suggests selling before a works bill is issued without mentioning the disclosure obligation.",
+    "reason": "Withheld for privacy.",
     "seconds": 6.9
   },
   "4:board_first": {
@@ -149,7 +149,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "A gives a sharper, more actionable plan and covers the key LISA risks, including the 12-month rule, the 25% withdrawal penalty and the price cap, while B never mentions the penalty and its advice to open by April 2027 ignores the 12-month clock, though B does flag its UK assumption, which A does not.",
+    "reason": "Withheld for privacy.",
     "seconds": 7.1
   },
   "5:single_first": {
@@ -166,7 +166,7 @@
       "clarity": 7.0
     },
     "winner": "board",
-    "reason": "B gives a sharper, correctly qualified plan and flags key Lifetime ISA risks that A misses: the 12-month qualifying rule, the 25% withdrawal penalty, the price cap and the need for an emergency fund, while A's suggestion to open a Lifetime ISA by April 2027 would needlessly delay the qualifying clock.",
+    "reason": "Withheld for privacy.",
     "seconds": 6.3
   },
   "6:board_first": {
@@ -489,7 +489,7 @@
       "clarity": 8.0
     },
     "winner": "board",
-    "reason": "A gives a measurable pilot plan with stop rules, flags its uncertain cost figures, and covers legal data-privacy risk; B is clearer but omits privacy risk and loosely calls Airtable and Monday.com event-specific tools.",
+    "reason": "Withheld for privacy.",
     "seconds": 6.1
   },
   "15:single_first": {
@@ -506,7 +506,7 @@
       "clarity": 9.0
     },
     "winner": "board",
-    "reason": "B covers the same core advice but adds the legal risk of handling attendee data under GDPR and CCPA, cost ranges flagged as unconfirmed, and concrete stop rules, which outweighs A's slightly cleaner writing.",
+    "reason": "Withheld for privacy.",
     "seconds": 7.2
   }
 }

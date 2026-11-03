@@ -5,6 +5,7 @@ Fifteen questions, each answered by a single Claude call and by a full Boardroom
 - **Round 1** judged the board's original resolution. **Round 2** re-ran only the Chair on the same meetings with the reworked write-up; the members' statements and the single answers are identical in both rounds.
 - Scores are out of 10, averaged over two judgements with the order swapped. A win only counts when both orders agree.
 - Member names were replaced with neutral labels ("Analyst 1" and so on) before judging; the answers below are shown as the board wrote them. Full meeting minutes are in [meetings/](meetings/).
+- Four questions were about my own life, so their details and answers are withheld for privacy. Their scores still count in every total.
 
 ## Which is which
 
@@ -22,11 +23,11 @@ Fifteen questions, each answered by a single Claude call and by a full Boardroom
 
 | # | Question | Round 1 | Round 2 | Round 2 score (board vs single) |
 | --- | --- | --- | --- | --- |
-| [1](#question-1) | I'm 24 and have £5,000 in savings. Should I pay off my £4,000… | Board | Board | 7.6 vs 6.9 |
+| [1](#question-1) | Pay off a debt or invest my savings? (details withheld for privacy) | Board | Board | 7.6 vs 6.9 |
 | [2](#question-2) | I've built a Notion student planner. Should I launch it on Etsy now… | Board | Board | 8.1 vs 6.8 |
-| [3](#question-3) | I own a one-bed buy-to-let flat in Manchester and the service charge… | Board | Board | 7.9 vs 6.6 |
+| [3](#question-3) | Sell or keep a buy-to-let flat after service charge rises? (details… | Board | Board | 7.9 vs 6.6 |
 | [4](#question-4) | I'm a junior data analyst. Should I learn Python first or do the… | Single | Board | 7.8 vs 7.5 |
-| [5](#question-5) | My employer matches pension contributions up to 5%. Should I put in… | Board | Board | 8.5 vs 6.5 |
+| [5](#question-5) | Pay more into a pension while saving for a home? (details withheld… | Board | Board | 8.5 vs 6.5 |
 | [6](#question-6) | I'm one year into a stable corporate job. A startup has offered me… | Board | Board | 8.2 vs 6.8 |
 | [7](#question-7) | Should I pay £400 for an evening SQL course or learn it from free… | Single | Tie | 8.0 vs 8.0 |
 | [8](#question-8) | I want to post on LinkedIn about my side projects. Could it hurt me… | Single | Board | 7.9 vs 7.2 |
@@ -36,13 +37,13 @@ Fifteen questions, each answered by a single Claude call and by a full Boardroom
 | [12](#question-12) | A friend wants to start a business with me, split 50/50. Should I… | Tie | Board | 8.2 vs 7.9 |
 | [13](#question-13) | Should I move my investments from index funds into individual shares? | Tie | Board | 8.4 vs 7.9 |
 | [14](#question-14) | Should I spend £1,500 on a new laptop now to work on side projects in… | Tie | Board | 8.0 vs 7.1 |
-| [15](#question-15) | Our five-person events team runs on spreadsheets. Should we move to a… | Single | Board | 7.9 vs 7.2 |
+| [15](#question-15) | Should a small team move from spreadsheets to a CRM? (details… | Single | Board | 7.9 vs 7.2 |
 
 **Totals.** Round 1: board 6, tie 3, single 6. Round 2: board 14, tie 1, single 0.
 
 ## Question 1
 
-**I'm 24 and have £5,000 in savings. Should I pay off my £4,000 graduate overdraft now or invest the money?**
+**Pay off a debt or invest my savings? (details withheld for privacy)**
 
 | | Round 1 board | Round 1 single | Round 2 board | Round 2 single |
 | --- | --- | --- | --- | --- |
@@ -52,112 +53,7 @@ Fifteen questions, each answered by a single Claude call and by a full Boardroom
 | Clarity | 7.0 | 7.5 | 7.0 | 7.0 |
 | **Winner** | Board | | Board | |
 
-Judge, round 2 (A = Board, B = Single): "A gives a sharper, cost-aware plan: repay only the soon-to-be-charged portion, park the rest in savings and set an alert before the free period ends, while B's 'pay it all off now' headline sits awkwardly with its own conditional advice."
-
-Judge, round 1 (A = Board, B = Single): "A gives the more precise advice: it repays only the part of the overdraft that will soon cost interest, notes that interest applies only above the shrinking free limit, and sets dated steps, while B defaults to repaying everything and opens with a slightly contradictory decision."
-
-<details>
-<summary>Board answer, round 2 (reworked Chair)</summary>
-
-#### Decision
-Do not invest this money. First check your overdraft terms today. Then repay any part of the £4,000 that is already charged interest, or will be within about 12 months. If the whole overdraft is still free for over a year, hold that cash in easy-access savings and clear the overdraft a month before the free period ends.
-
-#### Why
-- Overdrafts above the free limit often cost about 39% to 40% EAR. At 39%, £4,000 costs about £1,560 a year, or £130 a month. No investment reliably beats that.
-- Shares can fall 20% or more in a year. You owe a debt with a deadline. Money needed within 5 years does not belong in shares.
-- Some banks shrink the free limit each year. NatWest, for example, steps down from £3,250 to £2,250 to £1,250. So only part of your £4,000 may be at risk of interest soon.
-- If the debt is free, savings at about 4.5% would earn roughly £180 a year on £4,000. That is about £15 a month. It is a small gain, so do not take risks for it.
-
-#### Main risks
-- Missing the date when the free period ends. Cost then jumps to about £130 a month.
-- Banks can cut or withdraw an overdraft limit, and it is repayable on demand.
-- Paying off everything leaves £1,000. That is under one month of cover for most people. You may drift back into the overdraft.
-- Savings rates quoted online may include short bonuses. Check them yourself. I could not verify the figures.
-- A Lifetime ISA has a 25% withdrawal charge. On a bad exit you lose about 6.25% of your own money. Rules were under review, so check gov.uk.
-
-#### Honest criticism for the owner
-- You asked a question that depends on a number you have not looked up. Your rate and your free-period end date decide this. Everything else is guesswork.
-- You are treating this £5,000 as the big decision. At 24, your monthly habit matters more. A steady monthly investment over decades will beat this one choice.
-- Having no emergency fund beyond this £5,000 is a weakness. Do not leave yourself with nothing.
-- Clearing the overdraft does not close it. Do not spend back into it.
-
-#### Next steps
-1. Today, in your banking app: write down your rate, your free-period end date and your yearly limit steps. Set a calendar alert one month before the free period ends.
-2. By 1 November 2026: repay the part that will be charged interest within 12 months. Keep the rest in easy-access savings. Aim for 3 months of spending as a buffer, and build it from monthly pay.
-3. Once the overdraft is clear: take any employer pension match from salary. Then start a monthly low-cost global fund, only with money you can leave for 5+ years.
-
-#### Board notes
-- I overruled the Advocate and the Operator on the pension match and Lifetime ISA. Pension contributions come from salary, not from this £5,000, so they do not compete for this cash.
-- I partly overruled the 39% figure applied to the full £4,000. It only applies to the amount above your free limit.
-- Open: the Operator's £200 a month saving is an assumption. We have no income or spending data.
-
-</details>
-
-<details>
-<summary>Single Claude answer</summary>
-
-#### Decision
-Pay off the £4,000 overdraft now, then keep the remaining £1,000 as an emergency buffer. A graduate overdraft is often 0% for a limited time, so check yours first. If it is still 0%, you can keep it a while longer. If it charges interest or the 0% period ends soon, clear it today.
-
-#### Main risks
-- **Interest rate unknown.** Many graduate overdrafts are 0% for 1 to 3 years, then jump to roughly 35-40% EAR. I don't know your bank's terms. Check them.
-- **Paying it off leaves you thin.** £1,000 is a small buffer. A broken laptop or a gap between jobs could push you back into debt.
-- **Investing risk.** Stocks have historically returned about 5-8% a year on average, but not reliably. A 20% fall in a year is normal. That cannot beat a guaranteed saving of 35%+ interest.
-- **Credit score.** Using a lot of your overdraft limit can hurt your credit file. This matters if you want a mortgage later.
-- **Forced removal.** Banks can cut or reduce graduate overdraft limits. You may then have to repay with little notice.
-
-#### Honest criticism for the owner
-You are treating this as "pay off or invest". It is really three separate questions: what does the overdraft cost, do you have an emergency fund, and are you using your tax-free allowances?
-
-You didn't say the interest rate. That one number decides the answer. You also didn't say whether the £5,000 is your only cushion. If it is, spending £4,000 of it feels risky, but the overdraft is a poor safety net. It has a limit, and the bank can change it.
-
-If your overdraft is at 0%, "invest instead" is not crazy. But the better move is usually a savings account paying about 4% (I'm unsure of current rates; check a comparison site). You'd earn interest and could still clear the debt later. Investing money you may need within 1 to 3 years is gambling with your safety net.
-
-Also, if your employer offers a pension match, that beats both options. It is an instant return of 100% or more on what you put in.
-
-#### Next steps
-1. Log into your bank today and find your overdraft rate and the date any 0% period ends. Write both down.
-2. If the rate is above 0% or the 0% ends within 12 months, pay the £4,000 off now. Keep £1,000 in an easy-access savings account.
-3. Check that you're getting your full workplace pension match. After that, build your emergency fund towards 3 months of spending, then consider a Stocks and Shares ISA (£20,000 yearly allowance) for long-term money.
-
-</details>
-
-<details>
-<summary>Board answer, round 1 (original Chair)</summary>
-
-#### Decision
-Do not invest this money. Check your overdraft terms today, then repay any part that will cost interest within 12 months. Keep the rest in easy-access savings as a buffer, and start investing from monthly income once the overdraft is gone.
-
-#### Where the board agreed
-- Everything turns on your 0% end date and the rate after it.
-- After the 0% period, rates near 39% EAR are common. That is about £1,560 a year on £4,000. No investment reliably beats that.
-- Shares can fall 20% in a year, so money with a deadline under 5 years should not go in them.
-- Keep a cash buffer so you do not slide back into the overdraft.
-- Invest only after the overdraft is cleared, and only money you can leave for 5+ years.
-
-#### Where the board disagreed
-- **Pay now or hold in savings.** Skeptic and Operator say pay now unless the 0% lasts a year or more. Scout says repay only the part that will soon cost interest.
-- **Buffer size.** Operator wants about three months of spending. Others accept £1,000.
-- **Lifetime ISA.** Advocate sees upside. Skeptic sees a trap.
-
-#### Where I overrule the board
-- **Scout, Operator and Skeptic priced the whole £4,000 at 39%.** Only the part above the free limit is charged. Your real cost may be much lower.
-- **Advocate and Scout put the pension match in the plan for this cash.** It comes from salary, not your £5,000. It is worth taking, but it is a separate decision.
-- **Operator's £200 a month saving is invented.** I treat it as a target, not a fact.
-- **Return figures (5% to 8% for shares, 4% to 5% for savings) are unsourced or mix real and nominal terms.** Treat them as rough. I am unsure of current rates.
-- **Lifetime ISA.** Not now. Clear the debt first. A bad exit costs you about 6.25% of what you put in. The rules may be under review, so check gov.uk.
-
-#### Honest criticism for the owner
-You asked "debt or invest" without knowing your own overdraft terms. That is the one fact that decides this, and it takes 20 minutes to find. You also assume £5,000 is a lot. Once you repay £4,000, you hold £1,000, under one month of spending for many people. Your bigger edge is monthly saving over decades, not this lump sum. Also, clearing an overdraft does not close it. The risk is borrowing again.
-
-#### Next steps
-1. **Today:** open your banking app. Write down the 0% end date, the post-0% rate, and how the free limit shrinks.
-2. **By 25 Oct 2026:** repay the amount that will be charged interest within 12 months. Put the rest in easy-access savings. Set a calendar alert one month before the 0% ends.
-3. **By 1 Nov 2026:** check for an employer pension match and take it in full. Set up a monthly transfer you can afford, then invest it in a low-cost global fund once the overdraft is £0.
-
-</details>
-
-Full meeting: [statements and cross-examination](meetings/20261018-101809-5432.md)
+The answers and the judge's reasons for this question are withheld for privacy.
 
 ## Question 2
 
@@ -280,7 +176,7 @@ Full meeting: [statements and cross-examination](meetings/20261018-101915-a105.m
 
 ## Question 3
 
-**I own a one-bed buy-to-let flat in Manchester and the service charge has risen sharply two years running. Should I sell or keep renting it out?**
+**Sell or keep a buy-to-let flat after service charge rises? (details withheld for privacy)**
 
 | | Round 1 board | Round 1 single | Round 2 board | Round 2 single |
 | --- | --- | --- | --- | --- |
@@ -290,111 +186,7 @@ Full meeting: [statements and cross-examination](meetings/20261018-101915-a105.m
 | Clarity | 7.0 | 8.0 | 7.5 | 8.0 |
 | **Winner** | Board | | Board | |
 
-Judge, round 2 (A = Board, B = Single): "A covers the risks that matter, including disclosure duties, Section 20 works, Building Safety Act protection, mortgage refix and the problem of selling with a tenant in place, and flags its uncertainties, whereas B's advice to sell before a works bill appears edges toward concealment and it misses several of these risks."
-
-Judge, round 1 (A = Board, B = Single): "A gives a clearer conditional plan with dated steps and flags the key legal risks, including honest disclosure of known works, Building Safety Act protection and selling with a sitting tenant, while B's yield formula leaves out mortgage interest and tax and its advice to sell before a works bill is issued edges toward a disclosure problem."
-
-<details>
-<summary>Board answer, round 2 (reworked Chair)</summary>
-
-#### Decision
-Do not sell yet, and do not commit to keeping it either. Spend the next four to six weeks getting your real figures. Sell only if your yield after tax is below about 4% (or below what your sale money could safely earn elsewhere), or if a major works bill is pending. Otherwise keep it and fight the charge.
-
-#### Why
-- Nobody can call this without your numbers. Two sharp rises usually have a cause: insurance, a new managing agent, or repair backlog. The cause decides everything.
-- Rent will not rescue you. The ONS average for a Manchester one-bed is about £993 a month (June 2026). A £50 a month charge rise is about 5% of that.
-- Selling is costly and slower than it looks. Agent and legal fees may run 1.5% to 3% of the price. Capital gains tax is 18% or 24% above a £3,000 allowance.
-- Section 21 no-fault eviction reportedly ended on 1 May 2026. I have not seen GOV.UK confirm this. Selling with a tenant in place is now harder. Selling to another landlord with the tenant in place may be the easiest route. That is an inference, not a verified fact.
-
-#### Main risks
-- **Section 20 works bill.** Works over £250 per flat need consultation. A bill could be thousands of pounds.
-- **Cladding or fire safety costs.** The Building Safety Act may protect some leaseholders. I am unsure whether you qualify.
-- **Mortgage reset.** If your fix ends soon, the flat may go cash negative.
-- **Weaker resale.** Buyers and lenders look hard at high service charges. Waiting could lower your price.
-- **Disclosure.** If you sell, you must answer buyers' solicitors honestly about known works. Hiding a notice risks a collapsed sale or a misrepresentation claim.
-- **Rent rises.** The tenant can challenge them at tribunal, so a reset to market is not guaranteed.
-
-#### Honest criticism for the owner
-You asked sell or keep without giving a single figure. That is a guess, not a decision. You also seem to treat the charge as fixed. It may be challengeable at the First-tier Tribunal under section 27A, but outcomes are mixed. Do not count on a win. Also, you did not say if the flat is let now or when the tenancy began. That date strongly affects how you can sell.
-
-#### Next steps
-1. **By 25 Oct:** Gather rent, 3 years of service charge, ground rent, mortgage balance, rate, fix end date and early repayment charge, and purchase price.
-2. **By 1 Nov:** Email the managing agent in writing for 3 years of accounts, budget, reserve fund balance and any planned or notified major works.
-3. **By 15 Nov:** Get two agent sale valuations, one rent valuation, and a capital gains tax estimate from an accountant. Then compare after-tax yield with what the net sale money would earn. Decide by end of November.
-
-#### Board notes
-- I overruled the Skeptic's "sell before buyers see it". It is risky and may be unlawful in effect.
-- I did not adopt the 4% threshold as fact. Operator and Skeptic gave it without a source. Treat it as a rough guide against current cash rates, which nobody checked.
-- Still open: the Ground 1A sale rules differ between sources. Check GOV.UK or a solicitor before planning a vacant sale.
-
-</details>
-
-<details>
-<summary>Single Claude answer</summary>
-
-#### Decision
-Keep it for now, but only if the numbers below check out in the next 4 to 6 weeks. If your net yield after the new service charge is under about 4%, or the rises look set to continue, sell. I can't decide this fully without your figures, so treat this as a conditional call.
-
-#### Main risks
-- **Service charge keeps climbing.** Two big rises in a row often point to a cause such as major works, insurance costs or a poorly run block. If it is major works, a one-off bill of several thousand pounds could follow.
-- **Weak resale.** Buyers and lenders look hard at high service charges and cladding or fire safety (EWS1) issues. A high charge can cut your sale price or shrink the pool of buyers.
-- **Tax and rules.** Mortgage interest is only a 20% tax credit for higher-rate landlords. The Renters' Rights Act changes tenancies (no fixed terms, no Section 21). I am not certain of every commencement date, so check them.
-- **Capital gains tax.** If you sell, you may owe CGT on any gain. Rates for residential property are 18% or 24%, and the annual exempt amount is small (£3,000).
-- **Void months.** Each empty month costs you one-twelfth of annual rent.
-
-#### Honest criticism for the owner
-- You gave me no numbers. Without rent, charge, mortgage rate, purchase price and current value, "sell or keep" is a guess.
-- You are reacting to one cost line. Judge the whole return: rent minus service charge, ground rent, insurance, agent fees (often 10% to 15% of rent), repairs and mortgage interest.
-- You may be treating the service charge as fixed. In many cases you can challenge it. Ask for the service charge accounts, and you can take unreasonable charges to the First-tier Tribunal (Property Chamber). Many owners never ask.
-- Selling is not free. Expect agent fees of 1% to 1.5% plus VAT, legal fees, and possible CGT. Selling now into a block with a rising charge may also mean selling at a discount.
-- Sunk cost cuts both ways. What you paid is irrelevant. The question is whether this money earns more here than elsewhere.
-
-#### Next steps
-1. **Work out your net yield this week.** Use: (annual rent minus service charge, ground rent, insurance, agent fees, repairs and a 1-month void allowance) divided by the flat's current market value, not your purchase price. Get a valuation from 2 or 3 Manchester agents, which is free.
-2. **Ask the managing agent or freeholder for the last 3 years of service charge accounts and the budget.** Also ask about planned major works and any Section 20 notices. Check whether the rise is one-off or structural.
-3. **If net yield is below about 4%, or major works are likely, get a CGT estimate and sell-side quotes before December.** Selling before a works bill is issued tends to be better than after, because buyers' solicitors will ask about it. Speak to an accountant for the CGT figure.
-
-</details>
-
-<details>
-<summary>Board answer, round 1 (original Chair)</summary>
-
-#### Decision
-Do not sell yet, and do not commit to keeping it either. Spend about four weeks getting the real figures. Then sell if net yield after all costs and tax is below about 4%, or if a major works bill is pending. Otherwise keep it and challenge the charge.
-
-#### Where the board agreed
-- No one can give a verdict without your rent, mortgage, service charge history and tax band.
-- Get three years of service charge accounts and any notice of major works first.
-- Compare net yield after tax with what the sale money would earn elsewhere.
-- Section 20 consultation applies above £250 per flat. CGT is 18% or 24% with a £3,000 allowance.
-- A charge can be challenged at the First-tier Tribunal under section 27A, but outcomes are mixed.
-
-#### Where the board disagreed
-- **Rent rise:** Advocate leans on resetting rent to market. Skeptic, Operator and Scout note the tenant can challenge it.
-- **Tribunal:** Advocate is optimistic. Operator says most rises are reasonable. Scout's three cases show a mix.
-- **Timing:** Operator wants a January 2027 listing. Others want the figures first.
-- **Selling with a tenant:** Sources conflict on Ground 1A notice and timing rules.
-
-#### Where I overrule the board
-- **Skeptic, "sell before buyers see it":** Wrong and risky. Sellers must answer solicitors' enquiries about known works honestly. Concealing a notice risks a collapsed sale or a misrepresentation claim.
-- **Skeptic, cladding:** The post-2000 claim is unsourced. The Building Safety Act may protect many leaseholders from cladding costs. I am unsure whether you qualify.
-- **Operator, "after-tax yield":** Its 4.0% is before income tax and ignores the mortgage. It is not like for like with cash.
-- **Operator, January 2027 and "sell vacant":** Both are arbitrary. Vacant possession is now hard to get.
-- **Advocate, "leaseholders win more than expected":** No evidence was given.
-- **All, the 4% line:** It is a rule of thumb, not a fact. Set your own line from your alternatives, and count growth and sale costs of roughly 2% to 3% of the price.
-- **Gap:** Nobody asked whether the flat is let now, or when the tenancy began.
-
-#### Honest criticism for the owner
-You gave no numbers, so the board could only offer a framework. "Sharp rises" is a feeling until you have the accounts. You may also be reacting to the cost without checking whether your rent is below market (about £993 a month for a Manchester one-bed, per ONS, unverified by me). The Section 21 end date of 1 May 2026 comes from secondary sources, so confirm it on GOV.UK.
-
-#### Next steps
-1. **By 25 Oct:** Email the managing agent for three years of accounts, the budget, sinking fund and planned works. Ask in writing.
-2. **By 8 Nov:** Get two sale valuations, one rent valuation, your mortgage redemption figure and early repayment charge, and a CGT estimate from an accountant (roughly £150 to £300 all in).
-3. **By 15 Nov:** Run net yield after tax and sale costs, and note the tenancy start date. Sell if it fails your line or works are pending. Otherwise keep, raise rent through the proper notice and challenge unclear costs.
-
-</details>
-
-Full meeting: [statements and cross-examination](meetings/20261018-102020-9281.md)
+The answers and the judge's reasons for this question are withheld for privacy.
 
 ## Question 4
 
@@ -511,7 +303,7 @@ Full meeting: [statements and cross-examination](meetings/20261018-102132-3637.m
 
 ## Question 5
 
-**My employer matches pension contributions up to 5%. Should I put in more than 5% while I'm saving for a house deposit?**
+**Pay more into a pension while saving for a home? (details withheld for privacy)**
 
 | | Round 1 board | Round 1 single | Round 2 board | Round 2 single |
 | --- | --- | --- | --- | --- |
@@ -521,110 +313,7 @@ Full meeting: [statements and cross-examination](meetings/20261018-102132-3637.m
 | Clarity | 6.0 | 8.0 | 8.0 | 7.5 |
 | **Winner** | Board | | Board | |
 
-Judge, round 2 (A = Board, B = Single): "A gives a sharper, more actionable plan and covers the key LISA risks, including the 12-month rule, the 25% withdrawal penalty and the price cap, while B never mentions the penalty and its advice to open by April 2027 ignores the 12-month clock, though B does flag its UK assumption, which A does not."
-
-Judge, round 1 (A = Board, B = Single): "A covers the risks that matter, including the LISA's 12-month clock, first-time-buyer rule and the cash cushion, but its analyst commentary adds clutter. B reads more cleanly but misses the 12-month timing and wrongly suggests waiting until April 2027 to open a LISA."
-
-<details>
-<summary>Board answer, round 2 (reworked Chair)</summary>
-
-#### Decision
-Pay exactly 5% into the pension to get the full match. Put your next deposit money into a Lifetime ISA (LISA), up to £4,000 a year, if you are under 40, a first-time buyer, and the home costs £450,000 or less. Do not pay more than 5% into the pension while the deposit is the goal, unless you pay 40% tax and your deposit is already covered.
-
-#### Why
-- The match is an instant return on your own contribution. Nothing else beats it. This assumes the employer matches pound for pound. I do not know your scheme.
-- Pension money is locked until age 55, rising to 57 from 6 April 2028. You cannot use it for a deposit.
-- A LISA gives a 25% bonus, up to £1,000 a year. That equals basic-rate pension relief, but you can reach it for a first home.
-- Extra pension only wins clearly at higher rates. At 40% tax, £1,000 in the pension costs about £600. Between £100,000 and £125,140 income, the effective relief is about 60%.
-
-#### Main risks
-- **LISA 12-month rule.** An account opened today qualifies in October 2027. Buying sooner means you cannot use it.
-- **LISA penalty.** Withdrawing for anything else costs 25%. On £5,000 you get £3,750, which is £250 less than you paid in. A failed purchase triggers this.
-- **Price cap.** A home over £450,000 rules out the LISA. This is common in London and the South East.
-- **Reform.** The LISA may change. I found no final rules, so check gov.uk.
-- **No cash cushion.** Locked money plus no emergency fund can force you into debt.
-
-#### Honest criticism for the owner
-You gave us no age, salary, tax band, target price, purchase date, or monthly surplus. Those decide the answer. Without them, this is a default plan, not a tailored one. You may also be assuming "match up to 5%" means doubling your money. Check your scheme rules and ask HR whether the match rises if you pay more. That could change this advice.
-
-#### Next steps
-1. This week: check your payslip shows at least 5%. Ask HR about the match rules and salary sacrifice.
-2. This month: open a LISA if eligible, since the 12-month clock starts at opening. Keep about 3 months of spending in easy-access cash.
-3. Then pay about £333 a month into the LISA (£4,000 a year, £5,000 with bonus). Review in April 2027, when the new tax year starts.
-
-#### Board notes
-- Overruled Scout's "don't pay extra into your pension" as too absolute. It does not hold for higher-rate or £100,000 to £125,140 earners.
-- Overruled Operator's "£500 a month" example. The £4,000 cap means £333 a month. Operator's "cash first" order stands, but 3 months of cash is common advice, not a rule.
-- Open: whether the LISA bonus will change to payment only at purchase. One source suggested it, but it looked like a test site, so I treat it as unconfirmed.
-
-</details>
-
-<details>
-<summary>Single Claude answer</summary>
-
-#### Decision
-Contribute at least 5% to get the full match, but do not go above it while you save for the deposit. Put any extra money into a Lifetime ISA (if you are in the UK and eligible) or a plain cash savings account. Pension money is locked until about age 57, so it is the wrong place for cash you need in the next few years.
-
-#### Main risks
-- **Locked money.** Extra pension contributions are normally inaccessible until minimum pension age. This is 55 now and rises to 57 in April 2028. You cannot use them for a deposit.
-- **Losing the match.** If you drop below 5%, you give up free money. A 5% match on a £40,000 salary is £2,000 a year.
-- **Deposit delay.** Every extra £100 in the pension is £100 less toward the house. A delay can cost you if prices or rents rise.
-- **Tax rules.** I am assuming you are in the UK because you said "pension" and "deposit". If you are not, the details change. Check the current rules for your country.
-- **Market risk.** Money in a pension is usually invested in shares. It can fall in value, but that matters less over decades than over a few years.
-
-#### Honest criticism for the owner
-- You asked about "more than 5%" without telling me your salary, your deposit target, your timeline or your country. The answer depends on all four, so my advice is general.
-- You may be treating the pension and the house as one pot. They are two goals with very different timelines.
-- Tax relief on pension contributions is a real pull, especially if you pay higher rate tax (40% in England). It can look better than a Lifetime ISA's 25% bonus. But it only helps if you can wait decades. I am unsure whether it would beat the alternatives for you. It depends on your tax band.
-- Check that your employer's match is really "5% from you for 5% from them". Some schemes match less, or in tiers. Confirm it in writing.
-- One exception: if you earn just above a tax threshold, for example £100,000 where the personal allowance starts to shrink, extra pension contributions can be unusually valuable. Ask whether that applies to you.
-
-#### Next steps
-1. Check your payslip and scheme rules this week. Confirm you are contributing the full 5% and what your employer adds.
-2. Work out your deposit target and date. For example, £30,000 in 4 years means saving £625 a month. Then see how much of your pay is left after the 5%.
-3. Open a Lifetime ISA by the next tax year start (6 April 2027) if you are 18 to 39, buying a first home under the price cap (£450,000). Compare it with a cash ISA. The government adds 25% on up to £4,000 a year, which is up to £1,000. Check current limits before you commit.
-
-</details>
-
-<details>
-<summary>Board answer, round 1 (original Chair)</summary>
-
-#### Decision
-Take the full 5% match, and do not pay more than 5% into the pension while the house deposit is the goal. Put extra savings into a Lifetime ISA (LISA) if you qualify, and keep a cash cushion alongside it. Revisit extra pension payments after you buy, or sooner if you pay 40% tax.
-
-#### Where the board agreed
-- The match is the first priority. Never drop below 5%.
-- Pension money is locked until age 55, rising to 57 on 6 April 2028. It cannot fund a deposit.
-- For most basic-rate taxpayers, a LISA beats extra pension for a deposit. Both give a 25% boost, but the LISA is reachable.
-- Higher-rate taxpayers and people near £100,000 income have a stronger case for extra pension.
-
-#### Where the board disagreed
-- Scout said "don't pay extra into your pension" outright. Advocate and Skeptic allowed exceptions.
-- Operator put the LISA first. Operator's review put a cash cushion first. Skeptic stressed the cushion.
-- Whether the higher-rate "claim relief, then save the refund" idea works. Nobody researched it.
-
-#### Where I overrule the board
-- **Operator's numbers:** "£500 a month" into a LISA is wrong. The £4,000 cap means £333 a month. The 3, 6 and 12 month figures do not fit £500.
-- **Operator's 12-month claim:** it is right that a LISA opened today qualifies from October 2027. But Operator's list of dates is invented scheduling, not fact. Treat it as a suggestion.
-- **"Free money" and "100% return":** this assumes your employer matches pound for pound. The owner never said so. Check your scheme.
-- **Scout's absolute rule:** too strong. It conflicts with the higher-rate point.
-- **Skeptic's "delay costs more than tax relief":** a guess with no numbers.
-- **Scout's `develop.` source** on bonus timing is unreliable. I treat LISA reform as unconfirmed.
-- **Missed by everyone:** the LISA is for first-time buyers only. It also fails if the home costs over £450,000 or you are 40 or older. Scottish tax bands differ.
-
-#### Honest criticism for the owner
-You gave no age, salary, house price, location or purchase date. Those decide this answer, and I am guessing without them. You also may be treating "saving for a house" and "saving for a pension" as equal goals. Only one can be spent on a house. If you buy within 12 months, a new LISA may not help in time. Also, a cash cushion comes before either pot, and I do not know if you have one.
-
-#### Next steps
-1. Check your payslip and scheme rules. Confirm you contribute at least 5%, how the match works, and whether it rises if you pay more.
-2. Work out whether you qualify for a LISA: first-time buyer, under 40, home at £450,000 or less. If yes, open one now to start the 12-month clock, and pay in up to £333 a month.
-3. Confirm you hold about 3 months of spending in easy-access cash. Check gov.uk for current LISA reform rules before committing large sums.
-
-I am unsure of: LISA reform timing, the 2029 salary sacrifice cap details, and your tax band.
-
-</details>
-
-Full meeting: [statements and cross-examination](meetings/20261018-102235-36c4.md)
+The answers and the judge's reasons for this question are withheld for privacy.
 
 ## Question 6
 
@@ -1697,7 +1386,7 @@ Full meeting: [statements and cross-examination](meetings/20261018-103226-8327.m
 
 ## Question 15
 
-**Our five-person events team runs on spreadsheets. Should we move to a CRM like HubSpot?**
+**Should a small team move from spreadsheets to a CRM? (details withheld for privacy)**
 
 | | Round 1 board | Round 1 single | Round 2 board | Round 2 single |
 | --- | --- | --- | --- | --- |
@@ -1707,105 +1396,4 @@ Full meeting: [statements and cross-examination](meetings/20261018-103226-8327.m
 | Clarity | 6.0 | 8.5 | 7.0 | 8.5 |
 | **Winner** | Single | | Board | |
 
-Judge, round 2 (A = Board, B = Single): "A gives a measurable pilot plan with stop rules, flags its uncertain cost figures, and covers legal data-privacy risk; B is clearer but omits privacy risk and loosely calls Airtable and Monday.com event-specific tools."
-
-Judge, round 1 (A = Board, B = Single): "B gives a clearer, self-contained plan that tests whether the pain is about contacts or logistics and compares HubSpot with an alternative tool, while A is cluttered with analyst back-and-forth, though A alone flags the privacy and consent risk."
-
-<details>
-<summary>Board answer, round 2 (reworked Chair)</summary>
-
-#### Decision
-Do not buy a paid CRM yet. Run a 30 to 60 day pilot on HubSpot's free CRM with one event and one named owner. Commit money only if the pilot beats the spreadsheets on problems you can name and measure. Decide by mid-January 2027.
-
-#### Why
-- You have not named the problem. A CRM fixes contact and follow-up pain. It does not fix logistics such as run-of-show, vendor budgets or seating. If most of your pain is logistics, HubSpot will disappoint.
-- The pilot is cheap and reversible. The free tier costs $0 in licences. The real cost is staff time, which the board estimates at 40 to 80 hours in the first quarter. That figure is a guess.
-- Price depends on the tier. Reported figures are about $900 to $1,200 a year for Starter (5 seats) and about $7,500 in year one for Professional Sales Hub with onboarding. These come from third-party blogs that disagree, so treat them as unconfirmed.
-- Adoption is the most likely failure. Two systems running side by side is how this usually dies.
-
-#### Main risks
-- **Money:** Paid tiers with automation add onboarding fees ($1,500 or more reported), annual commitments, and contact-based charges. Get a written quote for 5 seats.
-- **Legal:** Attendee data falls under GDPR, CCPA or similar rules depending on where guests live. Check consent records and deletion process before importing. Confirm with a lawyer. I am not one.
-- **Timing:** A rollout during a live event can cause a failure that costs more than the software. December holidays also slow the pilot.
-- **Fit:** The free tier may lack the tasks or pipelines you need, which could make the trial fail for the wrong reason. Unverified.
-- **Data:** Dirty spreadsheets give a dirty CRM. Budget 20 to 40 hours of cleanup.
-
-#### Honest criticism for the owner
-You asked "should we move?" without saying what hurts. That is the weakest part of this question. Nobody on the board knows your event count, contact count, next event date, or whether you have lost sponsors or missed follow-ups. Without that, any answer is partly a guess. Also, "free" is not free. Your team's time is the main cost, and a tool will not fix a messy process.
-
-#### Next steps
-1. This week: Write down 2 or 3 concrete problems and log lost hours for two weeks (15 minutes a day per person). Count missed follow-ups too. If the loss is small, fix the spreadsheets instead. The board did not agree on a hard hour threshold.
-2. Weeks 3 to 4: Name one owner with about 5 hours a week. Import one past event into the free tier. Check that one person attending three events shows three records. Request a 5-seat written quote and one price check on an events-specific tool.
-3. Pilot only if no major event falls in the window. Set a cutoff date after which old sponsor and contact sheets go read-only. Set a stop rule, for example under 80% of follow-ups logged by day 30.
-
-#### Board notes
-- I overruled the Operator's fixed 8 hours a week rule. It is unsupported, and a missed sponsor renewal is a cost that hours do not capture. Use it as a rough guide only.
-- I overruled the Advocate's "train everyone in a week" and "event registration" claims. Habit change takes 4 to 8 weeks, and HubSpot is not a full event platform.
-- Open: whether an events-specific tool fits better than HubSpot. No one compared them.
-
-</details>
-
-<details>
-<summary>Single Claude answer</summary>
-
-#### Decision
-Not yet. Spend two weeks finding out what is actually breaking in your spreadsheets, then move only if the pain is about contacts and follow-ups. If it is, start on HubSpot's free tier. Do not buy a paid plan until the free tier proves too small.
-
-#### Main risks
-- **Wrong tool type.** HubSpot is built for sales pipelines and contacts. Events work is mostly tasks, budgets, vendors, run-of-show and registrations. A CRM may fix the contact side and leave the rest in spreadsheets.
-- **Cost creep.** The free tier is limited, and paid tiers can climb fast once you need automation or reporting. I have not checked current 2026 prices, so verify them on hubspot.com before you plan a budget.
-- **Adoption failure.** With five people, one person ignoring the tool is 20% of your data gone. A half-used CRM is worse than a spreadsheet everyone trusts.
-- **Migration pain.** Messy sheets with duplicate names, mixed formats and free-text notes will import badly. Expect 1 to 3 days of cleanup.
-- **Event season timing.** Switching in the middle of a live event cycle can cause missed follow-ups.
-
-#### Honest criticism for the owner
-- You asked about a tool before naming a problem. "We run on spreadsheets" is not a problem. Lost leads, double-booked vendors and slow reporting are problems.
-- You may be treating software as the fix for a process gap. If nobody owns the data or updates it on a schedule, a CRM will go stale the same way.
-- You did not say how big the pain is. If the sheets work, five people may not need a CRM at all.
-- You are comparing HubSpot to spreadsheets only. Event-specific tools (for example Cvent, Airtable, or Monday.com) may fit better. I am unsure which suits you, because I do not know your event types, volume or budget.
-
-#### Next steps
-1. **This week:** ask each of the five people for their top three spreadsheet frustrations. Count how many involve contacts, sponsors or attendees versus tasks and logistics.
-2. **Next two weeks:** if contacts dominate, run a free HubSpot trial with one upcoming event and two people. Import about 200 real contacts, not test data. Set a pass mark, such as "everyone logs follow-ups within 24 hours."
-3. **By the end of the trial:** compare it with one project-style tool, such as Airtable, on the same event. Pick one, name one owner for data quality, and set a cutover date between events.
-
-</details>
-
-<details>
-<summary>Board answer, round 1 (original Chair)</summary>
-
-#### Decision
-Do not buy a paid HubSpot plan yet. Run a free-tier pilot on one real event, with one named owner, and decide by mid-January 2027. Buy only if the pilot beats the spreadsheets on problems you can name.
-
-#### Where the board agreed
-- Start with a free trial, not a purchase.
-- Name one owner with protected time.
-- Set a hard cutoff date for the old spreadsheets.
-- HubSpot manages contacts and deals. It does not replace run-of-show, vendor, or budget sheets.
-- Real cost is staff time, mainly data cleanup.
-- Prices are unverified and must be confirmed with HubSpot.
-
-#### Where the board disagreed
-- **Entry test:** Operator wants 8 lost hours a week. Skeptic says that line is invented and too high. Skeptic wants named problems instead.
-- **Upside:** Advocate stresses sponsor revenue and reuse across events. Operator and Skeptic want a baseline before crediting it.
-- **Timing:** Operator's plan puts the pilot in December. Skeptic flags the holiday slowdown.
-- **Alternatives:** Scout, Skeptic and Operator want an events tool compared. Advocate leans toward HubSpot.
-
-#### Where I overrule the board
-- **Operator's 8-hour threshold:** It has no basis. A Starter plan costs about $1,200 a year by the board's figures. Break-even is far below 8 hours a week. I replace it with: name 2 or 3 concrete problems and log the hours for two weeks.
-- **Advocate's "train everyone in a week":** Unsupported, and it contradicts the 4 to 8 week dip Advocate admits.
-- **Advocate's "import only active sponsors":** This forces two live systems. Import everything tied to the pilot event, or accept the drift risk knowingly.
-- **Operator's December pilot:** Holidays make it a weak test. Check the event calendar first. If an event falls inside the window, delay.
-- **Everyone's missed gap:** Privacy. Moving attendee data needs a consent and retention check. I am not a lawyer, so confirm it.
-
-#### Honest criticism for the owner
-You asked "should we move?" without saying what hurts. Nobody on the board could size the problem, because you gave no event count, contact count, or example of a lost sponsor or missed follow-up. "We run on spreadsheets" is not a problem. It is a description. If your real pain is logistics, a CRM will disappoint you. Also, the board's dollar figures are secondhand, and I cannot confirm them either.
-
-#### Next steps
-1. **This week:** Write down 2 or 3 specific problems. Log lost hours for two weeks (by 1 November). Note your next event dates.
-2. **Early November:** Get a written five-seat quote from HubSpot. Check free-tier limits. Get one price check on an events tool such as Eventbrite or Cvent.
-3. **If no event falls in the window:** Pick an owner, give them about 5 to 10 hours a week (an estimate), and run the free pilot on one event. Set a kill rule, such as under 80% of follow-ups logged by day 30. Set the go or no-go date for mid-January 2027.
-
-</details>
-
-Full meeting: [statements and cross-examination](meetings/20261018-103326-5e51.md)
+The answers and the judge's reasons for this question are withheld for privacy.
