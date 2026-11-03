@@ -1,6 +1,6 @@
 # Blind test: every question and answer
 
-Fifteen questions, each answered by a single Claude call and by a full Boardroom meeting, then judged blind by Claude Opus. Method and summary: [benchmark/README.md](README.md) and the main [README](../README.md#does-a-board-beat-one-claude).
+Fifteen questions, each answered by a single Claude call and by a full Boardroom meeting, then judged blind by Claude Opus. Method and summary: [benchmark/README.md](README.md) and the main [README](../README.md#earlier-rounds).
 
 - **Round 1** judged the board's original resolution. **Round 2** re-ran only the Chair on the same meetings with the reworked write-up; the members' statements and the single answers are identical in both rounds.
 - Scores are out of 10, averaged over two judgements with the order swapped. A win only counts when both orders agree.

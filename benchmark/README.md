@@ -1,6 +1,6 @@
 # Blind test: board vs single Claude
 
-Results are summarised in the main [README](../README.md#does-a-board-beat-one-claude).
+Results are summarised in the main [README](../README.md#does-it-work).
 
 ## Method
 
