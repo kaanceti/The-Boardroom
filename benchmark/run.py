@@ -24,7 +24,7 @@ BASE_FORMAT = (
 
 def limited(text: str) -> bool:
     t = (text or "").lower()
-    return "limit" in t and ("usage" in t or "rate" in t or "reached" in t)
+    return "limit" in t and ("usage" in t or "rate" in t or "reached" in t or "hit your" in t)
 
 def main():
     results = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}

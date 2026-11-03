@@ -1,0 +1,109 @@
+{
+  "id": "20261102-183345-9da0",
+  "files": [],
+  "outputs": [],
+  "names": {},
+  "absent": [],
+  "feedback": {},
+  "models": {},
+  "title": "My company wants everyone in the office four days a week instead of two. Should…",
+  "agenda": "My company wants everyone in the office four days a week instead of two. Should I accept it, push back, or start looking for another job?",
+  "context": "",
+  "mode": "full",
+  "created": "2026-11-02T18:33:45",
+  "stage": "done",
+  "statements": [
+    {
+      "id": "skeptic",
+      "name": "Skeptic",
+      "speciality": "Risk and failure analysis",
+      "model": "opus",
+      "status": "done",
+      "ok": true,
+      "text": "The usual answer: push back politely, accept if they hold firm, and quietly start job hunting.\n\nI argue for the cautious end. Accept for now, change nothing visible, and gather facts before you spend any leverage. You gave no hint of a preferred answer, so there is no lean to correct.\n\n**What I do not know**\n\nYour contract wording, your length of service, your commute cost, your caring duties, your sector, and whether this mandate is firm or a trial. Each one could flip this advice.\n\n**Risks, ranked by likelihood and impact**\n\n1. **Quitting before you have an offer.** High likelihood of regret, high impact. UK hiring has been soft through 2025 and 2026, and fully remote or two-day roles draw far more applicants. I am unsure of your sector's numbers. The rule is simple: resign only with a signed offer in hand.\n\n2. **Pushing back alone and getting labelled.** Medium likelihood, medium to high impact. Return-to-office mandates are often a quiet headcount tool. Firms use them to encourage leavers without paying redundancy. Visible resisters can become the first names on a later list. I cannot prove your employer intends this, but the pattern is common enough to plan for.\n\n3. **Assuming the law protects you.** Medium likelihood, high impact.\n   - Since 6 April 2024 you can make a statutory flexible working request from day one.\n   - You can make up to 2 requests a year. The employer must consult you and decide within 2 months.\n   - But they only need one of 8 business reasons to refuse, and that bar is low.\n   - If your contract names two office days, they need your consent to change it. If hybrid is only a \"policy\", they can usually change it on notice.\n   - Constructive dismissal claims are hard to win. They also need 2 years' service today. Reforms under the Employment Rights Act 2025 may shorten that, but I am not certain of the timing.\n\n4. **Hidden cost of accepting.** High likelihood, low to medium impact. Two extra days at, say, £15 to £25 in fares and food comes to about £1,400 to £2,300 a year after tax. Add roughly 80 to 150 hours of commuting a year. If childcare or health is involved, the impact becomes high, and you should say so now.\n\n5. **The mandate softens anyway.** Medium likelihood. Many firms announce four days and then tolerate three. Reacting early to a policy that drifts back would waste your leverage.\n\n**Doing nothing visible this month**\n\n1. Read your contract and the policy wording.\n2. Log your real extra costs and hours for 4 weeks.\n3. Check whether colleagues are actually complying.\n4. Update your CV quietly. Do not resign.\n\nThen decide with data. If there is a genuine need, such as caring duties or a disability, a formal written flexible working request is far safer than informal complaint. A disability need also triggers the duty to make reasonable adjustments under the Equality Act 2010.\n\n**What would have to be true for leaving to be right**\n\n- You hold a written offer at equal or better pay and flexibility.\n- The commute cost or caring burden is material and proven over a month.\n- The firm refused a formal request with a weak reason.\n\nBottom line: Accept for now without protest, gather 4 weeks of facts, update your CV quietly, and only push back formally or leave with evidence or an offer in hand.",
+      "seconds": 20.9
+    },
+    {
+      "id": "advocate",
+      "name": "Advocate",
+      "speciality": "Opportunity and upside",
+      "model": "haiku",
+      "status": "done",
+      "ok": true,
+      "text": "The usual answer: accept it, or push back and ask for two days.\n\nI think the bolder move is to accept the principle and negotiate the terms. Four office days can make you the person who gets things done in person, which is a position of strength if you use it.\n\nYour advantages:\n- If you do good work, the company has more reason to keep you than to push you out. Time in the office also builds visibility.\n- You can ask for things in return: fixed office days, such as Tuesday to Thursday plus one more; flexible start and finish times; or a review of your pay or role.\n- You can offer to lead the rollout for your team. That makes you the person who shapes the policy, not the person who absorbs it.\n\nWhere the upside is limited, and what I do not know:\n- I do not know your commute. Two extra days at 1 hour each way is 4 hours a week, about 200 hours a year over 50 working weeks. At 30 minutes each way, it is about 100 hours. Work out your real figure before you decide.\n- I do not know your contract. In the UK, changing where you work can be a contract change. Check whether your contract names a place of work or allows home working. Under the Employment Relations (Flexible Working) Act 2023, which took effect on 6 April 2024, you can make a formal flexible working request from day one. The employer must consider it and reply within two months. This is general information, not legal advice.\n- I do not know the costs. Extra travel means season tickets, fuel, parking and lunches. Get your own figures.\n- I do not know whether the policy is firm or a trial. Ask.\n\nOn looking for another job: I would not start there. But testing the market quietly, for a few hours, tells you what you are worth. That strengthens your negotiating position whatever you decide.\n\nBottom line: Do not simply accept or refuse. Agree to the principle, put your terms on the table, and offer to lead the change. Check your contract first.",
+      "seconds": 11.5
+    },
+    {
+      "id": "operator",
+      "name": "Operator",
+      "speciality": "Execution, numbers and timelines",
+      "model": "sonnet",
+      "status": "done",
+      "ok": true,
+      "text": "**Missing facts, which change the answer:** your commute time and cost, your contract wording, your length of service, your salary, and whether the rule applies to everyone. I assume 1 hour each way and £15 a day all-in. Replace these with your real figures.\n\n**What the change costs**\n- Two extra days a week is about 90 days a year after leave and bank holidays.\n- Time: 90 days x 2 hours = 180 hours a year. That is about 4.5 working weeks.\n- Money: 90 x (£15 travel + £8 food) = about £2,070 a year after tax. At basic-rate tax, that is about £2,600 of gross pay. Range: £1,600 to £3,500 depending on your commute.\n- Childcare or care costs would come on top. Add them if they apply.\n\n**Order of steps**\n1. By Fri 6 Nov (1 hour): read your contract and offer letter. Look for \"place of work\", \"homeworking\" and any variation clause. An employer usually cannot change a contractual term without your consent. If the policy is only a guideline, you have more leverage.\n2. By Fri 13 Nov (2 hours): write down your real cost and hours. Add any evidence of output while working two days in the office.\n3. By Fri 20 Nov (1 meeting): ask your manager for a specific compromise, such as three days, or four days with a start time that avoids peak fares. Do not argue in general terms.\n4. Same weeks, in parallel (3 hours a week): update your CV and set up job alerts. This costs nothing and weakens the risk of being stuck.\n5. By Fri 18 Dec: decide. If the answer is a flat no and the cost is above what you will tolerate, start applying properly (5 hours a week).\n\n**Realistic outcomes**\n- **Accept:** £0 upfront. At 3 months you have lost about £520 and 45 hours. At 6 months, £1,040 and 90 hours. At 12 months, £2,070 and 180 hours.\n- **Push back:** costs about 4 hours of effort. At 3 months you know the answer. I would not expect better than a 30 to 40% chance of a real concession, but that is a guess. Many firms hold the line on a policy change that affects everyone.\n- **Leave:** most searches take 2 to 4 months, plus 1 to 3 months' notice. Expect a start date between month 3 and month 7. At 12 months you might be settled, but I am unsure how many comparable roles are fully hybrid. Many advertised roles now ask for three or more office days. Check this before you commit.\n\n**What will not work:** quitting before you have an offer, unless you have at least 3 months of expenses saved. Do you? Say so.\n\n**Legal points I am unsure about:** the Employment Rights Act 2025 is changing flexible working rules and unfair dismissal qualifying periods. I do not know which parts are in force on today's date. Check gov.uk or ACAS before you rely on any of it.\n\nBottom line: Do not decide today. Spend the next two weeks on the contract check, your real cost figure and one specific counter-offer, while quietly searching 3 hours a week. Accept only if the extra cost stays under roughly £2,000 a year and you can live with 180 hours. Otherwise, leave once you have an offer.",
+      "seconds": 24.6
+    },
+    {
+      "id": "scout",
+      "name": "Scout",
+      "speciality": "Evidence and fact-checking",
+      "model": "sonnet",
+      "status": "done",
+      "ok": true,
+      "text": "Statement to the board\n\nI can't tell what the owner is hoping for, so I judged the three options neutrally.\n\n**What the evidence says**\n\n- Four days is not unusual. An Owl Labs survey of UK hybrid workers found 41% go in three days a week and 27% go in four. ([HRreview](https://hrreview.co.uk/hr-news/strategy-news/office-mandates-more-about-appearance-than-purpose/377999)) This is 2025 data, so it is indicative only.\n- Employer direction is toward more office time. An Indeed survey says 57% of UK employers plan full-time office attendance within two years. ([Startups Magazine](https://startupsmagazine.co.uk/article-employees-uk-spend-less-time-office-any-other-country-globally-still-want-reduce-time-even)) I could not date that piece.\n- Workers are not keen. The same piece says only 21% of UK workers are happy with four or more office days.\n- The market is not in your favour on pure leverage. I did not find current UK job-market figures, so I can't say how easy a move would be.\n\n**Legal position (the common claim that needs care)**\n\n- Many people believe a hybrid arrangement is a legal right. It usually is not. It depends on your contract and on what has been said or written about your place of work. I could not find a source on how a contractual location change works, so check your contract and any handbook clauses. ACAS is the free first stop.\n- The Employment Rights Act 2025 adds a \"reasonableness\" test to refusals of flexible working requests. Employers must explain in writing why a refusal is reasonable. ([JD Supra](https://www.jdsupra.com/legalnews/uk-employment-rights-act-2025-changes-4597043/)) Sources disagree on when it starts: some say 2027, others say phased from April 2026. Do not rely on it yet.\n- Right now you can ask for flexible working from day one of employment, under the existing process. The employer can still refuse on one of eight business grounds.\n\n**Evidence I could not retrieve**\n\nMy search on mandates and staff turnover failed, so I give no figures there. Do not treat my silence as evidence either way.\n\n**Practical reading**\n\n- Accepting costs you commuting time and money. Work out your own cost: weekly fare or fuel, plus hours. Two extra days over 46 weeks is about 92 extra commute days a year. Multiply that by your daily cost.\n- Pushing back is low risk if you do it as a formal flexible working request or a reasoned conversation. Asking carries little legal danger. Refusing to attend outright does carry risk, including disciplinary action.\n- Looking elsewhere is reasonable as a parallel step. It does not need to be a decision now.\n\n**Uncertain**\n\n- Your contract terms, your notice period, and whether the change has a consultation period. Also the real UK vacancy picture for your role.\n\nBottom line: Do not quit yet and do not refuse outright. Read your contract, work out your personal commute cost, then make a written, reasoned counter-offer such as three days or a trial period. Start a quiet job search at the same time, because the wider trend is toward more office days.",
+      "seconds": 25.3
+    }
+  ],
+  "reviews": [
+    {
+      "id": "skeptic",
+      "name": "Skeptic",
+      "status": "done",
+      "ok": true,
+      "text": "The usual answer: negotiate a middle ground and job-hunt quietly. All three statements land there. The risks they skip matter more than the ones they cover.\n\n**Statement B**\n- **Strongest point:** work out your real commute hours before deciding. The Employment Relations (Flexible Working) Act 2023 detail is accurate.\n- **Unsupported:** \"the company has more reason to keep you\" is an assertion, not evidence. Some firms use office mandates to cut headcount without paying redundancy.\n- **Risky advice:** offering to \"lead the rollout\" ties you publicly to a policy most staff dislike. That is a reputational cost with colleagues, and it can backfire if the policy later softens.\n- **Risky advice:** asking for a pay review in exchange for a company-wide rule is unlikely to work. It may also mark you as resistant.\n\n**Statement C**\n- **Strongest point:** do not resign without an offer. The cost figures and dated steps are the most useful on the board.\n- **Arithmetic slip:** grossing up £2,070 for basic-rate tax alone gives about £2,600. Adding 8% employee National Insurance makes it about £2,875.\n- **Missing:** the 18 December decision date ignores when the policy starts. If it starts sooner, you must either comply or object in writing in the meantime.\n- **Missing:** December hiring is slow, so the search timeline is optimistic.\n\n**Statement D**\n- **Strongest point:** hybrid is usually not a legal right, and refusing outright risks disciplinary action. It is also honest about the search that failed.\n- **Weak evidence:** the Indeed 57% figure is undated and second-hand, so give it little weight.\n- **Unsure:** my understanding is that the government roadmap puts the new flexible working reasonableness test in 2027. Check gov.uk.\n\n**Gaps across all three**\n1. **Acceptance by conduct.** This is the most likely way the owner loses leverage. If your contract gives you hybrid rights and you work four days without objecting, that may later be treated as agreeing to the change. Object in writing first, even while you comply. Confirm this with ACAS.\n2. **Redundancy pay.** If the mandate is a disguised headcount cut, resigning gives up any redundancy pay you would otherwise receive. None of the statements mentions this.\n3. **Pushing back can fail.** You can get a refusal and also be noted as resistant. Nobody priced that outcome.\n\n**Bottom line:** the cautious route is better supported than the bold one. Comply under written protest, check your contract, and search quietly. Do not volunteer to champion the policy.",
+      "seconds": 24.7
+    },
+    {
+      "id": "advocate",
+      "name": "Advocate",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.0
+    },
+    {
+      "id": "operator",
+      "name": "Operator",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.1
+    },
+    {
+      "id": "scout",
+      "name": "Scout",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.1
+    }
+  ],
+  "resolution": {
+    "ok": false,
+    "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+    "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+    "seconds": 1.6,
+    "model": "opus",
+    "status": "failed"
+  },
+  "labels": {
+    "skeptic": "A",
+    "advocate": "B",
+    "operator": "C",
+    "scout": "D"
+  },
+  "finished": "2026-11-02T18:34:37"
+}

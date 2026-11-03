@@ -1,0 +1,70 @@
+{
+  "id": "20261102-183443-cfa1",
+  "files": [],
+  "outputs": [],
+  "names": {},
+  "absent": [],
+  "feedback": {},
+  "models": {},
+  "title": "I have a job offer from another company. Should I tell my manager to try for a…",
+  "agenda": "I have a job offer from another company. Should I tell my manager to try for a counter-offer?",
+  "context": "",
+  "mode": "full",
+  "created": "2026-11-02T18:34:43",
+  "stage": "done",
+  "statements": [
+    {
+      "id": "skeptic",
+      "name": "Skeptic",
+      "speciality": "Risk and failure analysis",
+      "model": "opus",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.7
+    },
+    {
+      "id": "advocate",
+      "name": "Advocate",
+      "speciality": "Opportunity and upside",
+      "model": "haiku",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.1
+    },
+    {
+      "id": "operator",
+      "name": "Operator",
+      "speciality": "Execution, numbers and timelines",
+      "model": "sonnet",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.1
+    },
+    {
+      "id": "scout",
+      "name": "Scout",
+      "speciality": "Evidence and fact-checking",
+      "model": "sonnet",
+      "status": "failed",
+      "ok": false,
+      "text": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "error": "You've hit your session limit · resets 10:40pm (Europe/London)",
+      "seconds": 2.1
+    }
+  ],
+  "reviews": [],
+  "resolution": {
+    "ok": false,
+    "text": "",
+    "error": "No member gave a statement, so there is nothing to resolve. Check that Claude Code is signed in.",
+    "model": "opus",
+    "status": "failed"
+  },
+  "finished": "2026-11-02T18:34:46"
+}

@@ -20,8 +20,15 @@ Results are summarised in the main [README](../README.md#does-a-board-beat-one-c
 | --- | --- | --- | --- | --- | --- |
 | Round 1 (original Chair) | 6 | 3 | 6 | 7.3 | 7.6 |
 | Round 2 (reworked Chair) | 14 | 1 | 0 | 8.0 | 7.2 |
+| Round 3 (today's board vs Opus alone, new questions) | 11 | 4 | 0 | 8.1 | 7.7 |
 
 ![Results chart](results.png)
+
+## Round 3
+
+Today's board against Claude Opus on its own, on 15 new questions, with the same judge. Everything is in
+[`round3/`](round3/): the [plan](round3/PLAN.md) written before the test, the [results](round3/RESULTS.md),
+every meeting, and the first attempt that was set aside when the blind-review flaw turned up.
 
 ## Files
 

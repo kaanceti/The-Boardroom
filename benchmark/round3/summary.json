@@ -1,0 +1,23 @@
+{
+  "wins": {
+    "board": 11,
+    "tie": 4,
+    "single": 0
+  },
+  "average": {
+    "board": {
+      "usefulness": 8.5,
+      "accuracy": 7.5,
+      "risk": 8.9,
+      "clarity": 7.4
+    },
+    "single": {
+      "usefulness": 7.6,
+      "accuracy": 7.5,
+      "risk": 7.5,
+      "clarity": 8.1
+    }
+  },
+  "judge": "opus",
+  "questions": 15
+}

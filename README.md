@@ -22,6 +22,9 @@ the person was in the wrong. The Boardroom is built to push back:
 - Every resolution is stamped: agreed with you, partly agreed, or disagreed. The app keeps a running
   pushback rate, so you can see how often it tells you no.
 
+**Does it work?** In a blind test on 15 new questions, the board beat Claude Opus on its own 11 times,
+tied 4 and lost none. It costs 9 calls instead of 1. [The test, and its limits](#does-a-board-beat-one-claude).
+
 **Try it in your browser:** the [live demo](https://kaanceti.github.io/The-Boardroom/) replays three
 saved meetings, no install needed.
 
@@ -64,18 +67,47 @@ contents are treated as information, not instructions, but only attach documents
 
 ## Does a board beat one Claude?
 
-I tested it. Fifteen everyday decisions (money, career, small business) were each answered two
-ways, with the same model (Sonnet) and the same web tools:
+I tested it three times. Each time, 15 everyday decisions (money, work, small business) were answered
+twice: by a full Boardroom meeting, and by one Claude call with the same web tools, asked for a
+decision, the main risks, honest criticism and next steps. A separate Claude (Opus) compared each pair
+blind. It scored usefulness, accuracy, risk spotting and clarity out of 10 and picked a winner. Each
+pair was judged twice with the order swapped, and a win only counts when both orders agree. Member
+names and the word "board" were replaced with neutral labels first.
 
-- **Single:** one Claude call, asked for a decision, the main risks, honest criticism and next steps.
-- **Board:** a full Boardroom meeting: four statements, four cross-examinations, then the Chair.
+### Round 3: today's board against Claude Opus on its own
 
-A separate Claude (Opus) compared each pair blind. It scored usefulness, accuracy, risk spotting
-and clarity out of 10 and picked a winner. Each pair was judged twice with the order swapped, and
-a win only counts when both orders agree. Member names and the word "board" were replaced with
-neutral labels first.
+This is the real test: 15 new questions, today's board (three models, extreme Skeptic and Advocate) and
+the strongest single opponent, Claude Opus with the same web tools. The [plan](benchmark/round3/PLAN.md)
+was written and committed before any answer existed.
 
-![Blind test results](benchmark/results.png)
+**The board won 11, tied 4 and lost none.**
+
+| Average score out of 10 | Board | Opus alone |
+| --- | --- | --- |
+| Usefulness | **8.5** | 7.6 |
+| Accuracy | 7.5 | 7.5 |
+| Risk spotting | **8.9** | 7.5 |
+| Clarity | 7.4 | **8.1** |
+
+- The board's edge is usefulness and spotting risks. Accuracy was level, and Opus alone was clearer.
+- In all 4 ties the judge picked whichever answer it read second, both times. That is the judge leaning
+  on order, not a loss for either side.
+- A board answer costs 9 Claude calls and about 75 seconds. Opus alone costs 1 call and about 20.
+- Board answers were longer (670 vs 573 words), and AI judges can favour length.
+- The judge is the same model as Opus alone and as the Chair, so both answers it compared were written by
+  Opus. Fifteen questions, each run once, is a small sample.
+- While preparing the code for GitHub, I found the cross-examination was not really blind: members signed
+  their own statements. I stopped the first attempt after 12 meetings, fixed it, and started again from
+  question 1. [What happened](benchmark/round3/PLAN.md#restarted-on-2-november-2026).
+
+Every question, both answers and the judge's reasons: [`benchmark/round3/RESULTS.md`](benchmark/round3/RESULTS.md).
+
+### Rounds 1 and 2: how the Chair was fixed
+
+The first two rounds ran every seat on Sonnet, with the earlier, milder Skeptic and Advocate, against a
+single Sonnet call.
+
+![Blind test results, rounds 1 and 2](benchmark/results.png)
 
 **Round 1 was a draw: 6 wins each, 3 ties.** The board was better at spotting risks (8.2 vs 7.2)
 and slightly more accurate (7.5 vs 7.1), but far less clear (6.1 vs 8.4). The judge kept giving the
@@ -94,27 +126,9 @@ re-ran the Chair on the same 15 meetings. The members' statements were not touch
 | Clarity | 6.1 | 8.4 | 7.1 | **8.1** |
 | Wins out of 15 | 6 | 6 | **14** | 0 |
 
-A board answer costs about 9 Claude calls and 55 seconds; a single answer costs 1 call and 10 seconds.
-
-Limits, honestly:
-
-- The judge is an AI from the same model family, not a panel of people.
-- Fifteen questions is a small sample, and round 2 reused the questions that exposed the flaw, so it
-  may flatter the fix. A fresh set of questions is the proper next test.
-- Board answers are longer (550 vs 450 words) and AI judges can favour length. They were also longer
-  in round 1 (527 words), when the board only drew.
-- The judge was told not to mark an answer down for mentioning analysts, because in the app you can
-  read every member's statement.
-- The single answers were identical in both rounds. Their scores moved because the judge scores each
-  pair side by side.
-- The test ran every seat on Sonnet, with the earlier, milder Skeptic and Advocate. The mixed models
-  and the extreme members came later.
-
-**Round 3 is running now.** Today's board (three models, extreme Skeptic and Advocate) against Claude
-Opus on its own, on 15 new questions, with the same judge. The [plan](benchmark/round3/PLAN.md) was
-written and committed before any answer existed, and the results go here whatever they show.
-
-Every question, both answers and the judge's reasons: [`benchmark/all-answers.md`](benchmark/all-answers.md).
+Round 2 reused the questions that exposed the flaw, so it may flatter the fix. That is why round 3
+used new ones. The single answers were identical in rounds 1 and 2; their scores moved because the
+judge scores each pair side by side. Every question and answer: [`benchmark/all-answers.md`](benchmark/all-answers.md).
 Method and scripts: [`benchmark/`](benchmark/).
 
 ## Personalities

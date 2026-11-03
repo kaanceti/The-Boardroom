@@ -1,0 +1,512 @@
+{
+  "1:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both give the same sound £2,000/£1,000 split, but A edges ahead with concrete payoff scenarios, the cash-withdrawal and 60–90 day transfer-window risks, and smart sequencing so the transfer fee falls on £6,000, though its interest figures run slightly low and B adds useful debt-help resources.",
+    "seconds": 24.8
+  },
+  "1:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both give the same sound plan, but B adds roughly correct payoff scenarios, sequences the £2,000 payment before the transfer so the fee falls on £6,000, and covers more transfer-deal pitfalls, while flagging its unverified figures.",
+    "seconds": 9.2
+  },
+  "2:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "single",
+    "reason": "Both recommend a proportional split based on take-home pay, and A covers more risks (joint liability, Scotland's section 28 time limit), but B's table uses verifiable 2026/27 figures, asks for the missing facts and adds practical steps like a declaration of trust and pension nominations, while A rests on an unverifiable YouGov statistic and ends with cluttered analyst notes.",
+    "seconds": 13.1
+  },
+  "2:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "Both give the same sound proportional-to-take-home recommendation with correct worked maths, but B covers more of the risks that matter (Scotland's section 28 claim and its one-year limit, joint liability on tenancies and loans, the leading English cases) and better scopes what the split covers, though its specific YouGov figures cannot be verified.",
+    "seconds": 12.2
+  },
+  "3:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both reach the correct, well-calculated decision, but A covers the risks more fully (s455 charge, IR35, mortgage impact, filing fines) and is more careful about break-even, while B's £60,000 review trigger is unsupported on current rates even though it handles Making Tax Digital timing and rate uncertainty better.",
+    "seconds": 15.5
+  },
+  "3:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "Both get the core tax comparison right, but B covers more of the risks that matter (the s455 director's loan charge, IR35, late-filing fines, mortgage delays and payments on account) and avoids A's unsupported £60,000 trigger, though A usefully flags the £50,000 Making Tax Digital threshold that already applies.",
+    "seconds": 8.9
+  },
+  "4:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A wins on risk: it flags contract warranty clawback, the need for a solicitor and the possible undeclared Self Assessment income, though it wrongly applies 6% Class 4 NI to £9,600 profit, which falls below the threshold, while B is accurate and clear but misses those sale-contract and tax-compliance risks.",
+    "seconds": 11.6
+  },
+  "4:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B covers risks A misses (contract warranties and clawbacks, proof of funds, a walk-away price, unfiled Self Assessment, BADR only helping higher-rate taxpayers) and adds a useful after-tax keep-versus-sell comparison, though it wrongly applies 6% National Insurance to higher-rate earners, where the rate above £50,270 is 2%.",
+    "seconds": 25.1
+  },
+  "5:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both give sound, correctly calculated negotiate-first advice, but A covers more of the risks that matter, such as no legal right to return, possible loss of overtime pay, a new probation period and tribunal exposure, and it flags its uncertain claims, while B states unsourced figures like skills fading after 2 to 3 years as fact.",
+    "seconds": 7.3
+  },
+  "5:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "Both reach the same sound 'negotiate first' advice with correct take-home figures, but B adds material contract and legal risks (overtime loss, no legal right to return, new probation, 48-hour opt-out), flags uncertainty honestly, and gives concrete dated next steps.",
+    "seconds": 9.9
+  },
+  "6:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "A gives a concrete, dated plan and flags the key risk that working the new pattern without written protest can count as accepting a contract change, which B's 'accept for now' advice misses, though B helpfully raises disability and caring-duty protections.",
+    "seconds": 7.6
+  },
+  "6:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both give sound, well-hedged UK advice, but B adds key risks A misses (implied acceptance and complying under written protest, implied contract terms from long-running custom, not wasting one of the two statutory requests), uses accurate supporting evidence, and gives concrete dated next steps.",
+    "seconds": 7.9
+  },
+  "7:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A wins narrowly because it prices the unsalaried training year (£30–38k take-home), sets a 10-month savings target and a 2028 fallback, though it wrongly says the 2026/27 pay scale is unconfirmed and assumes the person is a parent, while B is better sourced on pay but less concrete about cash risk.",
+    "seconds": 8.7
+  },
+  "7:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B puts a figure on the training-year cost, sets clear rules such as not resigning before an offer and saving 10 months of costs, and gives sharper deadlines; A is clearer and its pay-scale sourcing looks more current, but its plan is less concrete about the main financial risk.",
+    "seconds": 7.7
+  },
+  "8:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 6.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "single",
+    "reason": "Both give sound conditional advice, but B adds a practical total-package comparison and a script while avoiding A's specific, hard-to-verify statistics such as the 40.8% Robert Half figure, though A uniquely covers after-tax value and the loss of unfair-dismissal protection.",
+    "seconds": 9.0
+  },
+  "8:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B adds more practical and distinctive guidance: don't sign before negotiating, the after-tax value of a rise, a market-based pay review without revealing the offer, asking the new employer to improve its package, and the loss of unfair-dismissal protection in a new job, though a few of its statistics are hard to verify.",
+    "seconds": 9.0
+  },
+  "9:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both answers give similar break-even maths and lease warnings, but A sees that a Christmas test would flatter demand and moves the test to January to March, while B recommends testing in peak season despite noting seasonality; A also covers dilapidations and 1954 Act renewal rights, though its wording is clumsier and its pass mark (30 a week vs 7 a day) is slightly inconsistent.",
+    "seconds": 8.4
+  },
+  "9:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B sets clearer test criteria, rightly warns that a Christmas test will flatter demand, and covers more lease risks such as dilapidations and lost renewal rights, though its candle-count pass marks (30 a week against 180 a month) do not quite match.",
+    "seconds": 7.8
+  },
+  "10:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 6.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "single",
+    "reason": "Both give the same sound price-first plan, but B is clearer, adds the director caveat on Employment Allowance and the management burden of hiring, and flags its unverified figures, while A has slightly richer risk coverage but awkward analyst clutter and break-even thresholds it cannot support without knowing the owner's prices.",
+    "seconds": 8.9
+  },
+  "10:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 8.0,
+      "risk": 7.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "Both give the same sound advice to raise prices first, but B adds a concrete break-even (about 18 billed hours on a 25-hour contract), a cash-buffer test and more of the risks that matter (empty paid hours, council dog caps, right-to-work checks, day-one sick pay, client poaching); A is clearer and correctly notes the director exception to the Employment Allowance, which B leaves out.",
+    "seconds": 8.1
+  },
+  "11:board_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "A wins narrowly: it gives a correct break-even calculation, keeps the trial clear of distorting holiday returns and sets explicit keep-or-stop thresholds, though B is clearer and adds the useful idea of fixing sizing first.",
+    "seconds": 9.5
+  },
+  "11:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 9.0
+    },
+    "winner": "board",
+    "reason": "B adds a correct break-even calculation, concrete success criteria and test-design warnings such as delayed holiday returns and too few orders, which make it more actionable than A, though A reads more cleanly.",
+    "seconds": 8.1
+  },
+  "12:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "winner": "single",
+    "reason": "Both give a sound, staged plan with correct break-even and VAT maths. B edges ahead with sharper practical insights: the VAT cost for clients who can't reclaim it, the booked-capacity test, project fees and a lock-in offer. A is weighed down by meta analyst notes and minor wording slips.",
+    "seconds": 8.8
+  },
+  "12:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 8.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B gives a clearer income-share threshold for exceptions, a worked break-even example, caveated market figures, and sharper contract and budget-cycle risks, though its analyst notes add some clutter and unexplained income figures.",
+    "seconds": 7.5
+  },
+  "13:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 6.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "Both diagnose before cutting, but A uses the correct current £12.71 wage, flags its weak evidence, and catches the allergen-record and December-distortion risks, while B relies on an outdated £12.21 rate despite its useful sales-data guidance.",
+    "seconds": 8.2
+  },
+  "13:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 6.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B gives the same sound diagnose-first advice but adds stronger risks (allergen records, December distortion), a free staggered-booking fix and a clear pass mark, and uses the current £12.71 wage where A cites the outdated £12.21, though B has a typo ('one family analysts') and is a little longer.",
+    "seconds": 7.6
+  },
+  "14:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 6.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 6.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "A covers more of the risks that matter, including visa rules on remote work, landlord consent for subletting and continuous employment, though its £21–£40 daily figure is miscalculated and its deadlines are out of order; B is clearer and flags the missing facts but misses the legal risks and understates the cost of voluntary NI.",
+    "seconds": 13.7
+  },
+  "14:single_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 9.0,
+      "clarity": 7.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B covers more of the risks that matter (no legal right to unpaid leave, loss of continuous employment, subletting breaching a tenancy, illegal remote work on a tourist entry) and gives a clearer go/no-go structure, though its £21–£40 daily figure is miscalculated (closer to £15–£27) and its deadlines are listed out of order.",
+    "seconds": 9.3
+  },
+  "15:board_first": {
+    "board": {
+      "usefulness": 8.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 8.0,
+      "accuracy": 7.0,
+      "risk": 8.0,
+      "clarity": 7.0
+    },
+    "winner": "board",
+    "reason": "A wins narrowly: it costs out the trade-off between depreciation and running-cost savings, and it covers insurance and lease risks. B adds sources and the charger grant, but its risk section mixes in speculation and items that aren't really risks.",
+    "seconds": 6.6
+  },
+  "15:single_first": {
+    "board": {
+      "usefulness": 9.0,
+      "accuracy": 8.0,
+      "risk": 9.0,
+      "clarity": 8.0
+    },
+    "single": {
+      "usefulness": 7.0,
+      "accuracy": 7.0,
+      "risk": 7.0,
+      "clarity": 8.0
+    },
+    "winner": "board",
+    "reason": "B ties the timing to the condition of the current car, quantifies running-cost savings against depreciation with figures that check out, and covers more of the risks that matter (insurance, lease costs, battery warranty, grant funding), while A is accurate but less specific.",
+    "seconds": 7.9
+  }
+}
